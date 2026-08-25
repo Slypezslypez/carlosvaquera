@@ -7,79 +7,103 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--gold:#c9a84c;--gold-l:#e8c97a;--bg:#0d0d14;--bg2:#141420;--bg3:#1c1c2a;--bg4:#242436;--text:#e8e4d8;--muted:#8888a0;--border:rgba(255,255,255,0.08);--r:6px}
+:root{--gold:#c9a84c;--gold-l:#e8c97a;--bg:#0d0d14;--bg2:#141420;--bg3:#1c1c2a;--bg4:#242436;--text:#e8e4d8;--muted:#7878a0;--border:rgba(255,255,255,0.07);--r:4px}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
 
 /* LOGIN */
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
-.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:3rem;width:100%;max-width:380px;text-align:center}
-.login-logo{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);margin-bottom:.4rem}
-.login-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
+.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:3rem;width:100%;max-width:360px;text-align:center}
+.login-logo{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);margin-bottom:.3rem}
+.login-sub{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
 .login-box input{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem}
 .login-box input:focus{border-color:var(--gold)}
-.login-box button{width:100%;background:var(--gold);color:var(--bg);border:none;padding:.85rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.login-box button{width:100%;background:var(--gold);color:var(--bg);border:none;padding:.85rem;border-radius:var(--r);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
 .login-box button:hover{background:var(--gold-l)}
 .login-error{color:#e05;font-size:.8rem;margin-top:.8rem}
 
 /* LAYOUT */
 .layout{display:flex;min-height:100vh}
-.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
-.sidebar-logo{padding:1.8rem 1.5rem 1.4rem;border-bottom:1px solid var(--border)}
-.sidebar-logo span{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);display:block}
-.sidebar-logo small{font-size:.7rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-nav.side-nav{flex:1;padding:1rem 0}
-nav.side-nav a{display:flex;align-items:center;gap:.75rem;padding:.75rem 1.5rem;color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;cursor:pointer;border-left:2px solid transparent;transition:color .15s,background .15s}
-nav.side-nav a:hover{color:var(--text);background:rgba(255,255,255,.03)}
-nav.side-nav a.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.06)}
-nav.side-nav a svg{width:16px;height:16px;flex-shrink:0}
-.sidebar-foot{padding:1.2rem 1.5rem;border-top:1px solid var(--border)}
-.sidebar-foot a{color:var(--muted);font-size:.78rem;text-decoration:none;transition:color .15s;cursor:pointer}
+.sidebar{width:230px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sidebar-logo{padding:1.6rem 1.4rem;border-bottom:1px solid var(--border)}
+.sidebar-logo span{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);display:block}
+.sidebar-logo small{font-size:.65rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+nav.side-nav{flex:1;padding:.8rem 0}
+nav.side-nav a{display:flex;align-items:center;gap:.7rem;padding:.65rem 1.4rem;color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;cursor:pointer;border-left:2px solid transparent;transition:color .15s,background .15s}
+nav.side-nav a:hover{color:var(--text);background:rgba(255,255,255,.02)}
+nav.side-nav a.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.05)}
+nav.side-nav a svg{width:15px;height:15px;flex-shrink:0;opacity:.7}
+.sidebar-foot{padding:1rem 1.4rem;border-top:1px solid var(--border)}
+.sidebar-foot a{color:var(--muted);font-size:.75rem;text-decoration:none;transition:color .15s;cursor:pointer;margin-right:.8rem}
 .sidebar-foot a:hover{color:var(--text)}
 .main{flex:1;overflow:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 2rem;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:10}
-.topbar h1{font-family:'Playfair Display',serif;font-size:1.3rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;border:none;transition:all .15s;text-decoration:none;letter-spacing:.04em}
-.btn-gold{background:var(--gold);color:var(--bg)}.btn-gold:hover{background:var(--gold-l)}
-.btn-outline{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-outline:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
-.btn-danger{background:rgba(200,50,50,.15);color:#e05;border:1px solid rgba(200,50,50,.2)}.btn-danger:hover{background:rgba(200,50,50,.25)}
-.btn svg{width:14px;height:14px}
-.content{padding:2rem}
-
-/* TABLE */
-table{width:100%;border-collapse:collapse}
-thead th{text-align:left;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.6rem 1rem;border-bottom:1px solid var(--border)}
-tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
-tbody tr:hover{background:rgba(255,255,255,.02)}
-tbody td{padding:.85rem 1rem;font-size:.85rem;vertical-align:middle}
-.badge{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.7rem;font-weight:500}
-.badge-available{background:rgba(50,180,100,.15);color:#3c8}
-.badge-sold{background:rgba(200,50,50,.12);color:#c55}
-.actions{display:flex;gap:.5rem}
-.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted);font-size:.85rem}
-
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;padding:1rem}
-.overlay.open{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);width:100%;max-width:500px}
-.modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;border-bottom:1px solid var(--border)}
-.modal-head h3{font-size:.95rem;font-weight:600}
-.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;line-height:1}
-.modal-close:hover{color:var(--text)}
-.modal-body{padding:1.5rem}
-.modal-foot{display:flex;justify-content:flex-end;gap:.7rem;padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:10}
+.topbar h1{font-family:'Playfair Display',serif;font-size:1.2rem}
+.content{padding:2rem;max-width:860px}
 
 /* FORM */
+.form-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;margin-bottom:1.5rem}
+.form-section h3{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
 .field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
-.field label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.field input,.field select{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.7rem .9rem;border-radius:4px;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;width:100%}
-.field input:focus,.field select:focus{border-color:var(--gold)}
-.field select{appearance:none}
+.field label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.field input,.field textarea,.field select{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.65rem .9rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;width:100%}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:90px}
 .row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+
+/* IMAGE UPLOAD */
+.img-upload{border:1px dashed rgba(255,255,255,.12);border-radius:var(--r);padding:1.2rem;text-align:center;cursor:pointer;transition:border-color .2s;background:rgba(255,255,255,.01);position:relative}
+.img-upload:hover{border-color:rgba(201,168,76,.3)}
+.img-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload .img-preview{width:100%;max-height:160px;object-fit:cover;border-radius:2px;display:none;margin-bottom:.8rem}
+.img-upload .img-preview.show{display:block}
+.img-upload p{font-size:.72rem;color:var(--muted);pointer-events:none}
+.img-upload p strong{color:var(--gold)}
+.img-status{font-size:.7rem;color:var(--gold);margin-top:.4rem;min-height:1em}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.78rem;font-weight:500;cursor:pointer;border:none;transition:all .15s;letter-spacing:.04em}
+.btn-gold{background:var(--gold);color:var(--bg)}.btn-gold:hover{background:var(--gold-l)}
+.btn-outline{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-outline:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+.btn-danger{background:rgba(200,50,50,.1);color:#e05;border:1px solid rgba(200,50,50,.15)}.btn-danger:hover{background:rgba(200,50,50,.2)}
+.btn svg{width:14px;height:14px}
+.save-bar{display:flex;align-items:center;gap:1rem;padding-top:.5rem}
+.save-msg{font-size:.78rem;color:#3c8;min-height:1.2em}
+.save-msg.err{color:#e05}
+
+/* AGENDA TABLE */
+table{width:100%;border-collapse:collapse}
+thead th{text-align:left;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.5rem 1rem;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+tbody td{padding:.75rem 1rem;font-size:.83rem;vertical-align:middle}
+.badge{display:inline-block;padding:.18rem .55rem;border-radius:20px;font-size:.65rem;font-weight:500}
+.badge-av{background:rgba(50,180,100,.12);color:#3c8}
+.badge-so{background:rgba(200,50,50,.1);color:#c55}
+.actions{display:flex;gap:.4rem}
+.empty-state{text-align:center;padding:3rem;color:var(--muted);font-size:.83rem}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);width:100%;max-width:480px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border-bottom:1px solid var(--border)}
+.modal-head h3{font-size:.9rem;font-weight:600}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:1.4rem}
+.modal-foot{display:flex;justify-content:flex-end;gap:.6rem;padding:.9rem 1.4rem;border-top:1px solid var(--border)}
 
 /* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r);padding:.8rem 1.2rem;font-size:.82rem;z-index:999;transform:translateY(100px);opacity:0;transition:all .3s;max-width:300px}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r);padding:.75rem 1.1rem;font-size:.8rem;z-index:999;transform:translateY(100px);opacity:0;transition:all .3s;max-width:280px}
 .toast.show{transform:translateY(0);opacity:1}
-.toast.error{border-left-color:#e05}
+.toast.err{border-left-color:#e05}
+
+/* CARD GRID for spectacles/books */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.card-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem}
+.card-item h4{font-size:.75rem;color:var(--gold);margin-bottom:1rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.book-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 </style>
 </head>
 <body>
@@ -102,40 +126,55 @@ tbody td{padding:.85rem 1rem;font-size:.85rem;vertical-align:middle}
       <span>Carlos Vaquera</span>
       <small>Administration</small>
     </div>
-    <nav class="side-nav">
-      <a class="active" onclick="showTab('agenda')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Agenda
+    <nav class="side-nav" id="side-nav">
+      <a onclick="showTab('hero')" data-tab="hero" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Accueil
+      </a>
+      <a onclick="showTab('artiste')" data-tab="artiste">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>L'Artiste
+      </a>
+      <a onclick="showTab('spectacles')" data-tab="spectacles">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>Spectacles
+      </a>
+      <a onclick="showTab('animations')" data-tab="animations">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Animations
+      </a>
+      <a onclick="showTab('conferences')" data-tab="conferences">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Conférences
+      </a>
+      <a onclick="showTab('auteur')" data-tab="auteur">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>L'Auteur
+      </a>
+      <a onclick="showTab('agenda')" data-tab="agenda">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Agenda
+      </a>
+      <a onclick="showTab('contact')" data-tab="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Contact
       </a>
     </nav>
     <div class="sidebar-foot">
-      <a href="/">← Retour au site</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="/" >← Site</a>
       <a onclick="logout()">Déconnexion</a>
     </div>
   </aside>
 
   <div class="main">
     <div class="topbar">
-      <h1>Agenda</h1>
-      <button class="btn btn-gold" onclick="openModal()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Ajouter une date
-      </button>
+      <h1 id="topbar-title">Accueil</h1>
+      <div style="font-size:.72rem;color:var(--muted)">Les modifications sont sauvegardées en direct</div>
     </div>
-    <div class="content">
-      <div id="agenda-container">
-        <div class="empty-state">Chargement…</div>
-      </div>
+    <div class="content" id="tab-content">
+      <div class="empty-state">Chargement…</div>
     </div>
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="overlay" id="modal">
+<!-- AGENDA MODAL -->
+<div class="overlay" id="agenda-modal">
   <div class="modal">
     <div class="modal-head">
       <h3 id="modal-title">Ajouter une date</h3>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeAgendaModal()">✕</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="edit-id">
@@ -143,10 +182,9 @@ tbody td{padding:.85rem 1rem;font-size:.85rem;vertical-align:middle}
         <div class="field"><label>Jour</label><input type="text" id="f-day" placeholder="12"></div>
         <div class="field"><label>Mois / Année</label><input type="text" id="f-month" placeholder="Sep 2026"></div>
       </div>
-      <div class="field"><label>Titre du spectacle</label><input type="text" id="f-title" placeholder="Grand Gala de Magie"></div>
-      <div class="field"><label>Lieu</label><input type="text" id="f-venue" placeholder="Théâtre du Châtelet — Paris"></div>
-      <div class="field">
-        <label>Statut</label>
+      <div class="field"><label>Titre</label><input type="text" id="f-title" placeholder="Grand Gala de Magie"></div>
+      <div class="field"><label>Lieu</label><input type="text" id="f-venue" placeholder="Théâtre — Paris"></div>
+      <div class="field"><label>Statut</label>
         <select id="f-status">
           <option value="available">Disponible</option>
           <option value="sold-out">Complet</option>
@@ -154,8 +192,8 @@ tbody td{padding:.85rem 1rem;font-size:.85rem;vertical-align:middle}
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-outline" onclick="closeModal()">Annuler</button>
-      <button class="btn btn-gold" onclick="save()">Enregistrer</button>
+      <button class="btn btn-outline" onclick="closeAgendaModal()">Annuler</button>
+      <button class="btn btn-gold" onclick="saveAgenda()">Enregistrer</button>
     </div>
   </div>
 </div>
@@ -164,29 +202,20 @@ tbody td{padding:.85rem 1rem;font-size:.85rem;vertical-align:middle}
 
 <script>
 let TOKEN = localStorage.getItem('cv_token');
+let CONTENT = {};
 
-// Auto-login if token exists
-if (TOKEN) showDashboard();
+if (TOKEN) initDashboard();
 
-document.getElementById('pw-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') login();
-});
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
 async function login() {
   const pw = document.getElementById('pw-input').value;
-  const r = await fetch('/api/auth', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ password: pw })
-  });
+  const r = await fetch('/api/auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: pw }) });
   const j = await r.json();
-  if (j.error) {
-    document.getElementById('login-error').textContent = j.error;
-    return;
-  }
+  if (j.error) { document.getElementById('login-error').textContent = j.error; return; }
   TOKEN = j.token;
   localStorage.setItem('cv_token', TOKEN);
-  showDashboard();
+  initDashboard();
 }
 
 function logout() {
@@ -196,54 +225,274 @@ function logout() {
   document.getElementById('login-screen').style.display = 'flex';
 }
 
-function showDashboard() {
+async function initDashboard() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('dashboard').style.display = 'flex';
-  loadAgenda();
+  // Load existing content
+  try {
+    const r = await fetch('/api/content');
+    CONTENT = await r.json();
+  } catch(e) { CONTENT = {}; }
+  showTab('hero');
 }
+
+// ── TABS ─────────────────────────────────────────────────────────
+const TAB_TITLES = { hero:'Accueil', artiste:"L'Artiste", spectacles:'Spectacles', animations:'Animations', conferences:'Conférences', auteur:"L'Auteur", agenda:'Agenda', contact:'Contact' };
 
 function showTab(tab) {
-  document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  document.querySelectorAll('.side-nav a').forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
+  document.getElementById('topbar-title').textContent = TAB_TITLES[tab];
+  const fn = { hero: renderHero, artiste: renderArtiste, spectacles: renderSpectacles, animations: renderAnimations, conferences: renderConferences, auteur: renderAuteur, agenda: renderAgenda, contact: renderContact };
+  fn[tab]?.();
 }
 
-// ── AGENDA ──────────────────────────────────────────────────
-async function loadAgenda() {
-  const r = await fetch('/api/agenda');
-  if (r.status === 401) { logout(); return; }
-  const rows = await r.json();
-  renderAgenda(rows);
+// ── HELPERS ──────────────────────────────────────────────────────
+function c(key, fallback = '') { return CONTENT[key] || fallback; }
+
+function fieldHtml(label, key, fallback = '', type = 'input') {
+  const val = c(key, fallback).replace(/"/g, '&quot;');
+  if (type === 'textarea') return `<div class="field"><label>${label}</label><textarea data-key="${key}">${c(key, fallback)}</textarea></div>`;
+  return `<div class="field"><label>${label}</label><input type="text" data-key="${key}" value="${val}"></div>`;
 }
 
-function renderAgenda(rows) {
-  const el = document.getElementById('agenda-container');
-  if (!rows.length) {
-    el.innerHTML = '<div class="empty-state">Aucune date. Cliquez "Ajouter une date".</div>';
-    return;
+function imgHtml(label, key) {
+  const hasImg = false; // We'll check via URL
+  return `<div class="field"><label>${label}</label>
+    <div class="img-upload" id="upload-${key}">
+      <input type="file" accept="image/*" onchange="uploadImg(event,'${key}')">
+      <img class="img-preview" id="prev-${key}" src="/api/upload?key=${key}" onerror="this.style.display='none'" onload="this.style.display='block'">
+      <p>📷 <strong>Cliquez ou glissez</strong> une image<br><span style="font-size:.65rem;opacity:.5">JPG, PNG — max 2 Mo</span></p>
+    </div>
+    <div class="img-status" id="status-${key}"></div>
+  </div>`;
+}
+
+function saveBar(section) {
+  return `<div class="save-bar">
+    <button class="btn btn-gold" onclick="saveSection('${section}')">💾 Enregistrer ${TAB_TITLES[section]}</button>
+    <div class="save-msg" id="msg-${section}"></div>
+  </div>`;
+}
+
+async function saveSection(section) {
+  const container = document.getElementById('tab-content');
+  const inputs = container.querySelectorAll('[data-key]');
+  const updates = Array.from(inputs).map(el => ({ key: el.dataset.key, value: el.value }));
+  const msg = document.getElementById('msg-' + section);
+  msg.textContent = 'Sauvegarde…';
+  try {
+    const r = await fetch('/api/content', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
+      body: JSON.stringify({ updates })
+    });
+    if (r.status === 401) { logout(); return; }
+    CONTENT = await r.json();
+    msg.textContent = '✓ Sauvegardé';
+    msg.className = 'save-msg';
+    toast('Section sauvegardée ✓');
+    setTimeout(() => msg.textContent = '', 3000);
+  } catch {
+    msg.textContent = 'Erreur';
+    msg.className = 'save-msg err';
   }
-  el.innerHTML = `
-    <table>
-      <thead><tr><th>Date</th><th>Spectacle</th><th>Lieu</th><th>Statut</th><th></th></tr></thead>
-      <tbody>
-        ${rows.map(s => `
-          <tr>
-            <td style="font-family:'Playfair Display',serif;color:var(--gold)">${s.day} ${s.month}</td>
-            <td style="font-weight:500">${s.title}</td>
-            <td style="color:var(--muted)">${s.venue}</td>
-            <td>${s.status === 'sold-out'
-              ? '<span class="badge badge-sold">Complet</span>'
-              : '<span class="badge badge-available">Disponible</span>'}</td>
-            <td><div class="actions">
-              <button class="btn btn-outline" onclick='editRow(${JSON.stringify(s)})'>Modifier</button>
-              <button class="btn btn-danger" onclick="deleteRow(${s.id}, this)">Supprimer</button>
-            </div></td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>`;
 }
 
-function openModal(item = null) {
+async function uploadImg(event, key) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { toast('Image trop grande (max 2 Mo)', true); return; }
+  const status = document.getElementById('status-' + key);
+  status.textContent = 'Upload en cours…';
+  const reader = new FileReader();
+  reader.onload = async e => {
+    const dataUrl = e.target.result;
+    const base64 = dataUrl.split(',')[1];
+    const mime_type = file.type;
+    try {
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
+        body: JSON.stringify({ key, data: base64, mime_type })
+      });
+      if (r.status === 401) { logout(); return; }
+      status.textContent = '✓ Image mise à jour';
+      const prev = document.getElementById('prev-' + key);
+      if (prev) { prev.src = dataUrl; prev.style.display = 'block'; }
+      toast('Image mise à jour ✓');
+      setTimeout(() => status.textContent = '', 3000);
+    } catch { status.textContent = 'Erreur upload'; }
+  };
+  reader.readAsDataURL(file);
+}
+
+function toast(msg, err = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (err ? ' err' : '');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── RENDER TABS ───────────────────────────────────────────────────
+
+function renderHero() {
+  document.getElementById('tab-content').innerHTML = `
+    <div class="form-section">
+      <h3>Texte principal</h3>
+      ${fieldHtml('Titre principal', 'hero_title', 'Carlos<br><em>Vaquera</em>')}
+      ${fieldHtml('Phrase signature', 'hero_tagline', '« Your illusions are my reality »')}
+      ${fieldHtml('Sous-titre', 'hero_subtitle', 'Magicien · Mentaliste · Conférencier')}
+      ${fieldHtml('Texte bouton 1', 'hero_btn1', 'Découvrir les spectacles')}
+      ${fieldHtml('Texte bouton 2', 'hero_btn2', "L'univers de Carlos")}
+    </div>
+    <div class="form-section">
+      <h3>Image de fond (hero)</h3>
+      ${imgHtml('Photo principale', 'hero_bg')}
+    </div>
+    ${saveBar('hero')}`;
+}
+
+function renderArtiste() {
+  document.getElementById('tab-content').innerHTML = `
+    <div class="form-section">
+      <h3>Textes</h3>
+      ${fieldHtml('Titre', 'artiste_title', "Créateur d'émotions")}
+      ${fieldHtml('Introduction (italique)', 'artiste_lead', "Créateur d'illusions et explorateur de l'esprit…", 'textarea')}
+      ${fieldHtml('Paragraphe 1', 'artiste_body1', "Mentaliste au talent reconnu…", 'textarea')}
+      ${fieldHtml('Paragraphe 2', 'artiste_body2', "Formateur passionné…", 'textarea')}
+      ${fieldHtml('Paragraphe 3', 'artiste_body3', "Son talent l'a conduit…", 'textarea')}
+      <div class="row-3">
+        ${fieldHtml('Chiffre 1 (ex: 30+)', 'artiste_stat1', '30+')}
+        ${fieldHtml('Label 1', 'artiste_stat1_label', 'ans de magie')}
+        ${fieldHtml('Chiffre 2', 'artiste_stat2', '12+')}
+        ${fieldHtml('Label 2', 'artiste_stat2_label', 'Livres publiés')}
+        ${fieldHtml('Chiffre 3', 'artiste_stat3', 'EU')}
+        ${fieldHtml('Label 3', 'artiste_stat3_label', 'International')}
+      </div>
+    </div>
+    <div class="form-section">
+      <h3>Photo</h3>
+      ${imgHtml('Photo de Carlos', 'artiste_img')}
+    </div>
+    ${saveBar('artiste')}`;
+}
+
+function renderSpectacles() {
+  const cards = [1,2,3].map(i => `
+    <div class="card-item">
+      <h4>Spectacle ${i}</h4>
+      ${fieldHtml('Tag (ex: One-man show)', `sp${i}_tag`, ['One-man show','Mentalisme','Philosophie'][i-1])}
+      ${fieldHtml('Titre', `sp${i}_title`, ['Démons & Merveilles','Imagienaire','Le Mentaliste Philosophe'][i-1])}
+      ${fieldHtml('Description', `sp${i}_desc`, '', 'textarea')}
+      ${imgHtml('Affiche / Photo', `sp${i}_img`)}
+    </div>`).join('');
+  document.getElementById('tab-content').innerHTML = `
+    <div class="form-section">
+      <h3>Les 3 spectacles</h3>
+      <div class="card-grid">${cards}</div>
+    </div>
+    ${saveBar('spectacles')}`;
+}
+
+function renderAnimations() {
+  document.getElementById('tab-content').innerHTML = `
+    <div class="form-section">
+      <h3>Textes</h3>
+      ${fieldHtml('Titre', 'anim_title', 'Close-Up & Corporate')}
+      ${fieldHtml('Introduction', 'anim_lead', "Des prestations d'illusionnisme et de mentalisme subtiles…", 'textarea')}
+      ${fieldHtml('Corps de texte', 'anim_body', "De table en table ou de groupe en groupe…", 'textarea')}
+      ${fieldHtml('Texte du bouton', 'anim_btn', 'Organiser une animation')}
+    </div>
+    <div class="form-section">
+      <h3>Image de fond</h3>
+      ${imgHtml('Photo / fond', 'anim_bg')}
+    </div>
+    ${saveBar('animations')}`;
+}
+
+function renderConferences() {
+  document.getElementById('tab-content').innerHTML = `
+    <div class="form-section">
+      <h3>Textes</h3>
+      ${fieldHtml('Titre', 'conf_title', 'Mettez de la magie dans votre communication')}
+      ${fieldHtml('Introduction', 'conf_lead', 'Depuis 2009, Carlos séduit les entreprises…', 'textarea')}
+      ${fieldHtml('Liste de clients', 'conf_body', 'ING, Euroclear, BNP Paribas Fortis…', 'textarea')}
+      ${fieldHtml('Texte du bouton', 'conf_btn', 'Discuter de votre projet')}
+    </div>
+    <div class="form-section">
+      <h3>Image de fond</h3>
+      ${imgHtml('Photo / fond', 'conf_bg')}
+    </div>
+    ${saveBar('conferences')}`;
+}
+
+function renderAuteur() {
+  const books = [1,2,3,4].map(i => `
+    <div class="card-item">
+      <h4>Livre ${i}</h4>
+      ${fieldHtml('Titre', `book${i}_title`, ['Graines de Mentalisme','Aspirations','Rencontres',"L'Émotion Magique"][i-1])}
+      ${fieldHtml('Sous-titre / Éditeur', `book${i}_sub`, 'Carlos Vaquera')}
+      ${imgHtml('Couverture', `book${i}_img`)}
+    </div>`).join('');
+  document.getElementById('tab-content').innerHTML = `
+    <div class="form-section">
+      <h3>Introduction</h3>
+      ${fieldHtml('Texte intro', 'auteur_lead', "Les mots nous permettent de mettre sur papier des émotions…", 'textarea')}
+    </div>
+    <div class="form-section">
+      <h3>Les livres</h3>
+      <div class="book-grid">${books}</div>
+    </div>
+    ${saveBar('auteur')}`;
+}
+
+function renderContact() {
+  document.getElementById('tab-content').innerHTML = `
+    <div class="form-section">
+      <h3>Coordonnées</h3>
+      ${fieldHtml('Citation', 'contact_quote', '"L\'illusion est une vérité qui se donne en spectacle…"', 'textarea')}
+      ${fieldHtml('E-mail de contact', 'contact_email', 'carlosvaquera@carlosvaquera.com')}
+    </div>
+    ${saveBar('contact')}`;
+}
+
+// ── AGENDA ────────────────────────────────────────────────────────
+let agendaRows = [];
+
+async function renderAgenda() {
+  document.getElementById('tab-content').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+      <button class="btn btn-gold" onclick="openAgendaModal()">+ Ajouter une date</button>
+    </div>
+    <div class="form-section" style="padding:0;overflow:hidden">
+      <div id="agenda-table"><div class="empty-state">Chargement…</div></div>
+    </div>`;
+  const r = await fetch('/api/agenda');
+  agendaRows = await r.json();
+  renderAgendaTable();
+}
+
+function renderAgendaTable() {
+  const el = document.getElementById('agenda-table');
+  if (!agendaRows.length) { el.innerHTML = '<div class="empty-state">Aucune date.</div>'; return; }
+  el.innerHTML = `<table>
+    <thead><tr><th>Date</th><th>Spectacle</th><th>Lieu</th><th>Statut</th><th></th></tr></thead>
+    <tbody>${agendaRows.map(s => `
+      <tr>
+        <td style="color:var(--gold);font-weight:600">${s.day} ${s.month}</td>
+        <td>${s.title}</td>
+        <td style="color:var(--muted)">${s.venue}</td>
+        <td><span class="badge badge-${s.status==='sold-out'?'so':'av'}">${s.status==='sold-out'?'Complet':'Disponible'}</span></td>
+        <td><div class="actions">
+          <button class="btn btn-outline" onclick='editAgenda(${JSON.stringify(s)})'>Modifier</button>
+          <button class="btn btn-danger" onclick="deleteAgenda(${s.id})">Suppr.</button>
+        </div></td>
+      </tr>`).join('')}
+    </tbody></table>`;
+}
+
+function openAgendaModal(item = null) {
   document.getElementById('modal-title').textContent = item ? 'Modifier la date' : 'Ajouter une date';
   document.getElementById('edit-id').value  = item?.id    ?? '';
   document.getElementById('f-day').value    = item?.day   ?? '';
@@ -251,14 +500,14 @@ function openModal(item = null) {
   document.getElementById('f-title').value  = item?.title ?? '';
   document.getElementById('f-venue').value  = item?.venue ?? '';
   document.getElementById('f-status').value = item?.status ?? 'available';
-  document.getElementById('modal').classList.add('open');
+  document.getElementById('agenda-modal').classList.add('open');
 }
 
-function editRow(item) { openModal(item); }
-function closeModal() { document.getElementById('modal').classList.remove('open'); }
-document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+function editAgenda(item) { openAgendaModal(item); }
+function closeAgendaModal() { document.getElementById('agenda-modal').classList.remove('open'); }
+document.getElementById('agenda-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAgendaModal(); });
 
-async function save() {
+async function saveAgenda() {
   const body = {
     id:     document.getElementById('edit-id').value || undefined,
     day:    document.getElementById('f-day').value.trim(),
@@ -274,28 +523,19 @@ async function save() {
     body: JSON.stringify(body)
   });
   if (r.status === 401) { logout(); return; }
-  const rows = await r.json();
-  renderAgenda(rows);
-  closeModal();
+  agendaRows = await r.json();
+  renderAgendaTable();
+  closeAgendaModal();
   toast('Enregistré ✓');
 }
 
-async function deleteRow(id, btn) {
+async function deleteAgenda(id) {
   if (!confirm('Supprimer cette date ?')) return;
-  const r = await fetch(`/api/agenda?id=${id}`, {
-    method: 'DELETE',
-    headers: { 'Authorization': `Bearer ${TOKEN}` }
-  });
+  const r = await fetch(`/api/agenda?id=${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${TOKEN}` } });
   if (r.status === 401) { logout(); return; }
-  btn.closest('tr').remove();
+  agendaRows = agendaRows.filter(s => s.id !== id);
+  renderAgendaTable();
   toast('Supprimé ✓');
-}
-
-function toast(msg, err = false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (err ? ' error' : '');
-  setTimeout(() => t.classList.remove('show'), 3000);
 }
 </script>
 </body>
