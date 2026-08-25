@@ -114,7 +114,7 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .auteur-inner{max-width:1200px;margin:0 auto;padding:0 3rem}
 .auteur-head{margin-bottom:4rem}
 .books-carousel-wrap{position:relative;display:flex;align-items:center;gap:.8rem}
-.books-track-outer{overflow:hidden;flex:1;min-width:0}
+.books-track-outer{overflow:hidden;flex:1;min-width:0;position:relative}
 .books-track{display:flex;gap:12px;transition:transform .5s cubic-bezier(.4,0,.2,1);flex-wrap:nowrap}
 .book{flex-shrink:0;width:calc((100% - 48px) / 5)}
 .books-nav{flex-shrink:0;background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);width:38px;height:38px;cursor:pointer;font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;border-radius:1px}
@@ -358,189 +358,169 @@ footer p{font-size:.72rem;color:var(--muted)}
     <div class="auteur-head reveal">
       <div class="section-label" data-i18n="section_auteur">L'Auteur</div>
       <h2 data-i18n="auteur_h2">Amoureux des mots</h2>
-      <p class="lead" style="max-width:600px">Les mots nous permettent de mettre sur papier des émotions que nous transportons en nous depuis un long moment. Un livre, comme par magie, devient la plus courte distance entre deux sensibilités.</p>
+      <p class="lead" style="max-width:600px" id="auteur-lead">Les mots nous permettent de mettre sur papier des émotions que nous transportons en nous depuis un long moment. Un livre, comme par magie, devient la plus courte distance entre deux sensibilités.</p>
     </div>
-        <div class="books-carousel-wrap">
+    <div class="books-carousel-wrap">
       <button class="books-nav" id="books-prev" onclick="booksCarousel(-1)">&#8592;</button>
       <div class="books-track-outer">
         <div class="books-track" id="books-track">
-      <div class="book reveal" style="transition-delay:0.00s">
+      <div class="book" style="transition-delay:0.00s">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book1-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book1-title">Livre 1</div>
         <div class="book-sub" id="book1-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" style="transition-delay:0.08s">
+      <div class="book" style="transition-delay:0.08s">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book2-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book2-title">Livre 2</div>
         <div class="book-sub" id="book2-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" style="transition-delay:0.16s">
+      <div class="book" style="transition-delay:0.16s">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book3-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book3-title">Livre 3</div>
         <div class="book-sub" id="book3-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" style="transition-delay:0.24s">
+      <div class="book" style="transition-delay:0.24s">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book4-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book4-title">Livre 4</div>
         <div class="book-sub" id="book4-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" style="transition-delay:0.32s">
+      <div class="book" style="transition-delay:0.32s">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book5-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book5-title">Livre 5</div>
         <div class="book-sub" id="book5-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book6-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book6-title">Livre 6</div>
         <div class="book-sub" id="book6-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book7-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book7-title">Livre 7</div>
         <div class="book-sub" id="book7-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book8-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book8-title">Livre 8</div>
         <div class="book-sub" id="book8-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book9-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book9-title">Livre 9</div>
         <div class="book-sub" id="book9-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book10-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book10-title">Livre 10</div>
         <div class="book-sub" id="book10-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book11-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book11-title">Livre 11</div>
         <div class="book-sub" id="book11-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book12-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book12-title">Livre 12</div>
         <div class="book-sub" id="book12-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book13-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book13-title">Livre 13</div>
         <div class="book-sub" id="book13-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book14-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book14-title">Livre 14</div>
         <div class="book-sub" id="book14-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book15-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book15-title">Livre 15</div>
         <div class="book-sub" id="book15-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book16-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book16-title">Livre 16</div>
         <div class="book-sub" id="book16-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book17-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book17-title">Livre 17</div>
         <div class="book-sub" id="book17-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book18-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book18-title">Livre 18</div>
         <div class="book-sub" id="book18-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book19-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book19-title">Livre 19</div>
         <div class="book-sub" id="book19-sub">Carlos Vaquera</div>
       </div>
-      <div class="book reveal" >
+      <div class="book">
         <div class="book-ph ph" style="aspect-ratio:2/3" id="book20-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-spine"></div>
         <div class="book-title" id="book20-title">Livre 20</div>
         <div class="book-sub" id="book20-sub">Carlos Vaquera</div>
       </div>
@@ -549,32 +529,6 @@ footer p{font-size:.72rem;color:var(--muted)}
       <button class="books-nav" id="books-next" onclick="booksCarousel(1)">&#8594;</button>
     </div>
     <div class="books-dots" id="books-dots"><span onclick="booksGoTo(0)" data-dot="0"></span><span onclick="booksGoTo(1)" data-dot="1"></span><span onclick="booksGoTo(2)" data-dot="2"></span><span onclick="booksGoTo(3)" data-dot="3"></span></div>
-    </div>
-      <div class="book reveal" style="transition-delay:.1s">
-        <div class="book-ph ph" style="aspect-ratio:2/3" id="book2-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Couverture
-        </div>
-        <div class="book-title" id="book2-title">Aspirations</div>
-        <div class="book-sub" id="book2-sub">Carlos Vaquera</div>
-      </div>
-      <div class="book reveal" style="transition-delay:.2s">
-        <div class="book-ph ph" style="aspect-ratio:2/3" id="book3-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Couverture
-        </div>
-        <div class="book-title" id="book3-title">Rencontres</div>
-        <div class="book-sub" id="book3-sub">Carlos Vaquera</div>
-      </div>
-      <div class="book reveal" style="transition-delay:.3s">
-        <div class="book-ph ph" style="aspect-ratio:2/3" id="book4-img">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Couverture
-        </div>
-        <div class="book-title" id="book4-title">L'Émotion Magique</div>
-        <div class="book-sub" id="book4-sub">Carlos Vaquera</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -742,7 +696,7 @@ async function loadContent(){
     setText('#conf-body',c.conf_body);
     setImg('conf-bg','conf_bg');
     // Auteur
-    setText('#auteur .lead',c.auteur_lead);
+    setText('#auteur-lead',c.auteur_lead);
     for(let i=1;i<=20;i++){setText(`#book${i}-title`,c[`book${i}_title`]);setText(`#book${i}-sub`,c[`book${i}_sub`]);setImg(`book${i}-img`,`book${i}_img`);}
     // Contact
     setText('#contact-quote',c.contact_quote);
