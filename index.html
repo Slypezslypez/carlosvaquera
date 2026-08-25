@@ -753,29 +753,30 @@ async function loadContent(){
     if(c.artiste_stat3_label&&statlbls[2])statlbls[2].textContent=c.artiste_stat3_label;
     setImg('artiste-ph','artiste_img');
     // Spectacles
-    let specDone=0;
-    function spImgCheck(){specDone++;if(specDone>=8)specUpdateUI();}
+    // Load spectacles — show card only when image loads
+    const spKeys=['sp1_img','sp2_img','sp3_img','sp4_img','sp5_img','sp6_img','sp7_img','sp8_img'];
+    let spChecked=0;
     for(let i=1;i<=8;i++){
-      setText(`#sp${i}-tag`,c[`sp${i}_tag`]);
-      setText(`#sp${i}-title`,c[`sp${i}_title`]);
-      setText(`#sp${i}-desc`,c[`sp${i}_desc`]);
+      setText('#sp'+i+'-tag', c['sp'+i+'_tag']);
+      setText('#sp'+i+'-title', c['sp'+i+'_title']);
+      setText('#sp'+i+'-desc', c['sp'+i+'_desc']);
       (function(idx){
         const el=document.getElementById('sp'+idx+'-img');
-        if(!el){spImgCheck();return;}
+        if(!el){spChecked++;if(spChecked===8)specUpdateUI();return;}
         const url='/api/upload?key=sp'+idx+'_img&t='+Date.now();
-        const t=new Image();
-        t.onload=()=>{
+        const img=new Image();
+        img.onload=function(){
           el.style.backgroundImage='url('+url+')';
           el.style.backgroundSize='cover';
           el.style.backgroundPosition='center';
           el.style.border='none';
           el.innerHTML='';
           const card=el.closest('.card');
-          if(card)card.classList.remove('sp-hidden');
-          spImgCheck();
+          if(card){card.classList.remove('sp-hidden');}
+          spChecked++;if(spChecked===8)specUpdateUI();
         };
-        t.onerror=()=>spImgCheck();
-        t.src=url;
+        img.onerror=function(){spChecked++;if(spChecked===8)specUpdateUI();};
+        img.src=url;
       })(i);
     }
     // Animations
