@@ -318,7 +318,7 @@ async function uploadImg(event, key) {
       if (r.status === 401) { logout(); return; }
       status.textContent = '✓ Image mise à jour';
       const prev = document.getElementById('prev-' + key);
-      if (prev) { prev.src = dataUrl; prev.style.display = 'block'; }
+      if (prev) { prev.src = `/api/upload?key=${key}&t=${Date.now()}`; prev.style.display = 'block'; }
       toast('Image mise à jour ✓');
       setTimeout(() => status.textContent = '', 3000);
     } catch { status.textContent = 'Erreur upload'; }
