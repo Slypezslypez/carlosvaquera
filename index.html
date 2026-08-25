@@ -116,17 +116,17 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .books-carousel-wrap{position:relative;display:flex;align-items:center;gap:.8rem;margin-top:0}
 .books-track-outer{overflow:hidden;flex:1}
 .books-track{display:flex;gap:1.2rem;transition:transform .5s cubic-bezier(.4,0,.2,1);will-change:transform}
-.book{flex:0 0 calc(20% - .96rem);min-width:0}
+.book{flex-shrink:0;min-width:0}
 .books-nav{flex-shrink:0;background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);width:38px;height:38px;cursor:pointer;font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;border-radius:1px}
 .books-nav:hover{background:rgba(201,168,76,.12);border-color:var(--gold)}
 .books-nav:disabled{opacity:.2;cursor:default}
 .books-dots{display:flex;gap:.4rem;justify-content:center;margin-top:1.5rem}
 .books-dots span{width:24px;height:2px;background:rgba(255,255,255,.15);cursor:pointer;transition:background .2s}
 .books-dots span.active{background:var(--gold)}
-.book{position:relative;cursor:pointer;transform:perspective(800px) rotateY(0deg);transition:transform .5s}
-.book:hover{transform:perspective(800px) rotateY(-8deg) translateX(6px)}
+.book{position:relative;cursor:pointer;transition:opacity .3s}
+.book:hover{opacity:.85}
 .book-ph{width:100%;aspect-ratio:2/3;outline:1px solid rgba(201,168,76,0.45);outline-offset:-1px}
-.book-spine{position:absolute;left:-8px;top:4px;bottom:4px;width:8px;background:linear-gradient(to right,rgba(0,0,0,.6),rgba(0,0,0,.2));transform-origin:right;transform:perspective(800px) rotateY(80deg)}
+.book-spine{display:none}
 .book-title{margin-top:.8rem;font-size:.8rem;font-weight:500;line-height:1.3}
 .book-sub{font-size:.7rem;color:var(--muted)}
 
@@ -789,10 +789,16 @@ const BOOKS_TOTAL = 20;
 const BOOKS_PAGES = Math.ceil(BOOKS_TOTAL / BOOKS_PER_PAGE);
 
 function booksUpdateUI() {
+  const outer = document.querySelector('.books-track-outer');
   const track = document.getElementById('books-track');
-  if (!track) return;
-  const bookW = track.children[0] ? track.children[0].offsetWidth + 19.2 : 0; // 1.2rem gap ~19.2px
-  track.style.transform = `translateX(-${booksPage * BOOKS_PER_PAGE * bookW}px)`;
+  if (!outer || !track) return;
+  const gap = 16;
+  const outerW = outer.offsetWidth;
+  const bookW = Math.floor((outerW - gap * (BOOKS_PER_PAGE - 1)) / BOOKS_PER_PAGE);
+  Array.from(track.children).forEach(b => { b.style.width = bookW + 'px'; });
+  track.style.gap = gap + 'px';
+  const offset = booksPage * BOOKS_PER_PAGE * (bookW + gap);
+  track.style.transform = `translateX(-${offset}px)`;
   document.getElementById('books-prev').disabled = booksPage === 0;
   document.getElementById('books-next').disabled = booksPage >= BOOKS_PAGES - 1;
   document.querySelectorAll('#books-dots [data-dot]').forEach(d => {
