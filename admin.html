@@ -379,20 +379,21 @@ function renderArtiste() {
 }
 
 function renderSpectacles() {
-  const cards = [1,2,3].map(i => `
-    <div class="card-item">
-      <h4>Spectacle ${i}</h4>
-      ${fieldHtml('Tag (ex: One-man show)', `sp${i}_tag`, ['One-man show','Mentalisme','Philosophie'][i-1])}
-      ${fieldHtml('Titre', `sp${i}_title`, ['Démons & Merveilles','Imagienaire','Le Mentaliste Philosophe'][i-1])}
-      ${fieldHtml('Description', `sp${i}_desc`, '', 'textarea')}
-      ${imgHtml('Affiche / Photo', `sp${i}_img`)}
-    </div>`).join('');
-  document.getElementById('tab-content').innerHTML = `
-    <div class="form-section">
-      <h3>Les 3 spectacles</h3>
-      <div class="card-grid">${cards}</div>
-    </div>
-    ${saveBar('spectacles')}`;
+  let cards = '';
+  const titles = ['Démons & Merveilles','Imagienaire','Le Mentaliste Philosophe','Spectacle 4','Spectacle 5','Spectacle 6','Spectacle 7','Spectacle 8'];
+  const tags = ['One-man show','Mentalisme','Philosophie & Magie','Close-up','Corporate','Gala','Jeune public','Conférence'];
+  for (let i = 1; i <= 8; i++) {
+    cards += '<div class="card-item"><h4>Spectacle ' + i + '</h4>'
+      + fieldHtml('Tag', 'sp' + i + '_tag', tags[i-1])
+      + fieldHtml('Titre', 'sp' + i + '_title', titles[i-1])
+      + fieldHtml('Description', 'sp' + i + '_desc', '', 'textarea')
+      + imgHtml('Affiche / Photo', 'sp' + i + '_img')
+      + '</div>';
+  }
+  document.getElementById('tab-content').innerHTML =
+    '<div class="form-section"><h3>Les 8 spectacles</h3>'
+    + '<div class="card-grid" style="grid-template-columns:repeat(4,1fr)">' + cards + '</div>'
+    + '</div>' + saveBar('spectacles');
 }
 
 function renderAnimations() {
