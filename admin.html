@@ -428,27 +428,22 @@ function renderConferences() {
 }
 
 function renderAuteur() {
-  const books = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map(i => {
-    const defaults = ['Graines de Mentalisme','Aspirations','Rencontres',"L'Émotion Magique"];
-    const def = i<=4 ? defaults[i-1] : `Livre ${i}`;
-    return `<div class="card-item">
-      <h4>Livre ${i}</h4>
-      ${fieldHtml('Titre', \`book\${i}_title\`, def)}
-      ${fieldHtml('Sous-titre', \`book\${i}_sub\`, 'Carlos Vaquera')}
-      ${imgHtml('Couverture', \`book\${i}_img\`)}
-    </div>`;
-  }).join('');
-  document.getElementById('tab-content').innerHTML = \`
-    <div class="form-section">
-      <h3>Introduction</h3>
-      \${fieldHtml('Texte intro', 'auteur_lead', "Les mots nous permettent de mettre sur papier des émotions…", 'textarea')}
-    </div>
-    <div class="form-section">
-      <h3>Les livres (20 emplacements)</h3>
-      <div class="book-grid" style="grid-template-columns:repeat(4,1fr)">\${books}</div>
-    </div>
-    \${saveBar('auteur')}\`;
-}`;
+  const defaults = ['Graines de Mentalisme','Aspirations','Rencontres',"L'Émotion Magique"];
+  let books = '';
+  for (let i = 1; i <= 20; i++) {
+    const def = i <= 4 ? defaults[i-1] : 'Livre ' + i;
+    books += '<div class="card-item"><h4>Livre ' + i + '</h4>'
+      + fieldHtml('Titre', 'book' + i + '_title', def)
+      + fieldHtml('Sous-titre', 'book' + i + '_sub', 'Carlos Vaquera')
+      + imgHtml('Couverture', 'book' + i + '_img')
+      + '</div>';
+  }
+  document.getElementById('tab-content').innerHTML =
+    '<div class="form-section"><h3>Introduction</h3>'
+    + fieldHtml('Texte intro', 'auteur_lead', "Les mots nous permettent de mettre sur papier des émotions…", 'textarea')
+    + '</div><div class="form-section"><h3>Les livres (20 emplacements)</h3>'
+    + '<div class="book-grid" style="grid-template-columns:repeat(4,1fr)">' + books + '</div>'
+    + '</div>' + saveBar('auteur');
 }
 
 function renderContact() {
