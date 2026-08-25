@@ -100,6 +100,17 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .card:hover .card-desc{max-height:100px;opacity:1}
 .card-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-top:.8rem;opacity:0;transition:opacity .4s;text-decoration:none}
 .card:hover .card-link{opacity:1}
+/* ── SPEC CAROUSEL ── */
+.spec-carousel-wrap{position:relative;display:flex;align-items:stretch;gap:.8rem}
+.spec-track-outer{overflow:hidden;flex:1;min-width:0;position:relative}
+.spec-track{display:flex;gap:2px;transition:transform .5s cubic-bezier(.4,0,.2,1);flex-wrap:nowrap}
+.spec-nav{flex-shrink:0;background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);width:38px;cursor:pointer;font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;border-radius:1px;align-self:center}
+.spec-nav:hover{background:rgba(201,168,76,.12);border-color:var(--gold)}
+.spec-nav:disabled{opacity:.2;cursor:default}
+.spec-dots{display:flex;gap:.4rem;justify-content:center;margin-top:1.5rem}
+.spec-dots span{width:24px;height:2px;background:rgba(255,255,255,.15);cursor:pointer;transition:background .2s}
+.spec-dots span.active{background:var(--gold)}
+
 
 /* ── IMMERSIVE BAND ── */
 .band{position:relative;min-height:70vh;display:flex;align-items:center;overflow:hidden}
@@ -281,18 +292,21 @@ footer p{font-size:.72rem;color:var(--muted)}
       <div class="section-label" style="justify-content:center" data-i18n="section_spectacles">Les Spectacles</div>
       <h2 data-i18n="spectacles_h2">Des univers à explorer</h2>
     </div>
-    <div class="cards-grid">
-      <div class="card reveal">
+    <div class="spec-carousel-wrap">
+      <button class="spec-nav" id="spec-prev" onclick="specCarousel(-1)">&#8592;</button>
+      <div class="spec-track-outer">
+        <div class="spec-track" id="spec-track">
+      <div class="card" style="transition-delay:0.0s">
         <div class="card-ph ph" id="sp1-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
         <div class="card-overlay"></div>
         <div class="card-body">
           <div class="card-tag" id="sp1-tag">One-man show</div>
-          <div class="card-title" id="sp1-title">Démons &amp; Merveilles</div>
+          <div class="card-title" id="sp1-title">Démons & Merveilles</div>
           <div class="card-desc" id="sp1-desc">Un voyage au cœur de l'impossible. Magie, illusion et mentalisme se mêlent dans un spectacle unique et envoûtant.</div>
           <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
         </div>
       </div>
-      <div class="card reveal" style="transition-delay:.1s">
+      <div class="card" style="transition-delay:0.1s">
         <div class="card-ph ph" id="sp2-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
         <div class="card-overlay"></div>
         <div class="card-body">
@@ -302,17 +316,71 @@ footer p{font-size:.72rem;color:var(--muted)}
           <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
         </div>
       </div>
-      <div class="card reveal" style="transition-delay:.2s">
+      <div class="card" style="transition-delay:0.2s">
         <div class="card-ph ph" id="sp3-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
         <div class="card-overlay"></div>
         <div class="card-body">
-          <div class="card-tag" id="sp3-tag">Philosophie &amp; Magie</div>
+          <div class="card-tag" id="sp3-tag">Philosophie & Magie</div>
           <div class="card-title" id="sp3-title">Le Mentaliste Philosophe</div>
           <div class="card-desc" id="sp3-desc">Carlos explore les frontières de l'esprit humain dans un spectacle qui mêle sagesse, humour et illusion.</div>
           <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
         </div>
       </div>
+      <div class="card">
+        <div class="card-ph ph" id="sp4-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp4-tag">Close-up</div>
+          <div class="card-title" id="sp4-title">Spectacle 4</div>
+          <div class="card-desc" id="sp4-desc"></div>
+          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-ph ph" id="sp5-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp5-tag">Corporate</div>
+          <div class="card-title" id="sp5-title">Spectacle 5</div>
+          <div class="card-desc" id="sp5-desc"></div>
+          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-ph ph" id="sp6-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp6-tag">Gala</div>
+          <div class="card-title" id="sp6-title">Spectacle 6</div>
+          <div class="card-desc" id="sp6-desc"></div>
+          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-ph ph" id="sp7-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp7-tag">Jeune public</div>
+          <div class="card-title" id="sp7-title">Spectacle 7</div>
+          <div class="card-desc" id="sp7-desc"></div>
+          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-ph ph" id="sp8-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp8-tag">Conférence</div>
+          <div class="card-title" id="sp8-title">Spectacle 8</div>
+          <div class="card-desc" id="sp8-desc"></div>
+          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
+        </div>
+      </div>
+        </div>
+      </div>
+      <button class="spec-nav" id="spec-next" onclick="specCarousel(1)">&#8594;</button>
     </div>
+    <div class="spec-dots" id="spec-dots"><span onclick="specGoTo(0)" data-sdot="0"></span><span onclick="specGoTo(1)" data-sdot="1"></span><span onclick="specGoTo(2)" data-sdot="2"></span></div>
   </div>
 </section>
 
@@ -679,12 +747,7 @@ async function loadContent(){
     if(c.artiste_stat3_label&&statlbls[2])statlbls[2].textContent=c.artiste_stat3_label;
     setImg('artiste-ph','artiste_img');
     // Spectacles
-    [1,2,3].forEach(i=>{
-      setText(`#sp${i}-tag`,c[`sp${i}_tag`]);
-      setText(`#sp${i}-title`,c[`sp${i}_title`]);
-      setText(`#sp${i}-desc`,c[`sp${i}_desc`]);
-      setImg(`sp${i}-img`,`sp${i}_img`);
-    });
+    for(let i=1;i<=8;i++){setText(`#sp${i}-tag`,c[`sp${i}_tag`]);setText(`#sp${i}-title`,c[`sp${i}_title`]);setText(`#sp${i}-desc`,c[`sp${i}_desc`]);setImg(`sp${i}-img`,`sp${i}_img`);}
     // Animations
     setText('#anim-title',c.anim_title);
     setText('#anim-lead',c.anim_lead);
@@ -736,6 +799,36 @@ loadAgenda();
 
 
 
+
+// ── SPEC CAROUSEL ────────────────────────
+let specPage = 0;
+const SPEC_PER_PAGE = 3;
+const SPEC_TOTAL = 8;
+const SPEC_PAGES = Math.ceil(SPEC_TOTAL / SPEC_PER_PAGE);
+
+function specUpdateUI() {
+  const outer = document.querySelector('.spec-track-outer');
+  const track = document.getElementById('spec-track');
+  if (!outer || !track || !track.children.length) return;
+  const gap = 2;
+  const outerW = outer.clientWidth;
+  const cardW = Math.floor((outerW - gap * (SPEC_PER_PAGE - 1)) / SPEC_PER_PAGE);
+  Array.from(track.children).forEach(c => { c.style.width = cardW + 'px'; c.style.flexShrink = '0'; });
+  const offset = specPage * SPEC_PER_PAGE * (cardW + gap);
+  track.style.transform = `translateX(-${offset}px)`;
+  document.getElementById('spec-prev').disabled = specPage === 0;
+  document.getElementById('spec-next').disabled = specPage >= SPEC_PAGES - 1;
+  document.querySelectorAll('#spec-dots [data-sdot]').forEach(d => {
+    d.classList.toggle('active', +d.dataset.sdot === specPage);
+  });
+}
+function specCarousel(dir) {
+  specPage = Math.max(0, Math.min(SPEC_PAGES - 1, specPage + dir));
+  specUpdateUI();
+}
+function specGoTo(page) { specPage = page; specUpdateUI(); }
+
+
 // ── BOOKS CAROUSEL ───────────────────────
 let booksPage = 0;
 const BOOKS_PER_PAGE = 5;
@@ -763,8 +856,8 @@ function booksCarousel(dir) {
   booksUpdateUI();
 }
 function booksGoTo(page) { booksPage = page; booksUpdateUI(); }
-window.addEventListener('load', booksUpdateUI);
-window.addEventListener('resize', booksUpdateUI);
+window.addEventListener('load', () => { booksUpdateUI(); specUpdateUI(); });
+window.addEventListener('resize', () => { booksUpdateUI(); specUpdateUI(); });
 
 
 // ── I18N ─────────────────────────────────
