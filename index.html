@@ -863,8 +863,12 @@ function specUpdateUI() {
   if (specPage >= SPEC_PAGES) specPage = SPEC_PAGES - 1;
   const offset = specPage * SPEC_PER_PAGE * (cardW + gap);
   track.style.transform = `translateX(-${offset}px)`;
-  document.getElementById('spec-prev').disabled = specPage === 0;
-  document.getElementById('spec-next').disabled = specPage >= SPEC_PAGES - 1;
+  const spPrev = document.getElementById('spec-prev');
+  const spNext = document.getElementById('spec-next');
+  spPrev.style.visibility = specPage === 0 ? 'hidden' : 'visible';
+  spNext.style.visibility = specPage >= SPEC_PAGES - 1 ? 'hidden' : 'visible';
+  spPrev.disabled = specPage === 0;
+  spNext.disabled = specPage >= SPEC_PAGES - 1;
   // Rebuild dots
   dotsEl.innerHTML = Array.from({length: SPEC_PAGES}, (_,i) =>
     `<span onclick="specGoTo(${i})" data-sdot="${i}"></span>`).join('');
@@ -895,8 +899,12 @@ function booksUpdateUI() {
   Array.from(track.children).forEach(b => { b.style.width = bookW + 'px'; b.style.flexShrink = '0'; });
   const offset = booksPage * BOOKS_PER_PAGE * (bookW + gap);
   track.style.transform = `translateX(-${offset}px)`;
-  document.getElementById('books-prev').disabled = booksPage === 0;
-  document.getElementById('books-next').disabled = booksPage >= BOOKS_PAGES - 1;
+  const bkPrev = document.getElementById('books-prev');
+  const bkNext = document.getElementById('books-next');
+  bkPrev.style.visibility = booksPage === 0 ? 'hidden' : 'visible';
+  bkNext.style.visibility = booksPage >= BOOKS_PAGES - 1 ? 'hidden' : 'visible';
+  bkPrev.disabled = booksPage === 0;
+  bkNext.disabled = booksPage >= BOOKS_PAGES - 1;
   document.querySelectorAll('#books-dots [data-dot]').forEach(d => {
     d.classList.toggle('active', +d.dataset.dot === booksPage);
   });
