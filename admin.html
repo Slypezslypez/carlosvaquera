@@ -260,7 +260,7 @@ function imgHtml(label, key) {
   return `<div class="field"><label>${label}</label>
     <div class="img-upload" id="upload-${key}">
       <input type="file" accept="image/*" onchange="uploadImg(event,'${key}')">
-      <img class="img-preview" id="prev-${key}" src="/api/upload?key=${key}" onerror="this.style.display='none'" onload="this.style.display='block'">
+      <img class="img-preview" id="prev-${key}" src="/api/upload?key=${key}&t=${Date.now()}" onerror="this.style.display='none'" onload="this.style.display='block'">
       <p>📷 <strong>Cliquez ou glissez</strong> une image<br><span style="font-size:.65rem;opacity:.5">JPG, PNG — max 2 Mo</span></p>
     </div>
     <div class="img-status" id="status-${key}"></div>
@@ -428,23 +428,27 @@ function renderConferences() {
 }
 
 function renderAuteur() {
-  const books = [1,2,3,4].map(i => `
-    <div class="card-item">
+  const books = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map(i => {
+    const defaults = ['Graines de Mentalisme','Aspirations','Rencontres',"L'Émotion Magique"];
+    const def = i<=4 ? defaults[i-1] : `Livre ${i}`;
+    return `<div class="card-item">
       <h4>Livre ${i}</h4>
-      ${fieldHtml('Titre', `book${i}_title`, ['Graines de Mentalisme','Aspirations','Rencontres',"L'Émotion Magique"][i-1])}
-      ${fieldHtml('Sous-titre / Éditeur', `book${i}_sub`, 'Carlos Vaquera')}
-      ${imgHtml('Couverture', `book${i}_img`)}
-    </div>`).join('');
-  document.getElementById('tab-content').innerHTML = `
+      ${fieldHtml('Titre', \`book\${i}_title\`, def)}
+      ${fieldHtml('Sous-titre', \`book\${i}_sub\`, 'Carlos Vaquera')}
+      ${imgHtml('Couverture', \`book\${i}_img\`)}
+    </div>`;
+  }).join('');
+  document.getElementById('tab-content').innerHTML = \`
     <div class="form-section">
       <h3>Introduction</h3>
-      ${fieldHtml('Texte intro', 'auteur_lead', "Les mots nous permettent de mettre sur papier des émotions…", 'textarea')}
+      \${fieldHtml('Texte intro', 'auteur_lead', "Les mots nous permettent de mettre sur papier des émotions…", 'textarea')}
     </div>
     <div class="form-section">
-      <h3>Les livres</h3>
-      <div class="book-grid">${books}</div>
+      <h3>Les livres (20 emplacements)</h3>
+      <div class="book-grid" style="grid-template-columns:repeat(4,1fr)">\${books}</div>
     </div>
-    ${saveBar('auteur')}`;
+    \${saveBar('auteur')}\`;
+}`;
 }
 
 function renderContact() {
