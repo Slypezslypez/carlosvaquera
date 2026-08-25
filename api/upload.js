@@ -24,7 +24,7 @@ module.exports = async function handler(req, res) {
     if (!rows.length) return res.status(404).end();
     const buf = Buffer.from(rows[0].data, 'base64');
     res.setHeader('Content-Type', rows[0].mime_type);
-    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     return res.send(buf);
   }
 
