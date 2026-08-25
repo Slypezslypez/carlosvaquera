@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Carlos Vaquera</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#c9a84c;--gold-l:#e8c97a;--bg:#0d0d14;--bg2:#141420;--bg3:#1c1c2a;--bg4:#242436;--text:#e8e4d8;--muted:#8888a0;--border:rgba(255,255,255,0.08);--r:6px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+
+/* LOGIN */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
+.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:3rem;width:100%;max-width:380px;text-align:center}
+.login-logo{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);margin-bottom:.4rem}
+.login-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
+.login-box input{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem}
+.login-box input:focus{border-color:var(--gold)}
+.login-box button{width:100%;background:var(--gold);color:var(--bg);border:none;padding:.85rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.login-box button:hover{background:var(--gold-l)}
+.login-error{color:#e05;font-size:.8rem;margin-top:.8rem}
+
+/* LAYOUT */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.sidebar-logo{padding:1.8rem 1.5rem 1.4rem;border-bottom:1px solid var(--border)}
+.sidebar-logo span{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);display:block}
+.sidebar-logo small{font-size:.7rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+nav.side-nav{flex:1;padding:1rem 0}
+nav.side-nav a{display:flex;align-items:center;gap:.75rem;padding:.75rem 1.5rem;color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:500;cursor:pointer;border-left:2px solid transparent;transition:color .15s,background .15s}
+nav.side-nav a:hover{color:var(--text);background:rgba(255,255,255,.03)}
+nav.side-nav a.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.06)}
+nav.side-nav a svg{width:16px;height:16px;flex-shrink:0}
+.sidebar-foot{padding:1.2rem 1.5rem;border-top:1px solid var(--border)}
+.sidebar-foot a{color:var(--muted);font-size:.78rem;text-decoration:none;transition:color .15s;cursor:pointer}
+.sidebar-foot a:hover{color:var(--text)}
+.main{flex:1;overflow:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 2rem;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:10}
+.topbar h1{font-family:'Playfair Display',serif;font-size:1.3rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;border:none;transition:all .15s;text-decoration:none;letter-spacing:.04em}
+.btn-gold{background:var(--gold);color:var(--bg)}.btn-gold:hover{background:var(--gold-l)}
+.btn-outline{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-outline:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+.btn-danger{background:rgba(200,50,50,.15);color:#e05;border:1px solid rgba(200,50,50,.2)}.btn-danger:hover{background:rgba(200,50,50,.25)}
+.btn svg{width:14px;height:14px}
+.content{padding:2rem}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+thead th{text-align:left;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.6rem 1rem;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+tbody td{padding:.85rem 1rem;font-size:.85rem;vertical-align:middle}
+.badge{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.7rem;font-weight:500}
+.badge-available{background:rgba(50,180,100,.15);color:#3c8}
+.badge-sold{background:rgba(200,50,50,.12);color:#c55}
+.actions{display:flex;gap:.5rem}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted);font-size:.85rem}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);width:100%;max-width:500px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;border-bottom:1px solid var(--border)}
+.modal-head h3{font-size:.95rem;font-weight:600}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;line-height:1}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:1.5rem}
+.modal-foot{display:flex;justify-content:flex-end;gap:.7rem;padding:1rem 1.5rem;border-top:1px solid var(--border)}
+
+/* FORM */
+.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.field label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.7rem .9rem;border-radius:4px;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;width:100%}
+.field input:focus,.field select:focus{border-color:var(--gold)}
+.field select{appearance:none}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r);padding:.8rem 1.2rem;font-size:.82rem;z-index:999;transform:translateY(100px);opacity:0;transition:all .3s;max-width:300px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.error{border-left-color:#e05}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Carlos Vaquera</div>
+    <div class="login-sub">Administration</div>
+    <input type="password" id="pw-input" placeholder="Mot de passe" autocomplete="current-password">
+    <button onclick="login()">Connexion</button>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="layout" id="dashboard" style="display:none">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span>Carlos Vaquera</span>
+      <small>Administration</small>
+    </div>
+    <nav class="side-nav">
+      <a class="active" onclick="showTab('agenda')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Agenda
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <a href="/" target="_blank">↗ Voir le site</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+      <a onclick="logout()">Déconnexion</a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <h1>Agenda</h1>
+      <button class="btn btn-gold" onclick="openModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Ajouter une date
+      </button>
+    </div>
+    <div class="content">
+      <div id="agenda-container">
+        <div class="empty-state">Chargement…</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">Ajouter une date</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="row-2">
+        <div class="field"><label>Jour</label><input type="text" id="f-day" placeholder="12"></div>
+        <div class="field"><label>Mois / Année</label><input type="text" id="f-month" placeholder="Sep 2026"></div>
+      </div>
+      <div class="field"><label>Titre du spectacle</label><input type="text" id="f-title" placeholder="Grand Gala de Magie"></div>
+      <div class="field"><label>Lieu</label><input type="text" id="f-venue" placeholder="Théâtre du Châtelet — Paris"></div>
+      <div class="field">
+        <label>Statut</label>
+        <select id="f-status">
+          <option value="available">Disponible</option>
+          <option value="sold-out">Complet</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-gold" onclick="save()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let TOKEN = localStorage.getItem('cv_token');
+
+// Auto-login if token exists
+if (TOKEN) showDashboard();
+
+document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+
+async function login() {
+  const pw = document.getElementById('pw-input').value;
+  const r = await fetch('/api/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: pw })
+  });
+  const j = await r.json();
+  if (j.error) {
+    document.getElementById('login-error').textContent = j.error;
+    return;
+  }
+  TOKEN = j.token;
+  localStorage.setItem('cv_token', TOKEN);
+  showDashboard();
+}
+
+function logout() {
+  localStorage.removeItem('cv_token');
+  TOKEN = null;
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+function showDashboard() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'flex';
+  loadAgenda();
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// ── AGENDA ──────────────────────────────────────────────────
+async function loadAgenda() {
+  const r = await fetch('/api/agenda');
+  if (r.status === 401) { logout(); return; }
+  const rows = await r.json();
+  renderAgenda(rows);
+}
+
+function renderAgenda(rows) {
+  const el = document.getElementById('agenda-container');
+  if (!rows.length) {
+    el.innerHTML = '<div class="empty-state">Aucune date. Cliquez "Ajouter une date".</div>';
+    return;
+  }
+  el.innerHTML = `
+    <table>
+      <thead><tr><th>Date</th><th>Spectacle</th><th>Lieu</th><th>Statut</th><th></th></tr></thead>
+      <tbody>
+        ${rows.map(s => `
+          <tr>
+            <td style="font-family:'Playfair Display',serif;color:var(--gold)">${s.day} ${s.month}</td>
+            <td style="font-weight:500">${s.title}</td>
+            <td style="color:var(--muted)">${s.venue}</td>
+            <td>${s.status === 'sold-out'
+              ? '<span class="badge badge-sold">Complet</span>'
+              : '<span class="badge badge-available">Disponible</span>'}</td>
+            <td><div class="actions">
+              <button class="btn btn-outline" onclick='editRow(${JSON.stringify(s)})'>Modifier</button>
+              <button class="btn btn-danger" onclick="deleteRow(${s.id}, this)">Supprimer</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+}
+
+function openModal(item = null) {
+  document.getElementById('modal-title').textContent = item ? 'Modifier la date' : 'Ajouter une date';
+  document.getElementById('edit-id').value  = item?.id    ?? '';
+  document.getElementById('f-day').value    = item?.day   ?? '';
+  document.getElementById('f-month').value  = item?.month ?? '';
+  document.getElementById('f-title').value  = item?.title ?? '';
+  document.getElementById('f-venue').value  = item?.venue ?? '';
+  document.getElementById('f-status').value = item?.status ?? 'available';
+  document.getElementById('modal').classList.add('open');
+}
+
+function editRow(item) { openModal(item); }
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+
+async function save() {
+  const body = {
+    id:     document.getElementById('edit-id').value || undefined,
+    day:    document.getElementById('f-day').value.trim(),
+    month:  document.getElementById('f-month').value.trim(),
+    title:  document.getElementById('f-title').value.trim(),
+    venue:  document.getElementById('f-venue').value.trim(),
+    status: document.getElementById('f-status').value,
+  };
+  if (!body.title) { toast('Le titre est requis.', true); return; }
+  const r = await fetch('/api/agenda', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
+    body: JSON.stringify(body)
+  });
+  if (r.status === 401) { logout(); return; }
+  const rows = await r.json();
+  renderAgenda(rows);
+  closeModal();
+  toast('Enregistré ✓');
+}
+
+async function deleteRow(id, btn) {
+  if (!confirm('Supprimer cette date ?')) return;
+  const r = await fetch(`/api/agenda?id=${id}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${TOKEN}` }
+  });
+  if (r.status === 401) { logout(); return; }
+  btn.closest('tr').remove();
+  toast('Supprimé ✓');
+}
+
+function toast(msg, err = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (err ? ' error' : '');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
