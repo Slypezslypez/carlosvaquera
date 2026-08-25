@@ -113,10 +113,10 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 #auteur{padding:10rem 0;background:var(--bg)}
 .auteur-inner{max-width:1200px;margin:0 auto;padding:0 3rem}
 .auteur-head{margin-bottom:4rem}
-.books-carousel-wrap{position:relative;display:flex;align-items:center;gap:.8rem;margin-top:0}
-.books-track-outer{overflow:hidden;flex:1}
-.books-track{display:flex;gap:1.2rem;transition:transform .5s cubic-bezier(.4,0,.2,1);will-change:transform}
-.book{flex-shrink:0;min-width:0}
+.books-carousel-wrap{position:relative;display:flex;align-items:center;gap:.8rem}
+.books-track-outer{overflow:hidden;flex:1;min-width:0}
+.books-track{display:flex;gap:12px;transition:transform .5s cubic-bezier(.4,0,.2,1);flex-wrap:nowrap}
+.book{flex-shrink:0;width:calc((100% - 48px) / 5)}
 .books-nav{flex-shrink:0;background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);width:38px;height:38px;cursor:pointer;font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;border-radius:1px}
 .books-nav:hover{background:rgba(201,168,76,.12);border-color:var(--gold)}
 .books-nav:disabled{opacity:.2;cursor:default}
@@ -186,7 +186,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 @media(max-width:900px){
   .artiste-inner,.contact-inner{grid-template-columns:1fr;gap:4rem}
   .cards-grid{grid-template-columns:1fr 1fr}
-  .book{flex:0 0 calc(50% - .6rem)}
+  
   #nav{padding:1rem 1.5rem}
   .nav-links{display:none}
   .hero-content{text-align:center}
@@ -199,7 +199,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 }
 @media(max-width:600px){
   .cards-grid{grid-template-columns:1fr}
-  .book{flex:0 0 calc(50% - .6rem)}
+  
   .artiste-inner{padding:0 1.5rem}
 }
 </style>
@@ -791,12 +791,11 @@ const BOOKS_PAGES = Math.ceil(BOOKS_TOTAL / BOOKS_PER_PAGE);
 function booksUpdateUI() {
   const outer = document.querySelector('.books-track-outer');
   const track = document.getElementById('books-track');
-  if (!outer || !track) return;
-  const gap = 16;
-  const outerW = outer.offsetWidth;
+  if (!outer || !track || !track.children.length) return;
+  const gap = 12;
+  const outerW = outer.clientWidth;
   const bookW = Math.floor((outerW - gap * (BOOKS_PER_PAGE - 1)) / BOOKS_PER_PAGE);
-  Array.from(track.children).forEach(b => { b.style.width = bookW + 'px'; });
-  track.style.gap = gap + 'px';
+  Array.from(track.children).forEach(b => { b.style.width = bookW + 'px'; b.style.flexShrink = '0'; });
   const offset = booksPage * BOOKS_PER_PAGE * (bookW + gap);
   track.style.transform = `translateX(-${offset}px)`;
   document.getElementById('books-prev').disabled = booksPage === 0;
