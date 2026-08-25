@@ -342,36 +342,36 @@ footer p{font-size:.72rem;color:var(--muted)}
     </div>
     <div class="books-grid">
       <div class="book reveal">
-        <div class="book-ph ph" style="aspect-ratio:2/3">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book1-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-title">Graines de Mentalisme</div>
-        <div class="book-sub">Carlos Vaquera</div>
+        <div class="book-title" id="book1-title">Graines de Mentalisme</div>
+        <div class="book-sub" id="book1-sub">Carlos Vaquera</div>
       </div>
       <div class="book reveal" style="transition-delay:.1s">
-        <div class="book-ph ph" style="aspect-ratio:2/3">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book2-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-title">Aspirations</div>
-        <div class="book-sub">Carlos Vaquera</div>
+        <div class="book-title" id="book2-title">Aspirations</div>
+        <div class="book-sub" id="book2-sub">Carlos Vaquera</div>
       </div>
       <div class="book reveal" style="transition-delay:.2s">
-        <div class="book-ph ph" style="aspect-ratio:2/3">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book3-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-title">Rencontres</div>
-        <div class="book-sub">Carlos Vaquera</div>
+        <div class="book-title" id="book3-title">Rencontres</div>
+        <div class="book-sub" id="book3-sub">Carlos Vaquera</div>
       </div>
       <div class="book reveal" style="transition-delay:.3s">
-        <div class="book-ph ph" style="aspect-ratio:2/3">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book4-img">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           Couverture
         </div>
-        <div class="book-title">L'Émotion Magique</div>
-        <div class="book-sub">Carlos Vaquera</div>
+        <div class="book-title" id="book4-title">L'Émotion Magique</div>
+        <div class="book-sub" id="book4-sub">Carlos Vaquera</div>
       </div>
     </div>
   </div>
@@ -476,9 +476,20 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 function setImg(id,key){
   const el=document.getElementById(id);
   if(!el)return;
-  const url=`/api/upload?key=${key}`;
+  const url=`/api/upload?key=${key}&t=${Date.now()}`;
   const t=new Image();
-  t.onload=()=>{el.src=url;if(el.classList.contains('ph'))el.style.backgroundImage=`url(${url})`;};
+  t.onload=()=>{
+    if(el.tagName==='IMG'){
+      el.src=url;
+    }else{
+      el.style.backgroundImage=`url(${url})`;
+      el.style.backgroundSize='cover';
+      el.style.backgroundPosition='center';
+      el.style.border='none';
+      el.innerHTML='';
+    }
+  };
+  t.onerror=()=>{};
   t.src=url;
 }
 function setText(sel,val,html=false){
