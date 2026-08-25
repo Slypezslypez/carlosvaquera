@@ -753,8 +753,7 @@ async function loadContent(){
     if(c.artiste_stat3_label&&statlbls[2])statlbls[2].textContent=c.artiste_stat3_label;
     setImg('artiste-ph','artiste_img');
     // Spectacles
-    // Load spectacles — show card only when image loads
-    const spKeys=['sp1_img','sp2_img','sp3_img','sp4_img','sp5_img','sp6_img','sp7_img','sp8_img'];
+    // Load spectacles — show card if it has a title OR an image
     let spChecked=0;
     for(let i=1;i<=8;i++){
       setText('#sp'+i+'-tag', c['sp'+i+'_tag']);
@@ -762,6 +761,10 @@ async function loadContent(){
       setText('#sp'+i+'-desc', c['sp'+i+'_desc']);
       (function(idx){
         const el=document.getElementById('sp'+idx+'-img');
+        const card=el?el.closest('.card'):null;
+        // Show card if it has a title or tag (even without image)
+        const hasText = !!(c['sp'+idx+'_title']||c['sp'+idx+'_tag']);
+        if(hasText && card) card.classList.remove('sp-hidden');
         if(!el){spChecked++;if(spChecked===8)specUpdateUI();return;}
         const url='/api/upload?key=sp'+idx+'_img&t='+Date.now();
         const img=new Image();
@@ -771,8 +774,7 @@ async function loadContent(){
           el.style.backgroundPosition='center';
           el.style.border='none';
           el.innerHTML='';
-          const card=el.closest('.card');
-          if(card){card.classList.remove('sp-hidden');}
+          if(card) card.classList.remove('sp-hidden');
           spChecked++;if(spChecked===8)specUpdateUI();
         };
         img.onerror=function(){spChecked++;if(spChecked===8)specUpdateUI();};
