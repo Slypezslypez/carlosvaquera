@@ -762,9 +762,6 @@ async function loadContent(){
       (function(idx){
         const el=document.getElementById('sp'+idx+'-img');
         const card=el?el.closest('.card'):null;
-        // Show card if it has a title or tag (even without image)
-        const hasText = !!(c['sp'+idx+'_title']||c['sp'+idx+'_tag']);
-        if(hasText && card) card.classList.remove('sp-hidden');
         if(!el){spChecked++;if(spChecked===8)specUpdateUI();return;}
         const url='/api/upload?key=sp'+idx+'_img&t='+Date.now();
         const img=new Image();
