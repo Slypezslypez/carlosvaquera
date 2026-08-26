@@ -319,9 +319,10 @@ async function saveSection(section) {
 async function deleteImg(key) {
   if (!confirm('Supprimer cette image ?')) return;
   try {
-    const r = await fetch(`/api/upload?action=delete&key=${key}`, {
+    const r = await fetch('/api/delete-img', {
       method: 'POST',
-      headers: { 'Authorization': `Bearer ${TOKEN}` }
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
+      body: JSON.stringify({ key })
     });
     if (r.status === 401) { logout(); return; }
     const j = await r.json().catch(() => ({}));
