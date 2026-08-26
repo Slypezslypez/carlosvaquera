@@ -190,6 +190,17 @@ tbody td{padding:.75rem 1rem;font-size:.83rem;vertical-align:middle}
           <option value="sold-out">Complet</option>
         </select>
       </div>
+      <div class="field"><label>Image du spectacle</label>
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:.4rem">
+          <img id="f-img-preview" src="" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid rgba(201,168,76,.3);display:none">
+          <label style="cursor:pointer;padding:.5rem 1rem;border:1px solid rgba(201,168,76,.4);border-radius:4px;color:var(--gold);font-size:.85rem">
+            Choisir une image
+            <input type="file" id="f-img" accept="image/*" style="display:none" onchange="previewAgendaImg(this)">
+          </label>
+          <button type="button" onclick="clearAgendaImg()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem">Supprimer</button>
+        </div>
+        <input type="hidden" id="f-img-b64">
+      </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-outline" onclick="closeAgendaModal()">Annuler</button>
@@ -350,6 +361,11 @@ function renderHero() {
       <h3>Image de fond (hero)</h3>
       ${imgHtml('Photo principale', 'hero_bg')}
     </div>
+    <div class="form-section">
+      <h3>Portrait (optionnel)</h3>
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Apparaît sur le côté gauche de la page d'accueil. Si vide, aucun cadre n'est affiché.</p>
+      ${imgHtml('Portrait de Carlos', 'hero_portrait')}
+    </div>
     ${saveBar('hero')}`;
 }
 
@@ -477,9 +493,10 @@ function renderAgendaTable() {
   const el = document.getElementById('agenda-table');
   if (!agendaRows.length) { el.innerHTML = '<div class="empty-state">Aucune date.</div>'; return; }
   el.innerHTML = `<table>
-    <thead><tr><th>Date</th><th>Spectacle</th><th>Lieu</th><th>Statut</th><th></th></tr></thead>
+    <thead><tr><th>Image</th><th>Date</th><th>Spectacle</th><th>Lieu</th><th>Statut</th><th></th></tr></thead>
     <tbody>${agendaRows.map(s => `
       <tr>
+        <td>${s.image ? `<img src="${s.image}" style="width:44px;height:44px;object-fit:cover;border-radius:4px;border:1px solid rgba(201,168,76,.3)">` : '<span style="color:var(--muted);font-size:.75rem">—</span>'}</td>
         <td style="color:var(--gold);font-weight:600">${s.day} ${s.month}</td>
         <td>${s.title}</td>
         <td style="color:var(--muted)">${s.venue}</td>
@@ -500,7 +517,32 @@ function openAgendaModal(item = null) {
   document.getElementById('f-title').value  = item?.title ?? '';
   document.getElementById('f-venue').value  = item?.venue ?? '';
   document.getElementById('f-status').value = item?.status ?? 'available';
+  document.getElementById('f-img-b64').value = item?.image ?? '';
+  const prev = document.getElementById('f-img-preview');
+  if (item?.image) { prev.src = item.image; prev.style.display = 'block'; }
+  else { prev.src = ''; prev.style.display = 'none'; }
+  document.getElementById('f-img').value = '';
   document.getElementById('agenda-modal').classList.add('open');
+}
+
+function previewAgendaImg(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('f-img-b64').value = e.target.result;
+    const prev = document.getElementById('f-img-preview');
+    prev.src = e.target.result;
+    prev.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearAgendaImg() {
+  document.getElementById('f-img-b64').value = '';
+  document.getElementById('f-img').value = '';
+  const prev = document.getElementById('f-img-preview');
+  prev.src = ''; prev.style.display = 'none';
 }
 
 function editAgenda(item) { openAgendaModal(item); }
@@ -515,6 +557,7 @@ async function saveAgenda() {
     title:  document.getElementById('f-title').value.trim(),
     venue:  document.getElementById('f-venue').value.trim(),
     status: document.getElementById('f-status').value,
+    image:  document.getElementById('f-img-b64').value || null,
   };
   if (!body.title) { toast('Le titre est requis.', true); return; }
   const r = await fetch('/api/agenda', {
