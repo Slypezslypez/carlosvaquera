@@ -160,6 +160,24 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .book-sub{font-size:.7rem;color:var(--muted)}
 
 /* ── AGENDA ── */
+/* ── VIDEOS ── */
+#videos{padding:10rem 0;background:var(--bg)}
+.videos-inner{max-width:1100px;margin:0 auto;padding:0 3rem}
+.videos-head{text-align:center;margin-bottom:4rem}
+.video-featured{margin-bottom:3rem}
+.video-embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:2px;outline:1px solid rgba(201,168,76,.2);outline-offset:-1px}
+.video-embed-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.video-featured-title{margin-top:1rem;font-size:1rem;font-weight:500;color:var(--text);text-align:center;opacity:.8}
+.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:2rem}
+.video-thumb{position:relative;cursor:pointer;aspect-ratio:16/9;overflow:hidden;border-radius:2px;outline:1px solid rgba(201,168,76,.15);outline-offset:-1px;background:var(--bg3)}
+.video-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.video-thumb:hover img{transform:scale(1.04)}
+.video-thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:background .2s}
+.video-thumb:hover .video-thumb-play{background:rgba(0,0,0,.55)}
+.video-thumb-play::after{content:'▶';font-size:1.6rem;color:#fff;opacity:.9;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.video-thumb-label{position:absolute;bottom:0;left:0;right:0;padding:.5rem .6rem;background:linear-gradient(transparent,rgba(0,0,0,.75));font-size:.7rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:900px){.video-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.video-grid{grid-template-columns:1fr}}
 #agenda{padding:10rem 0;background:var(--bg2)}
 .agenda-inner{max-width:1000px;margin:0 auto;padding:0 3rem}
 .agenda-head{text-align:center;margin-bottom:4rem}
@@ -245,6 +263,7 @@ footer p{font-size:.72rem;color:var(--muted)}
     <li><a href="#artiste" data-i18n="nav_artiste">L'Artiste</a></li>
     <li><a href="#spectacles" data-i18n="nav_spectacles">Spectacles</a></li>
     <li><a href="#auteur" data-i18n="nav_auteur">L'Auteur</a></li>
+    <li><a href="#videos" data-i18n="nav_videos">Vidéos</a></li>
     <li><a href="#agenda" data-i18n="nav_agenda">Agenda</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
@@ -583,6 +602,23 @@ footer p{font-size:.72rem;color:var(--muted)}
   </div>
 </section>
 
+<!-- VIDÉOS -->
+<section id="videos">
+  <div class="videos-inner">
+    <div class="videos-head reveal">
+      <div class="section-label" style="justify-content:center" data-i18n="section_videos">Vidéos</div>
+      <h2 data-i18n="videos_h2">Carlos en action</h2>
+    </div>
+    <!-- Featured video -->
+    <div class="video-featured" id="video-featured" style="display:none">
+      <div class="video-embed-wrap" id="video-featured-wrap"></div>
+      <div class="video-featured-title" id="video-featured-title"></div>
+    </div>
+    <!-- Grid -->
+    <div class="video-grid" id="video-grid"></div>
+  </div>
+</section>
+
 <!-- AGENDA -->
 <section id="agenda">
   <div class="agenda-inner">
@@ -778,6 +814,7 @@ async function loadContent(){
     // Contact
     setText('#contact-quote',c.contact_quote);
     if(c.contact_email){const a=document.getElementById('contact-email');if(a){a.textContent='✉ '+c.contact_email;a.href='mailto:'+c.contact_email;}}
+    loadVideos(c);
   }catch(e){console.log('Content unavailable, using defaults');}
 }
 loadContent();
@@ -811,6 +848,43 @@ async function loadAgenda(){
   }
 }
 loadAgenda();
+
+// ── VIDEOS ───────────────────────────────
+function ytId(url){
+  if(!url)return null;
+  const m=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+  return m?m[1]:null;
+}
+function loadVideos(c){
+  // Featured
+  const featUrl=c['video1_url'];
+  const featId=ytId(featUrl);
+  const featEl=document.getElementById('video-featured');
+  const featWrap=document.getElementById('video-featured-wrap');
+  const featTitle=document.getElementById('video-featured-title');
+  if(featId&&featEl){
+    featWrap.innerHTML=`<iframe src="https://www.youtube.com/embed/${featId}" allowfullscreen></iframe>`;
+    if(c['video1_title'])featTitle.textContent=c['video1_title'];
+    featEl.style.display='block';
+  }
+  // Grid (videos 2–20)
+  const grid=document.getElementById('video-grid');
+  if(!grid)return;
+  let html='';
+  for(let i=2;i<=20;i++){
+    const url=c['video'+i+'_url'];
+    const id=ytId(url);
+    if(!id)continue;
+    const title=c['video'+i+'_title']||'';
+    const thumb=`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+    html+=`<div class="video-thumb" onclick="window.open('https://www.youtube.com/watch?v=${id}','_blank')">
+      <img src="${thumb}" alt="${title}" loading="lazy">
+      <div class="video-thumb-play"></div>
+      ${title?`<div class="video-thumb-label">${title}</div>`:''}
+    </div>`;
+  }
+  grid.innerHTML=html;
+}
 
 
 
@@ -856,7 +930,8 @@ window.addEventListener('resize', () => { booksUpdateUI(); });
 // ── I18N ─────────────────────────────────
 const TRANSLATIONS = {
   fr: {
-    nav_artiste:"L'Artiste",nav_spectacles:"Spectacles",nav_auteur:"L'Auteur",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Réserver",
+    nav_artiste:"L'Artiste",nav_spectacles:"Spectacles",nav_auteur:"L'Auteur",nav_videos:"Vidéos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Réserver",
+    section_videos:"Vidéos",videos_h2:"Carlos en action",
     hero_subtitle:"Magicien · Mentaliste · Conférencier",hero_tagline:"« Your illusions are my reality »",
     hero_intro:"Créateur d'illusions et explorateur de l'esprit — un univers où la frontière entre le réel et l'imaginaire s'efface.",
     hero_btn1:"Découvrir les spectacles",hero_btn2:"L'univers de Carlos",hero_scroll:"Défiler",
@@ -877,7 +952,8 @@ const TRANSLATIONS = {
     footer_sub:"Magicien · Mentaliste · Conférencier",footer_rights:"Tous droits réservés"
   },
   en: {
-    nav_artiste:"The Artist",nav_spectacles:"Shows",nav_auteur:"The Author",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Book Now",
+    nav_artiste:"The Artist",nav_spectacles:"Shows",nav_auteur:"The Author",nav_videos:"Videos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Book Now",
+    section_videos:"Videos",videos_h2:"Carlos in action",
     hero_subtitle:"Magician · Mentalist · Speaker",hero_tagline:"« Your illusions are my reality »",
     hero_intro:"Creator of illusions and explorer of the mind — a universe where the boundary between reality and imagination fades away.",
     hero_btn1:"Discover the shows",hero_btn2:"Carlos's universe",hero_scroll:"Scroll",
@@ -898,7 +974,8 @@ const TRANSLATIONS = {
     footer_sub:"Magician · Mentalist · Speaker",footer_rights:"All rights reserved"
   },
   es: {
-    nav_artiste:"El Artista",nav_spectacles:"Espectáculos",nav_auteur:"El Autor",nav_agenda:"Agenda",nav_contact:"Contacto",nav_reserver:"Reservar",
+    nav_artiste:"El Artista",nav_spectacles:"Espectáculos",nav_auteur:"El Autor",nav_videos:"Vídeos",nav_agenda:"Agenda",nav_contact:"Contacto",nav_reserver:"Reservar",
+    section_videos:"Vídeos",videos_h2:"Carlos en acción",
     hero_subtitle:"Mago · Mentalista · Conferenciante",hero_tagline:"« Your illusions are my reality »",
     hero_intro:"Creador de ilusiones y explorador de la mente — un universo donde la frontera entre lo real y lo imaginario se desvanece.",
     hero_btn1:"Descubrir los espectáculos",hero_btn2:"El universo de Carlos",hero_scroll:"Desplazar",
