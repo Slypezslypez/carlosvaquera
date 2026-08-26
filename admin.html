@@ -267,12 +267,14 @@ function fieldHtml(label, key, fallback = '', type = 'input') {
 }
 
 function imgHtml(label, key) {
-  const hasImg = false; // We'll check via URL
   return `<div class="field"><label>${label}</label>
     <div class="img-upload" id="upload-${key}">
       <input type="file" accept="image/*" onchange="uploadImg(event,'${key}')">
       <img class="img-preview" id="prev-${key}" src="/api/upload?key=${key}&t=${Date.now()}" onerror="this.style.display='none'" onload="this.style.display='block'">
       <p>📷 <strong>Cliquez ou glissez</strong> une image<br><span style="font-size:.65rem;opacity:.5">JPG, PNG — max 2 Mo</span></p>
+    </div>
+    <div style="margin-top:.4rem">
+      <button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem" onclick="deleteImg('${key}')">🗑 Supprimer l'image</button>
     </div>
     <div class="img-status" id="status-${key}"></div>
   </div>`;
@@ -307,6 +309,18 @@ async function saveSection(section) {
     msg.textContent = 'Erreur';
     msg.className = 'save-msg err';
   }
+}
+
+async function deleteImg(key) {
+  if (!confirm('Supprimer cette image ?')) return;
+  const r = await fetch(`/api/upload?key=${key}`, {
+    method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${TOKEN}` }
+  });
+  if (r.status === 401) { logout(); return; }
+  const prev = document.getElementById('prev-' + key);
+  if (prev) { prev.src = ''; prev.style.display = 'none'; }
+  toast('Image supprimée ✓');
 }
 
 async function uploadImg(event, key) {
