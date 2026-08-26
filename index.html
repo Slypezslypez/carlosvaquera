@@ -1,6 +1,21 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<script>
+// Accès preview : carlosvaquera.com/?preview=carlos
+(function(){
+  var p=new URLSearchParams(location.search).get('preview');
+  if(p==='carlos'){sessionStorage.setItem('cv_preview','1');return;}
+  if(sessionStorage.getItem('cv_preview')==='1')return;
+  // Coming soon
+  document.addEventListener('DOMContentLoaded',function(){
+    document.body.innerHTML='';
+    document.body.style.cssText='margin:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Georgia,serif;color:#c9a84c;text-align:center;';
+    document.body.innerHTML='<div><div style="font-size:1rem;letter-spacing:.3em;text-transform:uppercase;opacity:.6;margin-bottom:1.5rem">Carlos Vaquera</div><div style="font-size:2.5rem;font-weight:300;margin-bottom:1rem">Site en cours de création</div><div style="font-size:1rem;opacity:.5;letter-spacing:.1em">Coming soon</div></div>';
+  });
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Carlos Vaquera — Magicien, mentaliste et conférencier. Créateur d'illusions et explorateur de l'esprit.">
