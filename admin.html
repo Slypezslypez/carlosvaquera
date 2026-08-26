@@ -285,15 +285,6 @@ function imgHtml(label, key) {
   </div>`;
 }
 
-function selectTheme(val) {
-  document.getElementById('field-site_theme').value = val;
-  const ACCENTS = {'':'#c9a84c', clair:'#8a6e2f', mystere:'#c084fc', velours:'#e05252'};
-  document.querySelectorAll('[data-theme-opt]').forEach(el => {
-    const isActive = el.dataset.themeOpt === val;
-    el.style.borderColor = isActive ? ACCENTS[val] : 'rgba(128,128,128,.2)';
-  });
-}
-
 function saveBar(section) {
   return `<div class="save-bar">
     <button class="btn btn-gold" onclick="saveSection('${section}')">💾 Enregistrer ${TAB_TITLES[section]}</button>
@@ -414,28 +405,6 @@ function renderHero() {
       <h3>Portrait (optionnel)</h3>
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Apparaît sur le côté gauche de la page d'accueil. Si vide, aucun cadre n'est affiché.</p>
       ${imgHtml('Portrait de Carlos', 'hero_portrait')}
-    </div>
-    <div class="form-section">
-      <h3>🎨 Thème du site</h3>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1.2rem">Choisissez l'ambiance visuelle du site.</p>
-      <input type="hidden" data-key="site_theme" id="field-site_theme" value="${c('site_theme','')}" >
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem" id="theme-picker">
-        ${[
-          {val:'', label:'Sombre', desc:'Fond noir, or élégant', bg:'#080810', accent:'#c9a84c', textColor:'rgba(255,255,255,.5)'},
-          {val:'clair', label:'Clair', desc:'Fond crème, or discret', bg:'#f5f0e8', accent:'#8a6e2f', textColor:'rgba(0,0,0,.4)'},
-          {val:'mystere', label:'Mystère', desc:'Violet profond, magie', bg:'#0d0814', accent:'#c084fc', textColor:'rgba(255,255,255,.5)'},
-          {val:'velours', label:'Velours Rouge', desc:'Rouge passion, scène', bg:'#0e0808', accent:'#e05252', textColor:'rgba(255,255,255,.5)'},
-        ].map(t => `
-          <div onclick="selectTheme('${t.val}')" data-theme-opt="${t.val}" style="cursor:pointer;border:2px solid ${c('site_theme','')===t.val?t.accent:'rgba(128,128,128,.2)'};border-radius:8px;overflow:hidden;transition:border-color .2s">
-            <div style="background:${t.bg};padding:1rem;display:flex;gap:.6rem;align-items:center">
-              <div style="width:28px;height:28px;border-radius:50%;background:${t.accent};flex-shrink:0"></div>
-              <div>
-                <div style="color:${t.accent};font-size:.8rem;font-weight:600">${t.label}</div>
-                <div style="color:${t.textColor};font-size:.65rem">${t.desc}</div>
-              </div>
-            </div>
-          </div>`).join('')}
-      </div>
     </div>
     ${saveBar('hero')}`;
 }
