@@ -203,7 +203,7 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .book-sub{font-size:.7rem;color:var(--muted)}
 
 /* ── FEATURED BOOK ── */
-.featured-book{display:none;margin-top:5rem;padding-top:4rem;border-top:1px solid var(--border)}
+.featured-book{display:none;margin-bottom:5rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
 .featured-book.visible{display:flex;gap:4rem;align-items:center}
 .featured-book-cover{flex-shrink:0;width:200px}
 .featured-book-cover img{width:100%;aspect-ratio:2/3;object-fit:cover;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -485,6 +485,21 @@ footer p{font-size:.72rem;color:var(--muted)}
       <h2 data-i18n="auteur_h2">Amoureux des mots</h2>
       <p class="lead" style="max-width:600px" id="auteur-lead">Les mots nous permettent de mettre sur papier des émotions que nous transportons en nous depuis un long moment. Un livre, comme par magie, devient la plus courte distance entre deux sensibilités.</p>
     </div>
+
+    <!-- Dernier livre en avant -->
+    <div class="featured-book reveal" id="featured-book">
+      <div class="featured-book-cover">
+        <img id="featured-book-img" src="" alt="Dernier livre de Carlos Vaquera">
+      </div>
+      <div class="featured-book-info">
+        <div class="featured-book-label">Dernière publication</div>
+        <div class="featured-book-title" id="featured-book-title"></div>
+        <div class="featured-book-sub" id="featured-book-sub"></div>
+        <div class="featured-book-desc" id="featured-book-desc"></div>
+        <a id="featured-book-link" href="#" class="btn-primary" style="display:none">Commander →</a>
+      </div>
+    </div>
+
     <div class="books-carousel-wrap">
       <button class="books-nav" id="books-prev" onclick="booksCarousel(-1)">&#8592;</button>
       <div class="books-track-outer">
@@ -654,20 +669,6 @@ footer p{font-size:.72rem;color:var(--muted)}
       <button class="books-nav" id="books-next" onclick="booksCarousel(1)">&#8594;</button>
     </div>
     <div class="books-dots" id="books-dots"><span onclick="booksGoTo(0)" data-dot="0"></span><span onclick="booksGoTo(1)" data-dot="1"></span><span onclick="booksGoTo(2)" data-dot="2"></span><span onclick="booksGoTo(3)" data-dot="3"></span></div>
-
-    <!-- Dernier livre en avant -->
-    <div class="featured-book reveal" id="featured-book">
-      <div class="featured-book-cover">
-        <img id="featured-book-img" src="" alt="Dernier livre de Carlos Vaquera">
-      </div>
-      <div class="featured-book-info">
-        <div class="featured-book-label">Dernière publication</div>
-        <div class="featured-book-title" id="featured-book-title"></div>
-        <div class="featured-book-sub" id="featured-book-sub"></div>
-        <div class="featured-book-desc" id="featured-book-desc"></div>
-        <a id="featured-book-link" href="#" class="btn-primary" style="display:none">Commander →</a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -908,7 +909,20 @@ async function loadContent(){
     if(c.artiste_stat1_label&&statlbls[0])statlbls[0].textContent=c.artiste_stat1_label;
     if(c.artiste_stat2_label&&statlbls[1])statlbls[1].textContent=c.artiste_stat2_label;
     if(c.artiste_stat3_label&&statlbls[2])statlbls[2].textContent=c.artiste_stat3_label;
-    setImg('artiste-ph','artiste_img');
+    (function(){
+      const url='/api/upload?key=artiste_img&t='+Date.now();
+      const t=new Image();
+      t.onload=function(){
+        const el=document.getElementById('artiste-ph');
+        if(!el)return;
+        el.style.backgroundImage='url('+url+')';
+        el.style.backgroundSize='cover';
+        el.style.backgroundPosition='center top';
+        el.style.border='none';
+        el.innerHTML='';
+      };
+      t.src=url;
+    })();
     // Spectacles — grille fixe 4 slots, visible si image chargée
     for(let i=1;i<=4;i++){
       setText('#sp'+i+'-tag', c['sp'+i+'_tag']);
