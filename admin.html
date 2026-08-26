@@ -178,9 +178,11 @@ tbody td{padding:.75rem 1rem;font-size:.83rem;vertical-align:middle}
     </div>
     <div class="modal-body">
       <input type="hidden" id="edit-id">
-      <div class="row-2">
-        <div class="field"><label>Jour</label><input type="text" id="f-day" placeholder="12"></div>
-        <div class="field"><label>Mois / Année</label><input type="text" id="f-month" placeholder="Sep 2026"></div>
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="f-date" style="width:100%;padding:.55rem .8rem;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:.9rem;color-scheme:dark" onchange="syncDateFields(this.value)">
+        <input type="hidden" id="f-day">
+        <input type="hidden" id="f-month">
       </div>
       <div class="field"><label>Titre</label><input type="text" id="f-title" placeholder="Grand Gala de Magie"></div>
       <div class="field"><label>Lieu</label><input type="text" id="f-venue" placeholder="Théâtre — Paris"></div>
@@ -544,11 +546,32 @@ function renderAgendaTable() {
     </tbody></table>`;
 }
 
+const MONTHS_FR = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'];
+
+function syncDateFields(val) {
+  if (!val) return;
+  const [y, m, d] = val.split('-');
+  document.getElementById('f-day').value = String(parseInt(d));
+  document.getElementById('f-month').value = MONTHS_FR[parseInt(m)-1] + ' ' + y;
+}
+
+function dateFromDayMonth(day, month) {
+  // month = "Sep 2026" → try to parse back to YYYY-MM-DD
+  if (!day || !month) return '';
+  const parts = month.split(' ');
+  if (parts.length < 2) return '';
+  const year = parts[1];
+  const mIdx = MONTHS_FR.indexOf(parts[0]);
+  if (mIdx < 0) return '';
+  return `${year}-${String(mIdx+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+}
+
 function openAgendaModal(item = null) {
   document.getElementById('modal-title').textContent = item ? 'Modifier la date' : 'Ajouter une date';
   document.getElementById('edit-id').value  = item?.id    ?? '';
   document.getElementById('f-day').value    = item?.day   ?? '';
   document.getElementById('f-month').value  = item?.month ?? '';
+  document.getElementById('f-date').value   = item ? dateFromDayMonth(item.day, item.month) : '';
   document.getElementById('f-title').value  = item?.title ?? '';
   document.getElementById('f-venue').value  = item?.venue ?? '';
   document.getElementById('f-status').value = item?.status ?? 'available';
