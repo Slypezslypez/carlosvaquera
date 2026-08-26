@@ -318,14 +318,21 @@ async function saveSection(section) {
 
 async function deleteImg(key) {
   if (!confirm('Supprimer cette image ?')) return;
-  const r = await fetch(`/api/upload?key=${key}`, {
-    method: 'DELETE',
-    headers: { 'Authorization': `Bearer ${TOKEN}` }
-  });
-  if (r.status === 401) { logout(); return; }
-  const prev = document.getElementById('prev-' + key);
-  if (prev) { prev.src = ''; prev.style.display = 'none'; }
-  toast('Image supprimée ✓');
+  try {
+    const r = await fetch(`/api/upload?key=${key}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${TOKEN}` }
+    });
+    if (r.status === 401) { logout(); return; }
+    if (!r.ok) { toast('Erreur suppression (code ' + r.status + ')', true); return; }
+    const j = await r.json();
+    if (!j.success) { toast('Erreur suppression', true); return; }
+    const prev = document.getElementById('prev-' + key);
+    if (prev) { prev.src = ''; prev.style.display = 'none'; }
+    toast('Image supprimée ✓');
+  } catch(e) {
+    toast('Erreur réseau : ' + e.message, true);
+  }
 }
 
 function compressImage(file, maxW, maxH, quality) {
