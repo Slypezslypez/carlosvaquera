@@ -323,32 +323,53 @@ async function deleteImg(key) {
   toast('Image supprimée ✓');
 }
 
+function compressImage(file, maxW, maxH, quality) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxW || h > maxH) {
+          const ratio = Math.min(maxW / w, maxH / h);
+          w = Math.round(w * ratio);
+          h = Math.round(h * ratio);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve({ dataUrl, mime_type: 'image/jpeg' });
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 async function uploadImg(event, key) {
   const file = event.target.files[0];
   if (!file) return;
-  if (file.size > 2 * 1024 * 1024) { toast('Image trop grande (max 2 Mo)', true); return; }
   const status = document.getElementById('status-' + key);
-  status.textContent = 'Upload en cours…';
-  const reader = new FileReader();
-  reader.onload = async e => {
-    const dataUrl = e.target.result;
-    const base64 = dataUrl.split(',')[1];
-    const mime_type = file.type;
-    try {
-      const r = await fetch('/api/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
-        body: JSON.stringify({ key, data: base64, mime_type })
-      });
-      if (r.status === 401) { logout(); return; }
-      status.textContent = '✓ Image mise à jour';
-      const prev = document.getElementById('prev-' + key);
-      if (prev) { prev.src = `/api/upload?key=${key}&t=${Date.now()}`; prev.style.display = 'block'; }
-      toast('Image mise à jour ✓');
-      setTimeout(() => status.textContent = '', 3000);
-    } catch { status.textContent = 'Erreur upload'; }
-  };
-  reader.readAsDataURL(file);
+  status.textContent = 'Compression…';
+  // Compress to max 1600x1600, quality 0.82 — target < 1.5 Mo
+  const { dataUrl, mime_type } = await compressImage(file, 1600, 1600, 0.82);
+  const base64 = dataUrl.split(',')[1];
+  const kb = Math.round(base64.length * 0.75 / 1024);
+  status.textContent = `Upload en cours… (${kb} Ko)`;
+  try {
+    const r = await fetch('/api/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
+      body: JSON.stringify({ key, data: base64, mime_type })
+    });
+    if (r.status === 401) { logout(); return; }
+    status.textContent = '✓ Image mise à jour';
+    const prev = document.getElementById('prev-' + key);
+    if (prev) { prev.src = `/api/upload?key=${key}&t=${Date.now()}`; prev.style.display = 'block'; }
+    toast('Image mise à jour ✓');
+    setTimeout(() => status.textContent = '', 3000);
+  } catch { status.textContent = 'Erreur upload'; }
 }
 
 function toast(msg, err = false) {
