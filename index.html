@@ -154,7 +154,9 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .agenda-inner{max-width:1000px;margin:0 auto;padding:0 3rem}
 .agenda-head{text-align:center;margin-bottom:4rem}
 #agenda-list{display:flex;flex-direction:column;gap:1px}
-.show-row{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:2rem;padding:1.8rem 2rem;background:var(--bg3);transition:all .2s;border-left:2px solid transparent;position:relative;overflow:hidden}
+.show-row{display:grid;grid-template-columns:80px auto 1fr auto;align-items:center;gap:2rem;padding:1.8rem 2rem;background:var(--bg3);transition:all .2s;border-left:2px solid transparent;position:relative;overflow:hidden}
+.show-img{width:56px;height:56px;object-fit:cover;border-radius:4px;outline:1px solid rgba(201,168,76,.35);outline-offset:-1px}
+.show-img-empty{width:56px;height:56px}
 .show-row::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(201,168,76,.04),transparent);opacity:0;transition:opacity .3s}
 .show-row:hover{border-left-color:var(--gold)}
 .show-row:hover::before{opacity:1}
@@ -213,8 +215,9 @@ footer p{font-size:.72rem;color:var(--muted)}
   .hero-btns{justify-content:center}
   .spectacles-inner,.auteur-inner,.agenda-inner,.band-content{padding:0 1.5rem}
   footer{flex-direction:column;gap:1.5rem;text-align:center}
-  .show-row{grid-template-columns:70px 1fr;grid-template-rows:auto auto}
-  .show-status{grid-column:2}
+  .show-row{grid-template-columns:70px 44px 1fr;grid-template-rows:auto auto}
+  .show-status{grid-column:3}
+  .show-img,.show-img-empty{width:44px;height:44px}
 }
 @media(max-width:600px){
   .cards-grid{grid-template-columns:1fr}
@@ -308,7 +311,6 @@ footer p{font-size:.72rem;color:var(--muted)}
           <div class="card-tag" id="sp1-tag">One-man show</div>
           <div class="card-title" id="sp1-title">Démons & Merveilles</div>
           <div class="card-desc" id="sp1-desc"></div>
-          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
         </div>
       </div>
       <div class="card sp-hidden" id="sp2-card">
@@ -318,7 +320,6 @@ footer p{font-size:.72rem;color:var(--muted)}
           <div class="card-tag" id="sp2-tag">Mentalisme</div>
           <div class="card-title" id="sp2-title">Imagienaire</div>
           <div class="card-desc" id="sp2-desc"></div>
-          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
         </div>
       </div>
       <div class="card sp-hidden" id="sp3-card">
@@ -328,7 +329,6 @@ footer p{font-size:.72rem;color:var(--muted)}
           <div class="card-tag" id="sp3-tag">Philosophie & Magie</div>
           <div class="card-title" id="sp3-title">Le Mentaliste Philosophe</div>
           <div class="card-desc" id="sp3-desc"></div>
-          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
         </div>
       </div>
       <div class="card sp-hidden" id="sp4-card">
@@ -338,7 +338,6 @@ footer p{font-size:.72rem;color:var(--muted)}
           <div class="card-tag" id="sp4-tag">Close-up</div>
           <div class="card-title" id="sp4-title">Spectacle 4</div>
           <div class="card-desc" id="sp4-desc"></div>
-          <a href="#contact" class="card-link" data-i18n="card_link">Réserver →</a>
         </div>
       </div>
     </div>
@@ -762,6 +761,7 @@ async function loadAgenda(){
           <div class="show-day">${s.day}</div>
           <div class="show-month">${s.month}</div>
         </div>
+        ${s.image ? `<img class="show-img" src="${s.image}" alt="${s.title}">` : '<div class="show-img-empty"></div>'}
         <div>
           <div class="show-title">${s.title}</div>
           <div class="show-venue">${s.venue}</div>
