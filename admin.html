@@ -145,6 +145,9 @@ tbody td{padding:.75rem 1rem;font-size:.83rem;vertical-align:middle}
       <a onclick="showTab('auteur')" data-tab="auteur">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>L'Auteur
       </a>
+      <a onclick="showTab('videos')" data-tab="videos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Vidéos
+      </a>
       <a onclick="showTab('agenda')" data-tab="agenda">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Agenda
       </a>
@@ -250,12 +253,12 @@ async function initDashboard() {
 }
 
 // ── TABS ─────────────────────────────────────────────────────────
-const TAB_TITLES = { hero:'Accueil', artiste:"L'Artiste", spectacles:'Spectacles', animations:'Animations', conferences:'Conférences', auteur:"L'Auteur", agenda:'Agenda', contact:'Contact' };
+const TAB_TITLES = { hero:'Accueil', artiste:"L'Artiste", spectacles:'Spectacles', animations:'Animations', conferences:'Conférences', auteur:"L'Auteur", videos:'Vidéos', agenda:'Agenda', contact:'Contact' };
 
 function showTab(tab) {
   document.querySelectorAll('.side-nav a').forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
   document.getElementById('topbar-title').textContent = TAB_TITLES[tab];
-  const fn = { hero: renderHero, artiste: renderArtiste, spectacles: renderSpectacles, animations: renderAnimations, conferences: renderConferences, auteur: renderAuteur, agenda: renderAgenda, contact: renderContact };
+  const fn = { hero: renderHero, artiste: renderArtiste, spectacles: renderSpectacles, animations: renderAnimations, conferences: renderConferences, auteur: renderAuteur, videos: renderVideos, agenda: renderAgenda, contact: renderContact };
   fn[tab]?.();
 }
 
@@ -512,6 +515,24 @@ function renderContact() {
 
 // ── AGENDA ────────────────────────────────────────────────────────
 let agendaRows = [];
+
+function renderVideos() {
+  let fields = '<div class="form-section"><h3>Vidéo mise en avant (n°1)</h3>'
+    + fieldHtml('URL YouTube (vidéo principale)', 'video1_url', '')
+    + fieldHtml('Titre de la vidéo', 'video1_title', '')
+    + '</div><div class="form-section"><h3>Autres vidéos (2 à 20)</h3>'
+    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Collez l\'URL YouTube de chaque vidéo. Laissez vide pour ne pas afficher.</p>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">';
+  for (let i = 2; i <= 20; i++) {
+    fields += '<div style="border:1px solid var(--border);border-radius:6px;padding:1rem">'
+      + '<div style="font-size:.75rem;color:var(--gold);margin-bottom:.5rem;letter-spacing:.05em">Vidéo ' + i + '</div>'
+      + fieldHtml('URL YouTube', 'video' + i + '_url', '')
+      + fieldHtml('Titre', 'video' + i + '_title', '')
+      + '</div>';
+  }
+  fields += '</div></div>' + saveBar('videos');
+  document.getElementById('tab-content').innerHTML = fields;
+}
 
 async function renderAgenda() {
   document.getElementById('tab-content').innerHTML = `
