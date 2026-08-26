@@ -324,9 +324,9 @@ async function deleteImg(key) {
       headers: { 'Authorization': `Bearer ${TOKEN}` }
     });
     if (r.status === 401) { logout(); return; }
-    if (!r.ok) { toast('Erreur suppression (code ' + r.status + ')', true); return; }
-    const j = await r.json();
-    if (!j.success) { toast('Erreur suppression', true); return; }
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { toast('Erreur ' + r.status + ' : ' + (j.error || '?'), true); return; }
+    if (!j.success) { toast('Erreur : ' + (j.error || 'inconnue'), true); return; }
     const prev = document.getElementById('prev-' + key);
     if (prev) { prev.src = ''; prev.style.display = 'none'; }
     toast('Image supprimée ✓');
