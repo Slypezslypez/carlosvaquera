@@ -57,6 +57,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .hero-tag{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;opacity:.9}
 .hero-tag::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.3;max-width:80px}
 .hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6.5rem);line-height:1.02;font-weight:700;margin-bottom:1rem}
+.hero-intro{font-size:1rem;color:rgba(255,255,255,.65);max-width:520px;line-height:1.7;margin-bottom:2rem;font-weight:300}
+.hero-awards{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.hero-award{display:flex;align-items:center;gap:.4rem;font-size:.7rem;letter-spacing:.08em;color:rgba(201,168,76,.8);text-transform:uppercase}
+.award-icon{font-size:.85rem}
+.hero-award-sep{color:rgba(201,168,76,.3);font-size:.8rem}
 .hero-h1 em{font-style:italic;color:var(--gold);display:block}
 .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.4rem);color:rgba(255,255,255,.45);font-style:italic;margin-bottom:2.5rem;letter-spacing:.06em}
 .hero-btns{display:flex;gap:1.2rem;flex-wrap:wrap}
@@ -258,6 +263,14 @@ footer p{font-size:.72rem;color:var(--muted)}
     <div class="hero-tag" data-i18n="hero_subtitle">Magicien · Mentaliste · Conférencier</div>
     <h1 class="hero-h1">Carlos<br><em>Vaquera</em></h1>
     <p class="hero-tagline" data-i18n="hero_tagline">« Your illusions are my reality »</p>
+    <p class="hero-intro" data-i18n="hero_intro">Créateur d'illusions et explorateur de l'esprit — un univers où la frontière entre le réel et l'imaginaire s'efface.</p>
+    <div class="hero-awards">
+      <div class="hero-award"><span class="award-icon">🏆</span><span>Mandrake d'Or</span></div>
+      <div class="hero-award-sep">·</div>
+      <div class="hero-award"><span class="award-icon">🥇</span><span>Champion d'Europe Close-Up</span></div>
+      <div class="hero-award-sep">·</div>
+      <div class="hero-award"><span class="award-icon">🎖️</span><span>Prix Las Vegas Close-Up Magic</span></div>
+    </div>
     <div class="hero-btns">
       <a href="#spectacles" class="btn-primary" data-i18n="hero_btn1">Découvrir les spectacles</a>
       <a href="#artiste" class="btn-ghost" data-i18n="hero_btn2">L'univers de Carlos</a>
@@ -824,6 +837,7 @@ const TRANSLATIONS = {
   fr: {
     nav_artiste:"L'Artiste",nav_spectacles:"Spectacles",nav_auteur:"L'Auteur",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Réserver",
     hero_subtitle:"Magicien · Mentaliste · Conférencier",hero_tagline:"« Your illusions are my reality »",
+    hero_intro:"Créateur d'illusions et explorateur de l'esprit — un univers où la frontière entre le réel et l'imaginaire s'efface.",
     hero_btn1:"Découvrir les spectacles",hero_btn2:"L'univers de Carlos",hero_scroll:"Défiler",
     section_artiste:"L'Artiste",section_spectacles:"Les Spectacles",spectacles_h2:"Des univers à explorer",
     section_auteur:"L'Auteur",auteur_h2:"Amoureux des mots",
@@ -844,6 +858,7 @@ const TRANSLATIONS = {
   en: {
     nav_artiste:"The Artist",nav_spectacles:"Shows",nav_auteur:"The Author",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Book Now",
     hero_subtitle:"Magician · Mentalist · Speaker",hero_tagline:"« Your illusions are my reality »",
+    hero_intro:"Creator of illusions and explorer of the mind — a universe where the boundary between reality and imagination fades away.",
     hero_btn1:"Discover the shows",hero_btn2:"Carlos's universe",hero_scroll:"Scroll",
     section_artiste:"The Artist",section_spectacles:"The Shows",spectacles_h2:"Worlds to explore",
     section_auteur:"The Author",auteur_h2:"A lover of words",
@@ -864,6 +879,7 @@ const TRANSLATIONS = {
   es: {
     nav_artiste:"El Artista",nav_spectacles:"Espectáculos",nav_auteur:"El Autor",nav_agenda:"Agenda",nav_contact:"Contacto",nav_reserver:"Reservar",
     hero_subtitle:"Mago · Mentalista · Conferenciante",hero_tagline:"« Your illusions are my reality »",
+    hero_intro:"Creador de ilusiones y explorador de la mente — un universo donde la frontera entre lo real y lo imaginario se desvanece.",
     hero_btn1:"Descubrir los espectáculos",hero_btn2:"El universo de Carlos",hero_scroll:"Desplazar",
     section_artiste:"El Artista",section_spectacles:"Los Espectáculos",spectacles_h2:"Mundos por explorar",
     section_auteur:"El Autor",auteur_h2:"Enamorado de las palabras",
