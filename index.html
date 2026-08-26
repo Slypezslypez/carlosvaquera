@@ -168,16 +168,17 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .video-embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:2px;outline:1px solid rgba(201,168,76,.2);outline-offset:-1px}
 .video-embed-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 .video-featured-title{margin-top:1rem;font-size:1rem;font-weight:500;color:var(--text);text-align:center;opacity:.8}
-.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:2rem}
-.video-thumb{position:relative;cursor:pointer;aspect-ratio:16/9;overflow:hidden;border-radius:2px;outline:1px solid rgba(201,168,76,.15);outline-offset:-1px;background:var(--bg3)}
+.video-strip{display:flex;gap:10px;overflow-x:auto;margin-top:1.5rem;padding-bottom:.8rem;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,.3) transparent}
+.video-strip::-webkit-scrollbar{height:3px}
+.video-strip::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:2px}
+.video-thumb{position:relative;cursor:pointer;flex-shrink:0;width:180px;aspect-ratio:16/9;overflow:hidden;border-radius:2px;outline:1px solid rgba(201,168,76,.15);outline-offset:-1px;background:var(--bg3);transition:outline-color .2s}
+.video-thumb.active{outline-color:var(--gold)}
 .video-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
-.video-thumb:hover img{transform:scale(1.04)}
-.video-thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:background .2s}
-.video-thumb:hover .video-thumb-play{background:rgba(0,0,0,.55)}
-.video-thumb-play::after{content:'▶';font-size:1.6rem;color:#fff;opacity:.9;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-.video-thumb-label{position:absolute;bottom:0;left:0;right:0;padding:.5rem .6rem;background:linear-gradient(transparent,rgba(0,0,0,.75));font-size:.7rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:900px){.video-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.video-grid{grid-template-columns:1fr}}
+.video-thumb:hover img{transform:scale(1.05)}
+.video-thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);transition:background .2s}
+.video-thumb:hover .video-thumb-play,.video-thumb.active .video-thumb-play{background:rgba(0,0,0,.5)}
+.video-thumb-play::after{content:'▶';font-size:1.1rem;color:#fff;opacity:.9}
+.video-thumb-label{position:absolute;bottom:0;left:0;right:0;padding:.35rem .4rem;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:.6rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #agenda{padding:10rem 0;background:var(--bg2)}
 .agenda-inner{max-width:1000px;margin:0 auto;padding:0 3rem}
 .agenda-head{text-align:center;margin-bottom:4rem}
@@ -614,8 +615,8 @@ footer p{font-size:.72rem;color:var(--muted)}
       <div class="video-embed-wrap" id="video-featured-wrap"></div>
       <div class="video-featured-title" id="video-featured-title"></div>
     </div>
-    <!-- Grid -->
-    <div class="video-grid" id="video-grid"></div>
+    <!-- Strip -->
+    <div class="video-strip" id="video-grid"></div>
   </div>
 </section>
 
@@ -855,35 +856,40 @@ function ytId(url){
   const m=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
   return m?m[1]:null;
 }
+function playVideo(id, title, el){
+  const featWrap=document.getElementById('video-featured-wrap');
+  const featTitle=document.getElementById('video-featured-title');
+  const featEl=document.getElementById('video-featured');
+  featWrap.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allowfullscreen allow="autoplay"></iframe>`;
+  featTitle.textContent=title||'';
+  featEl.style.display='block';
+  document.querySelectorAll('.video-thumb').forEach(t=>t.classList.remove('active'));
+  if(el)el.classList.add('active');
+  featEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
 function loadVideos(c){
-  // Featured
-  const featUrl=c['video1_url'];
-  const featId=ytId(featUrl);
+  const allVideos=[];
+  for(let i=1;i<=20;i++){
+    const id=ytId(c['video'+i+'_url']);
+    if(id)allVideos.push({id,title:c['video'+i+'_title']||''});
+  }
+  if(!allVideos.length)return;
   const featEl=document.getElementById('video-featured');
   const featWrap=document.getElementById('video-featured-wrap');
   const featTitle=document.getElementById('video-featured-title');
-  if(featId&&featEl){
-    featWrap.innerHTML=`<iframe src="https://www.youtube.com/embed/${featId}" allowfullscreen></iframe>`;
-    if(c['video1_title'])featTitle.textContent=c['video1_title'];
-    featEl.style.display='block';
-  }
-  // Grid (videos 2–20)
+  const first=allVideos[0];
+  featWrap.innerHTML=`<iframe src="https://www.youtube.com/embed/${first.id}" allowfullscreen></iframe>`;
+  featTitle.textContent=first.title;
+  featEl.style.display='block';
+  // Strip (all videos as thumbnails)
   const grid=document.getElementById('video-grid');
   if(!grid)return;
-  let html='';
-  for(let i=2;i<=20;i++){
-    const url=c['video'+i+'_url'];
-    const id=ytId(url);
-    if(!id)continue;
-    const title=c['video'+i+'_title']||'';
-    const thumb=`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
-    html+=`<div class="video-thumb" onclick="window.open('https://www.youtube.com/watch?v=${id}','_blank')">
-      <img src="${thumb}" alt="${title}" loading="lazy">
+  grid.innerHTML=allVideos.map((v,idx)=>`
+    <div class="video-thumb${idx===0?' active':''}" onclick="playVideo('${v.id}','${v.title.replace(/'/g,"\\'")}',this)">
+      <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.title}" loading="lazy">
       <div class="video-thumb-play"></div>
-      ${title?`<div class="video-thumb-label">${title}</div>`:''}
-    </div>`;
-  }
-  grid.innerHTML=html;
+      ${v.title?`<div class="video-thumb-label">${v.title}</div>`:''}
+    </div>`).join('');
 }
 
 
