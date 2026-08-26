@@ -53,7 +53,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,16,.9) 0%,rgba(8,8,16,.5) 50%,rgba(8,8,16,.8) 100%)}
 .hero-overlay2{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(201,168,76,.04) 0%,transparent 70%)}
 #particles{position:absolute;inset:0;z-index:1;pointer-events:none}
-.hero-content{position:relative;z-index:2;max-width:900px;padding:0 2rem;text-align:left}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1100px;padding:0 2rem;display:flex;align-items:center;gap:4rem}
+.hero-content{flex:1;text-align:left}
+.hero-portrait{flex-shrink:0;width:320px;display:none}
+.hero-portrait.visible{display:block}
+.hero-portrait-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px;filter:saturate(.85)}
+@media(max-width:900px){.hero-inner{flex-direction:column-reverse;gap:2rem}.hero-portrait{width:180px}}
 .hero-tag{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;opacity:.9}
 .hero-tag::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.3;max-width:80px}
 .hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6.5rem);line-height:1.02;font-weight:700;margin-bottom:1rem}
@@ -259,6 +264,10 @@ footer p{font-size:.72rem;color:var(--muted)}
     <div class="hero-overlay2"></div>
   </div>
   <canvas id="particles"></canvas>
+  <div class="hero-inner">
+  <div class="hero-portrait" id="hero-portrait">
+    <img class="hero-portrait-img" id="hero-portrait-img" src="" alt="Carlos Vaquera">
+  </div>
   <div class="hero-content">
     <div class="hero-tag" data-i18n="hero_subtitle">Magicien · Mentaliste · Conférencier</div>
     <h1 class="hero-h1">Carlos<br><em>Vaquera</em></h1>
@@ -276,6 +285,7 @@ footer p{font-size:.72rem;color:var(--muted)}
       <a href="#artiste" class="btn-ghost" data-i18n="hero_btn2">L'univers de Carlos</a>
     </div>
   </div>
+  </div><!-- /hero-inner -->
   <div class="hero-scroll" data-i18n="hero_scroll">Défiler</div>
 </section>
 
@@ -703,6 +713,17 @@ async function loadContent(){
     if(c.hero_btn1)document.querySelectorAll('.btn-primary')[0]&&(document.querySelectorAll('.btn-primary')[0].textContent=c.hero_btn1);
     if(c.hero_btn2)document.querySelectorAll('.btn-ghost')[0]&&(document.querySelectorAll('.btn-ghost')[0].textContent=c.hero_btn2);
     setImg('hero-img-bg','hero_bg');
+    // Portrait hero optionnel
+    (function(){
+      const url='/api/upload?key=hero_portrait&t='+Date.now();
+      const t=new Image();
+      t.onload=function(){
+        const img=document.getElementById('hero-portrait-img');
+        const wrap=document.getElementById('hero-portrait');
+        if(img&&wrap){img.src=url;wrap.classList.add('visible');}
+      };
+      t.src=url;
+    })();
     // Artiste
     setText('#artiste h2',c.artiste_title,true);
     setText('#artiste .lead',c.artiste_lead);
