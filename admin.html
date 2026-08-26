@@ -506,6 +506,13 @@ function renderAuteur() {
   document.getElementById('tab-content').innerHTML =
     '<div class="form-section"><h3>Introduction</h3>'
     + fieldHtml('Texte intro', 'auteur_lead', "Les mots nous permettent de mettre sur papier des émotions…", 'textarea')
+    + '</div><div class="form-section"><h3>⭐ Dernier livre en avant</h3>'
+    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Apparaît sous le carrousel uniquement si une image est uploadée.</p>'
+    + imgHtml('Couverture du livre', 'featured_book_img')
+    + fieldHtml('Titre du livre', 'featured_book_title', '')
+    + fieldHtml('Sous-titre / collection', 'featured_book_sub', '')
+    + fieldHtml('Description courte', 'featured_book_desc', '', 'textarea')
+    + fieldHtml('Lien de commande (URL)', 'featured_book_link', '')
     + '</div><div class="form-section"><h3>Les livres (20 emplacements)</h3>'
     + '<div class="book-grid" style="grid-template-columns:repeat(4,1fr)">' + books + '</div>'
     + '</div>' + saveBar('auteur');
