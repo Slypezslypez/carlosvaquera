@@ -9,6 +9,7 @@ function verifyToken(req) {
 }
 
 module.exports = async function handler(req, res) {
+  try {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -16,7 +17,7 @@ module.exports = async function handler(req, res) {
 
   const sql = neon(process.env.DATABASE_URL);
 
-  // GET — serve the image as binary
+  // GET — serve image as binary
   if (req.method === 'GET') {
     const key = req.query.key;
     if (!key) return res.status(400).end();
@@ -30,10 +31,21 @@ module.exports = async function handler(req, res) {
 
   if (!verifyToken(req)) return res.status(401).json({ error: 'Non autorisé' });
 
-  // POST — store image as base64
+  // POST ?action=delete — remove image by key
+  if (req.method === 'POST' && req.query.action === 'delete') {
+    const key = req.query.key;
+    if (!key) return res.status(400).json({ error: 'Clé manquante' });
+    try {
+      await sql`DELETE FROM images WHERE key = ${key}`;
+      return res.json({ success: true });
+    } catch(e) {
+      return res.status(500).json({ error: e.message });
+    }
+  }
+
+  // POST — store image
   if (req.method === 'POST') {
     const { key, data, mime_type } = req.body || {};
-    // data = base64 string (without data: prefix)
     await sql`
       INSERT INTO images (key, data, mime_type) VALUES (${key}, ${data}, ${mime_type})
       ON CONFLICT (key) DO UPDATE SET data = ${data}, mime_type = ${mime_type}, updated_at = NOW()
@@ -42,4 +54,7 @@ module.exports = async function handler(req, res) {
   }
 
   res.status(405).end();
+  } catch(e) {
+    if (!res.headersSent) res.status(500).json({ error: 'Handler: ' + e.message });
+  }
 };
