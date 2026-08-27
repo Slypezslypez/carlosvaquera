@@ -713,7 +713,7 @@ footer p{font-size:.72rem;color:var(--muted)}
       <div class="contact-flags">🇫🇷 🇬🇧 🇪🇸</div>
     </div>
     <div class="reveal-right">
-      <form id="contact-form" action="https://formspree.io/f/mqpzranl" method="POST">
+      <form id="contact-form" action="/api/contact" method="POST">
         <div class="field"><label data-i18n="form_name">Votre nom</label><input type="text" name="name" required placeholder="Prénom Nom" data-i18n-placeholder="form_placeholder_name"></div>
         <div class="field"><label data-i18n="form_email">E-mail</label><input type="email" name="email" required placeholder="vous@exemple.com" data-i18n-placeholder="form_placeholder_email"></div>
         <div class="field">
@@ -1223,7 +1223,8 @@ document.getElementById('contact-form').addEventListener('submit',async function
   const btn=this.querySelector('.btn-send');
   btn.disabled=true;btn.textContent=TRANSLATIONS[currentLang].form_sending;
   try{
-    const r=await fetch(this.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(this)});
+    const data={name:this.name.value,email:this.email.value,prestation:this.prestation.value,message:this.message.value};
+    const r=await fetch(this.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     if(r.ok){
       msg.textContent=TRANSLATIONS[currentLang].form_ok;
       msg.className='form-msg ok';this.reset();
