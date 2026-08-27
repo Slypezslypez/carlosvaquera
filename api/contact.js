@@ -18,7 +18,7 @@ module.exports = async function handler(req, res) {
       from: 'Contact <contact@carlosvaquera.com>',
       to: 'carlosvaquera@carlosvaquera.com',
       replyTo: email,
-      subject: `Nouveau message de ${name}${prestation ? ' — ' + prestation : ''}`,
+      subject: `Demande d'infos depuis le site${prestation ? ' — ' + prestation : ''}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
           <h2 style="color:#c9a84c">Nouveau message via carlosvaquera.com</h2>
