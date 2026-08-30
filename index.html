@@ -86,6 +86,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .nav-links{display:flex;gap:2.5rem;list-style:none}
 .nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;transition:color .2s;font-weight:500}
 .nav-links a:hover{color:var(--gold)}
+.nav-sep{width:1px;height:14px;background:rgba(255,255,255,.15);margin:0 .2rem}
 .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.45rem 1.2rem;border-radius:1px;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .2s;font-weight:500}
 .nav-cta:hover{background:var(--gold);color:var(--bg)}
 
@@ -316,10 +317,16 @@ footer p{font-size:.72rem;color:var(--muted)}
   <a class="nav-logo" href="#">Carlos Vaquera <span>Your illusions are my reality</span></a>
   <ul class="nav-links">
     <li><a href="#artiste" data-i18n="nav_artiste">L'Artiste</a></li>
+    <li class="nav-sep"></li>
     <li><a href="#spectacles" data-i18n="nav_spectacles">Spectacles</a></li>
+    <li><a href="#animations" data-i18n="nav_animations">Animations</a></li>
+    <li><a href="#conferences" data-i18n="nav_conferences">Conférences</a></li>
+    <li class="nav-sep"></li>
     <li><a href="#auteur" data-i18n="nav_auteur">L'Auteur</a></li>
+    <li class="nav-sep"></li>
     <li><a href="#videos" data-i18n="nav_videos">Vidéos</a></li>
     <li><a href="#agenda" data-i18n="nav_agenda">Agenda</a></li>
+    <li class="nav-sep"></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <a class="nav-cta" href="#contact" data-i18n="nav_reserver">Réserver</a>
@@ -459,6 +466,8 @@ footer p{font-size:.72rem;color:var(--muted)}
   </div>
 </div>
 
+<!-- SÉPARATEUR -->
+<div style="height:2px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);margin:0"></div>
 <!-- BAND: CONFÉRENCES -->
 <div class="band" id="conferences">
   <div class="band-ph">
@@ -1099,7 +1108,7 @@ window.addEventListener('resize', () => { booksUpdateUI(); });
 // ── I18N ─────────────────────────────────
 const TRANSLATIONS = {
   fr: {
-    nav_artiste:"L'Artiste",nav_spectacles:"Spectacles",nav_auteur:"L'Auteur",nav_videos:"Vidéos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Réserver",
+    nav_artiste:"L'Artiste",nav_spectacles:"Spectacles",nav_animations:"Animations",nav_conferences:"Conférences",nav_auteur:"L'Auteur",nav_videos:"Vidéos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Réserver",
     section_videos:"Vidéos",videos_h2:"Carlos en action",
     hero_subtitle:"Magicien · Mentaliste · Conférencier",hero_tagline:"« Your illusions are my reality »",
     hero_intro:"Créateur d'illusions et explorateur de l'esprit — un univers où la frontière entre le réel et l'imaginaire s'efface.",
@@ -1121,7 +1130,7 @@ const TRANSLATIONS = {
     footer_sub:"Magicien · Mentaliste · Conférencier",footer_rights:"Tous droits réservés"
   },
   en: {
-    nav_artiste:"The Artist",nav_spectacles:"Shows",nav_auteur:"The Author",nav_videos:"Videos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Book Now",
+    nav_artiste:"The Artist",nav_spectacles:"Shows",nav_animations:"Animations",nav_conferences:"Conferences",nav_auteur:"The Author",nav_videos:"Videos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Book Now",
     section_videos:"Videos",videos_h2:"Carlos in action",
     hero_subtitle:"Magician · Mentalist · Speaker",hero_tagline:"« Your illusions are my reality »",
     hero_intro:"Creator of illusions and explorer of the mind — a universe where the boundary between reality and imagination fades away.",
@@ -1143,7 +1152,7 @@ const TRANSLATIONS = {
     footer_sub:"Magician · Mentalist · Speaker",footer_rights:"All rights reserved"
   },
   es: {
-    nav_artiste:"El Artista",nav_spectacles:"Espectáculos",nav_auteur:"El Autor",nav_videos:"Vídeos",nav_agenda:"Agenda",nav_contact:"Contacto",nav_reserver:"Reservar",
+    nav_artiste:"El Artista",nav_spectacles:"Espectáculos",nav_animations:"Animaciones",nav_conferences:"Conferencias",nav_auteur:"El Autor",nav_videos:"Vídeos",nav_agenda:"Agenda",nav_contact:"Contacto",nav_reserver:"Reservar",
     section_videos:"Vídeos",videos_h2:"Carlos en acción",
     hero_subtitle:"Mago · Mentalista · Conferenciante",hero_tagline:"« Your illusions are my reality »",
     hero_intro:"Creador de ilusiones y explorador de la mente — un universo donde la frontera entre lo real y lo imaginario se desvanece.",
