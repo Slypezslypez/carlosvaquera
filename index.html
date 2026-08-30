@@ -977,6 +977,7 @@ async function loadContent(){
     // Contact
     setText('#contact-quote',c.contact_quote);
     if(c.contact_email){const a=document.getElementById('contact-email');if(a){a.textContent='✉ '+c.contact_email;a.href='mailto:'+c.contact_email+'?subject=Demande%20d\'infos%20depuis%20le%20site';}}
+    if(c.contact_email_visible==='false'){const a=document.getElementById('contact-email');if(a)a.style.display='none';}
     loadVideos(c);
   }catch(e){console.log('Content unavailable, using defaults');}
 }
