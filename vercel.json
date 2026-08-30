@@ -1,7 +1,6 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/conferences", "destination": "/conferences.html" }
+    { "source": "/admin", "destination": "/admin.html" }
   ]
 }
