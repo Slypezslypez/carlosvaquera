@@ -1,5 +1,6 @@
 const { neon } = require('@neondatabase/serverless');
 const jwt = require('jsonwebtoken');
+const sharp = require('sharp');
 
 function verifyToken(req) {
   const auth = req.headers['authorization'] || '';
@@ -43,12 +44,29 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // POST — store image
+  // POST — store image (with compression)
   if (req.method === 'POST') {
     const { key, data, mime_type } = req.body || {};
+
+    // Compress image with sharp (max 1920px wide, JPEG 80%)
+    let finalData = data;
+    let finalMime = mime_type;
+    try {
+      const inputBuffer = Buffer.from(data, 'base64');
+      const compressed = await sharp(inputBuffer)
+        .resize({ width: 1920, withoutEnlargement: true })
+        .jpeg({ quality: 80 })
+        .toBuffer();
+      finalData = compressed.toString('base64');
+      finalMime = 'image/jpeg';
+    } catch (e) {
+      // If compression fails (e.g. SVG), store original
+      console.warn('Compression skipped:', e.message);
+    }
+
     await sql`
-      INSERT INTO images (key, data, mime_type) VALUES (${key}, ${data}, ${mime_type})
-      ON CONFLICT (key) DO UPDATE SET data = ${data}, mime_type = ${mime_type}, updated_at = NOW()
+      INSERT INTO images (key, data, mime_type) VALUES (${key}, ${finalData}, ${finalMime})
+      ON CONFLICT (key) DO UPDATE SET data = ${finalData}, mime_type = ${finalMime}, updated_at = NOW()
     `;
     return res.json({ url: `/api/upload?key=${key}` });
   }
