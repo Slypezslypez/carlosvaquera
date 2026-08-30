@@ -708,7 +708,7 @@ footer p{font-size:.72rem;color:var(--muted)}
       <h2 data-i18n="contact_h2">Parlons de<br>votre événement</h2>
       <blockquote class="contact-quote" id="contact-quote">"L'illusion est une vérité qui se donne en spectacle pour mieux réveiller notre émerveillement."</blockquote>
       <div class="contact-info">
-        <a id="contact-email" href="mailto:carlosvaquera@carlosvaquera.com">✉ carlosvaquera@carlosvaquera.com</a>
+        <a id="contact-email" href="mailto:carlosvaquera@carlosvaquera.com?subject=Demande%20d'infos%20depuis%20le%20site">✉ carlosvaquera@carlosvaquera.com</a>
       </div>
       <div class="contact-flags">🇫🇷 🇬🇧 🇪🇸</div>
     </div>
@@ -976,7 +976,7 @@ async function loadContent(){
     })();
     // Contact
     setText('#contact-quote',c.contact_quote);
-    if(c.contact_email){const a=document.getElementById('contact-email');if(a){a.textContent='✉ '+c.contact_email;a.href='mailto:'+c.contact_email;}}
+    if(c.contact_email){const a=document.getElementById('contact-email');if(a){a.textContent='✉ '+c.contact_email;a.href='mailto:'+c.contact_email+'?subject=Demande%20d\'infos%20depuis%20le%20site';}}
     loadVideos(c);
   }catch(e){console.log('Content unavailable, using defaults');}
 }
