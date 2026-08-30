@@ -265,6 +265,19 @@ function showTab(tab) {
 // ── HELPERS ──────────────────────────────────────────────────────
 function c(key, fallback = '') { return CONTENT[key] || fallback; }
 
+function toggleHtml(label, key, fallback = 'true') {
+  const val = c(key, fallback);
+  const checked = val === 'true' ? 'checked' : '';
+  return `<div class="field" style="display:flex;align-items:center;gap:1rem">
+    <label style="margin:0">${label}</label>
+    <label style="position:relative;display:inline-block;width:44px;height:24px;cursor:pointer">
+      <input type="checkbox" data-key="${key}" data-toggle="true" ${checked} style="opacity:0;width:0;height:0" onchange="this.value=this.checked?'true':'false'">
+      <span style="position:absolute;inset:0;background:var(--toggle-off,#444);border-radius:24px;transition:.3s;"></span>
+      <span style="position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.3s;transform:${val==='true'?'translateX(20px)':'translateX(0)'}"></span>
+    </label>
+  </div>`;
+}
+
 function fieldHtml(label, key, fallback = '', type = 'input') {
   const val = c(key, fallback).replace(/"/g, '&quot;');
   if (type === 'textarea') return `<div class="field"><label>${label}</label><textarea data-key="${key}">${c(key, fallback)}</textarea></div>`;
@@ -295,7 +308,7 @@ function saveBar(section) {
 async function saveSection(section) {
   const container = document.getElementById('tab-content');
   const inputs = container.querySelectorAll('[data-key]');
-  const updates = Array.from(inputs).map(el => ({ key: el.dataset.key, value: el.value }));
+  const updates = Array.from(inputs).map(el => ({ key: el.dataset.key, value: el.dataset.toggle ? (el.checked ? 'true' : 'false') : el.value }));
   const msg = document.getElementById('msg-' + section);
   msg.textContent = 'Sauvegarde…';
   try {
@@ -524,6 +537,7 @@ function renderContact() {
       <h3>Coordonnées</h3>
       ${fieldHtml('Citation', 'contact_quote', '"L\'illusion est une vérité qui se donne en spectacle…"', 'textarea')}
       ${fieldHtml('E-mail de contact', 'contact_email', 'carlosvaquera@carlosvaquera.com')}
+      ${toggleHtml('Afficher l\'e-mail sur le site', 'contact_email_visible', 'true')}
     </div>
     ${saveBar('contact')}`;
 }
