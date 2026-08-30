@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script>
+(function(){
+  var p=new URLSearchParams(location.search).get('preview');
+  if(p==='carlos'){sessionStorage.setItem('cv_preview','1');return;}
+  if(sessionStorage.getItem('cv_preview')==='1')return;
+  document.addEventListener('DOMContentLoaded',function(){
+    document.body.innerHTML='';
+    document.body.style.cssText='margin:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Georgia,serif;color:#c9a84c;text-align:center;';
+    document.body.innerHTML='<div><div style="font-size:1rem;letter-spacing:.3em;text-transform:uppercase;opacity:.6;margin-bottom:1.5rem">Carlos Vaquera</div><div style="font-size:2.5rem;font-weight:300;margin-bottom:1rem">Site en cours de création</div><div style="font-size:1rem;opacity:.5;letter-spacing:.1em">Coming soon</div></div>';
+  });
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conférences-Spectacles — Carlos Vaquera | Magie & Mentalisme Corporate</title>
+<meta name="description" content="Carlos Vaquera propose des conférences-spectacles alliant magie, mentalisme et messages percutants. ING, BNP Paribas, GSK, TEDx… pour vos événements d'entreprise en Belgique et à l'international.">
+<link rel="canonical" href="https://www.carlosvaquera.com/conferences">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#c9a84c;--gold-l:#e8c97a;--gold-d:#8a6e2f;
+  --bg:#080810;--bg2:#0f0f1a;--bg3:#161625;--bg4:#1e1e30;
+  --text:#ede9e0;--muted:#7878a0;--border:rgba(255,255,255,0.06);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s;background:rgba(8,8,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);text-decoration:none;letter-spacing:.04em}
+.nav-logo span{display:block;font-size:.6rem;letter-spacing:.25em;color:var(--muted);font-family:'Inter',sans-serif;font-style:italic;margin-top:.1rem;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;transition:color .2s;font-weight:500}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-sep{width:1px;height:14px;background:rgba(255,255,255,.15);margin:0 .2rem}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.45rem 1.2rem;border-radius:1px;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .2s;font-weight:500}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
+.lang-switch{display:flex;gap:.2rem;align-items:center}
+.lang-switch button{background:none;border:none;cursor:pointer;font-size:1rem;opacity:.4;transition:opacity .2s;padding:.15rem .1rem;line-height:1}
+.lang-switch button:hover{opacity:.75}
+.lang-switch button.active{opacity:1}
+/* HERO */
+.conf-hero{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:flex-end;overflow:hidden;padding-top:80px}
+.conf-hero-bg{position:absolute;inset:0}
+.conf-hero-bg .ph{position:absolute;inset:0;border:none;background:linear-gradient(135deg,var(--bg3),var(--bg2))}
+.conf-hero-grad{position:absolute;inset:0;background:linear-gradient(270deg,rgba(8,8,16,.95) 0%,rgba(8,8,16,.6) 50%,rgba(8,8,16,.1) 100%)}
+.conf-hero-content{position:relative;z-index:1;max-width:580px;padding:4rem 3rem;text-align:right}
+.section-label{font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;justify-content:flex-end}
+.section-label::after{content:'';width:30px;height:1px;background:var(--gold);opacity:.5}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:700;line-height:1.1;margin-bottom:1.2rem}
+.lead{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:rgba(255,255,255,.6);font-style:italic;line-height:1.7;margin-bottom:1.5rem}
+p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin-bottom:1.2rem}
+/* SECTION */
+.conf-section{padding:8rem 0;background:var(--bg2)}
+.conf-inner{max-width:1100px;margin:0 auto;padding:0 3rem}
+/* LOGOS */
+.logos-section{padding:5rem 0;background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.logos-label{text-align:center;font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
+.logos-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem 3rem;max-width:800px;margin:0 auto}
+.logo-item{font-size:.85rem;color:rgba(255,255,255,.35);letter-spacing:.08em;font-weight:500;padding:.5rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:1px}
+/* FORMATS */
+.formats{padding:8rem 0;background:var(--bg)}
+.formats-inner{max-width:1100px;margin:0 auto;padding:0 3rem}
+.formats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem}
+.format-card{background:var(--bg3);padding:2.5rem 2rem;border-left:2px solid transparent;transition:border-color .3s}
+.format-card:hover{border-left-color:var(--gold)}
+.format-icon{font-size:1.8rem;margin-bottom:1rem}
+.format-title{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.8rem}
+.format-desc{font-size:.85rem;color:var(--muted);line-height:1.7}
+/* CTA */
+.cta-section{padding:8rem 0;background:var(--bg2);text-align:center}
+.btn-primary{display:inline-block;background:var(--gold);color:var(--bg);padding:.8rem 2.5rem;text-decoration:none;font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;transition:all .2s;border:1px solid var(--gold)}
+.btn-primary:hover{background:var(--gold-l)}
+.btn-ghost{display:inline-block;background:transparent;color:var(--text);padding:.8rem 2.5rem;text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);transition:all .2s;margin-left:1rem}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* PH */
+.ph{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.2);border:1px dashed rgba(255,255,255,.1);background:linear-gradient(135deg,rgba(255,255,255,.02),rgba(201,168,76,.03))}
+.ph svg{width:28px;height:28px;opacity:.3}
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold)}
+.footer-logo small{display:block;font-size:.6rem;letter-spacing:.2em;color:var(--muted);font-family:'Inter',sans-serif;font-style:italic;text-transform:uppercase}
+footer p{font-size:.72rem;color:var(--muted)}
+.footer-admin{color:rgba(255,255,255,.1);font-size:.65rem;text-decoration:none;transition:color .2s}
+.footer-admin:hover{color:rgba(255,255,255,.35)}
+@media(max-width:900px){
+  #nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .conf-hero-content{padding:3rem 1.5rem}
+  .conf-inner,.formats-inner{padding:0 1.5rem}
+  .formats-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:1.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="/">Carlos Vaquera <span>Your illusions are my reality</span></a>
+  <ul class="nav-links">
+    <li><a href="/#artiste">L'Artiste</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="/#spectacles">Spectacles</a></li>
+    <li><a href="/#animations">Animations</a></li>
+    <li><a href="/conferences" class="active">Conférences</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="/#auteur">L'Auteur</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="/#videos">Vidéos</a></li>
+    <li><a href="/#agenda">Agenda</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="/#contact">Réserver</a>
+  <div class="lang-switch">
+    <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
+    <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
+    <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="conf-hero">
+  <div class="conf-hero-bg">
+    <div class="ph" id="conf-bg" style="position:absolute;inset:0;border:none;background:linear-gradient(135deg,var(--bg2),var(--bg3))">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:40px;height:40px"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      Photo de conférence
+    </div>
+  </div>
+  <div class="conf-hero-grad"></div>
+  <div class="conf-hero-content">
+    <div class="section-label">Conférences-Spectacles</div>
+    <h1 id="conf-title">Mettez de la magie<br><em style="font-style:italic;color:var(--gold)">dans votre communication</em></h1>
+    <p class="lead" id="conf-lead">Depuis 2009, Carlos séduit les entreprises avec ses conférences-spectacles alliant magie, mentalisme et messages percutants.</p>
+    <a href="/#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block">Discuter de votre projet</a>
+  </div>
+</div>
+
+<!-- DESCRIPTION -->
+<section class="conf-section">
+  <div class="conf-inner">
+    <div class="reveal">
+      <p class="body" id="conf-body" style="max-width:700px;font-size:1rem;color:rgba(255,255,255,.7);line-height:2">ING, Euroclear, BNP Paribas Fortis, Air Liquide, GSK, TEDx… Des centaines d'entreprises en Belgique, France, Russie et Hong-Kong lui ont fait confiance. Carlos utilise la magie comme métaphore puissante pour illustrer vos messages clés et marquer durablement les esprits de vos collaborateurs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS CLIENTS -->
+<div class="logos-section">
+  <div class="logos-label">Ils lui ont fait confiance</div>
+  <div class="logos-grid">
+    <div class="logo-item">ING</div>
+    <div class="logo-item">Euroclear</div>
+    <div class="logo-item">BNP Paribas Fortis</div>
+    <div class="logo-item">Air Liquide</div>
+    <div class="logo-item">GSK</div>
+    <div class="logo-item">TEDx</div>
+  </div>
+</div>
+
+<!-- FORMATS -->
+<section class="formats">
+  <div class="formats-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:1rem">
+      <div class="section-label" style="justify-content:center">Formats disponibles</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700">Une formule pour chaque besoin</h2>
+    </div>
+    <div class="formats-grid reveal">
+      <div class="format-card">
+        <div class="format-icon">🎤</div>
+        <div class="format-title">Keynote magique</div>
+        <div class="format-desc">Une conférence d'ouverture ou de clôture où Carlos intègre des tours de magie pour illustrer votre thème. Idéal pour marquer les esprits lors d'un séminaire ou d'un congrès.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon">🧠</div>
+        <div class="format-title">Atelier mentalisme</div>
+        <div class="format-desc">Participatif et interactif. Carlos implique vos équipes dans des expériences de mentalisme qui révèlent la puissance de la perception, de la communication et de la créativité.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon">🌍</div>
+        <div class="format-title">Conférence internationale</div>
+        <div class="format-desc">Carlos se produit en français, anglais et espagnol. Ses conférences s'adaptent à tous les contextes culturels, de Bruxelles à Hong-Kong en passant par Paris et Moscou.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <div class="section-label" style="justify-content:center">Prêt à surprendre votre audience ?</div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:2rem">Parlons de votre projet</h2>
+  <a href="/#contact" class="btn-primary">Nous contacter</a>
+  <a href="/" class="btn-ghost">Retour au site</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Carlos Vaquera <small>Magicien · Mentaliste · Conférencier</small></div>
+  <p>© <span id="yr"></span> Carlos Vaquera. Tous droits réservés.</p>
+  <a href="/admin" class="footer-admin">⚙</a>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Charger image et texte dynamique depuis le CMS
+async function loadContent() {
+  try {
+    const r = await fetch('/api/content');
+    const c = await r.json();
+    if(c.conf_title) document.getElementById('conf-title').innerHTML = c.conf_title;
+    if(c.conf_lead) document.getElementById('conf-lead').textContent = c.conf_lead;
+    if(c.conf_body) document.getElementById('conf-body').textContent = c.conf_body;
+    // Image de fond
+    const url = '/api/upload?key=conf_bg&t=' + Date.now();
+    const t = new Image();
+    t.onload = function() {
+      const el = document.getElementById('conf-bg');
+      if(el) { el.style.backgroundImage='url('+url+')'; el.style.backgroundSize='cover'; el.style.backgroundPosition='center'; el.style.border='none'; el.innerHTML=''; }
+    };
+    t.src = url;
+  } catch(e) {}
+}
+loadContent();
+
+// Lang switch (basique)
+const LANG = { fr:{ reserver:'Réserver' }, en:{ reserver:'Book Now' }, es:{ reserver:'Reservar' } };
+let currentLang = localStorage.getItem('cv_lang') || 'fr';
+function setLang(lang) { currentLang = lang; localStorage.setItem('cv_lang', lang); document.querySelectorAll('#lang-switch button, .lang-switch button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang)); }
+setLang(currentLang);
+</script>
+</body>
+</html>
