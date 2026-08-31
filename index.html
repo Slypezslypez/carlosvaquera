@@ -340,6 +340,9 @@ footer p{font-size:.72rem;color:var(--muted)}
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
+    <video id="hero-video" class="hero-img" autoplay muted playsinline style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top">
+      <source id="hero-video-src" src="" type="video/mp4">
+    </video>
     <img src="/uploads/carlos-vaquera.png" alt="Carlos Vaquera" class="hero-img" id="hero-img-bg">
     <div class="hero-overlay"></div>
     <div class="hero-overlay2"></div>
@@ -898,6 +901,24 @@ async function loadContent(){
     if(c.hero_btn1)document.querySelectorAll('.btn-primary')[0]&&(document.querySelectorAll('.btn-primary')[0].textContent=c.hero_btn1);
     if(c.hero_btn2)document.querySelectorAll('.btn-ghost')[0]&&(document.querySelectorAll('.btn-ghost')[0].textContent=c.hero_btn2);
     setImg('hero-img-bg','hero_bg');
+    // Vidéo hero (se joue une fois, puis laisse place à l'image)
+    (function(){
+      const videoUrl='/api/upload?key=hero_video&t='+Date.now();
+      fetch(videoUrl,{method:'HEAD'}).then(r=>{
+        if(!r.ok) return;
+        const vid=document.getElementById('hero-video');
+        const img=document.getElementById('hero-img-bg');
+        if(!vid||!img) return;
+        document.getElementById('hero-video-src').src=videoUrl;
+        vid.load();
+        vid.style.display='block';
+        img.style.opacity='0';
+        vid.onended=function(){
+          vid.style.display='none';
+          img.style.opacity='1';
+        };
+      }).catch(()=>{});
+    })();
     // Portrait hero optionnel
     (function(){
       const url='/api/upload?key=hero_portrait&t='+Date.now();
