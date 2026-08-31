@@ -360,8 +360,16 @@ footer p{font-size:.72rem;color:var(--muted)}
   /* Band */
   .band{min-height:50vh}
 
-  /* Books carousel */
-  .book{width:calc((100% - 24px) / 3) !important}
+  /* Featured book masqué sur mobile */
+  .featured-book.visible{display:none !important}
+
+  /* Carrousel : touch scroll natif */
+  .books-track-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .books-track-outer::-webkit-scrollbar{display:none}
+  .books-track{flex-wrap:nowrap}
+  .book{scroll-snap-align:start;width:45vw !important;flex-shrink:0 !important}
+  .books-nav{display:none !important}
+  .books-dots{display:none}
 
   /* Sections — cadre mobile */
   #artiste,#spectacles,#animations,#conferences,#auteur,#videos,#agenda,#contact{
@@ -402,17 +410,6 @@ footer p{font-size:.72rem;color:var(--muted)}
   h2{font-size:clamp(1.8rem,7vw,2.5rem)}
   .lead{font-size:1.05rem}
   .hero-h1{font-size:clamp(2.5rem,10vw,4rem)}
-
-  /* Featured book masqué sur mobile */
-  .featured-book.visible{display:none !important}
-
-  /* Carrousel : touch scroll natif + boutons masqués */
-  .books-track-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none}
-  .books-track-outer::-webkit-scrollbar{display:none}
-  .books-track{transform:none !important;transition:none !important;flex-wrap:nowrap;scroll-snap-align:start}
-  .book{scroll-snap-align:start;width:calc((100% - 24px) / 2.2) !important}
-  .books-nav{display:none !important}
-  .books-dots{display:none}
 
   /* Animations/Conferences inner padding */
   #animations > div, #conferences > div{padding:2rem 1rem !important}
@@ -1244,6 +1241,8 @@ const BOOKS_TOTAL = 20;
 const BOOKS_PAGES = Math.ceil(BOOKS_TOTAL / BOOKS_PER_PAGE);
 
 function booksUpdateUI() {
+  // Sur mobile : scroll natif, pas de JS carousel
+  if(window.innerWidth <= 600) return;
   const outer = document.querySelector('.books-track-outer');
   const track = document.getElementById('books-track');
   if (!outer || !track || !track.children.length) return;
