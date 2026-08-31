@@ -48,20 +48,21 @@ module.exports = async function handler(req, res) {
   if (req.method === 'POST') {
     const { key, data, mime_type } = req.body || {};
 
-    // Compress image with sharp (max 1920px wide, JPEG 80%)
+    // Compress images with sharp (max 1920px wide, JPEG 80%) — skip for videos
     let finalData = data;
     let finalMime = mime_type;
-    try {
-      const inputBuffer = Buffer.from(data, 'base64');
-      const compressed = await sharp(inputBuffer)
-        .resize({ width: 1920, withoutEnlargement: true })
-        .jpeg({ quality: 80 })
-        .toBuffer();
-      finalData = compressed.toString('base64');
-      finalMime = 'image/jpeg';
-    } catch (e) {
-      // If compression fails (e.g. SVG), store original
-      console.warn('Compression skipped:', e.message);
+    if (mime_type && mime_type.startsWith('image/')) {
+      try {
+        const inputBuffer = Buffer.from(data, 'base64');
+        const compressed = await sharp(inputBuffer)
+          .resize({ width: 1920, withoutEnlargement: true })
+          .jpeg({ quality: 80 })
+          .toBuffer();
+        finalData = compressed.toString('base64');
+        finalMime = 'image/jpeg';
+      } catch (e) {
+        console.warn('Compression skipped:', e.message);
+      }
     }
 
     await sql`
