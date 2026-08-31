@@ -289,20 +289,20 @@ footer p{font-size:.72rem;color:var(--muted)}
 
 /* ── RESPONSIVE ── */
 /* ── HAMBURGER ── */
-.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;z-index:201}
-.nav-burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all .3s;transform-origin:center}
-.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;background:none;border:none;cursor:pointer;padding:6px;z-index:201}
+.nav-burger span{display:block;width:28px;height:2px;background:var(--text);transition:all .3s;transform-origin:center}
+.nav-burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .nav-burger.open span:nth-child(2){opacity:0}
-.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
 /* ── MOBILE MENU OVERLAY ── */
-.nav-mobile{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,8,16,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;transition:opacity .3s}
+.nav-mobile{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,8,16,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2.8rem;opacity:0;transition:opacity .3s}
 .nav-mobile.open{opacity:1}
-.nav-mobile a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;transition:color .2s;font-weight:500}
+.nav-mobile a{color:rgba(255,255,255,.7);text-decoration:none;font-size:1.1rem;letter-spacing:.22em;text-transform:uppercase;transition:color .2s;font-weight:500}
 .nav-mobile a:hover{color:var(--gold)}
-.nav-mobile .nav-cta-m{margin-top:1rem;border:1px solid var(--gold);color:var(--gold)!important;padding:.6rem 2rem;letter-spacing:.15em}
-.nav-mobile .lang-m{display:flex;gap:.8rem;margin-top:.5rem}
-.nav-mobile .lang-m button{background:none;border:none;font-size:1.3rem;cursor:pointer;opacity:.7;transition:opacity .2s}
+.nav-mobile .nav-cta-m{margin-top:1.2rem;border:1px solid var(--gold);color:var(--gold)!important;padding:.9rem 3rem;letter-spacing:.18em;font-size:1rem}
+.nav-mobile .lang-m{display:flex;gap:1.2rem;margin-top:.8rem}
+.nav-mobile .lang-m button{background:none;border:none;font-size:1.8rem;cursor:pointer;opacity:.7;transition:opacity .2s}
 .nav-mobile .lang-m button:hover{opacity:1}
 
 @media(max-width:900px){
