@@ -476,22 +476,6 @@ function renderHero() {
       ${imgHtml('Photo principale', 'hero_bg')}
     </div>
     <div class="form-section">
-      <h3>Vidéo de fond (optionnel)</h3>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Se joue une fois au chargement de la page, puis l'image de fond apparaît. Format MP4 recommandé.</p>
-      <div class="field">
-        <label>Vidéo hero</label>
-        <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
-          <label style="cursor:pointer;padding:.5rem 1rem;border:1px solid rgba(201,168,76,.4);border-radius:4px;color:var(--gold);font-size:.85rem">
-            Choisir une vidéo
-            <input type="file" accept="video/mp4,video/*" style="display:none" onchange="uploadVideo(event,'hero_video')">
-          </label>
-          <button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem" onclick="deleteVideo('hero_video')">🗑 Supprimer la vidéo</button>
-        </div>
-        <div class="img-status" id="status-hero_video"></div>
-        <video id="prev-video-hero_video" src="/api/upload?key=hero_video" controls style="margin-top:.8rem;max-width:100%;max-height:200px;border-radius:4px;display:none" onerror="this.style.display='none'" onloadeddata="this.style.display='block'"></video>
-      </div>
-    </div>
-    <div class="form-section">
       <h3>Portrait (optionnel)</h3>
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Apparaît sur le côté gauche de la page d'accueil. Si vide, aucun cadre n'est affiché.</p>
       ${imgHtml('Portrait de Carlos', 'hero_portrait')}
