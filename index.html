@@ -403,8 +403,16 @@ footer p{font-size:.72rem;color:var(--muted)}
   .lead{font-size:1.05rem}
   .hero-h1{font-size:clamp(2.5rem,10vw,4rem)}
 
-  /* Books → 2 colonnes */
-  .book{width:calc((100% - 12px) / 2) !important}
+  /* Featured book masqué sur mobile */
+  .featured-book.visible{display:none !important}
+
+  /* Carrousel : touch scroll natif + boutons masqués */
+  .books-track-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .books-track-outer::-webkit-scrollbar{display:none}
+  .books-track{transform:none !important;transition:none !important;flex-wrap:nowrap;scroll-snap-align:start}
+  .book{scroll-snap-align:start;width:calc((100% - 24px) / 2.2) !important}
+  .books-nav{display:none !important}
+  .books-dots{display:none}
 
   /* Animations/Conferences inner padding */
   #animations > div, #conferences > div{padding:2rem 1rem !important}
