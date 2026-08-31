@@ -905,7 +905,7 @@ async function loadContent(){
       const vid=document.getElementById('hero-video');
       const img=document.getElementById('hero-img-bg');
       if(!vid||!img) return;
-      vid.src=videoUrl;
+      vid.src='/hero.mp4';
       vid.load();
       vid.oncanplay=function(){
         const p=vid.play();
