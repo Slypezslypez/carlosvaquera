@@ -369,9 +369,23 @@ footer p{font-size:.72rem;color:var(--muted)}
   }
   #contact .field input,#contact .field textarea,#contact .field select{max-width:100%;width:100%}
 
-  /* Section label — plus visible sur mobile */
-  .section-label{font-size:.78rem;letter-spacing:.35em;margin-bottom:1.4rem}
-  .section-label::before{width:20px}
+  /* Section label — titre bien visible en haut sur mobile */
+  .section-label{
+    font-size:.9rem;
+    letter-spacing:.4em;
+    margin-bottom:1.6rem;
+    justify-content:center;
+    text-align:center;
+    padding:.8rem 1rem;
+    background:rgba(201,168,76,.06);
+    border-bottom:1px solid rgba(201,168,76,.15);
+    margin-left:-1.5rem;
+    margin-right:-1.5rem;
+    margin-top:-3rem;
+    padding-top:1.2rem;
+    padding-bottom:1.2rem;
+  }
+  .section-label::before{display:none}
 
   /* Footer */
   footer{flex-direction:column;gap:1.5rem;text-align:center;padding:3rem 1.5rem}
