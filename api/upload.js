@@ -18,14 +18,29 @@ module.exports = async function handler(req, res) {
 
   const sql = neon(process.env.DATABASE_URL);
 
-  // GET — serve image as binary
+  // GET — serve file as binary (with Range support for Safari video)
   if (req.method === 'GET') {
     const key = req.query.key;
     if (!key) return res.status(400).end();
     const rows = await sql`SELECT data, mime_type FROM images WHERE key = ${key}`;
     if (!rows.length) return res.status(404).end();
     const buf = Buffer.from(rows[0].data, 'base64');
-    res.setHeader('Content-Type', rows[0].mime_type);
+    const mime = rows[0].mime_type;
+    res.setHeader('Content-Type', mime);
+    res.setHeader('Accept-Ranges', 'bytes');
+    // Range request support (required for Safari video playback)
+    const range = req.headers['range'];
+    if (range && mime && mime.startsWith('video/')) {
+      const total = buf.length;
+      const [startStr, endStr] = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(startStr, 10);
+      const end = endStr ? parseInt(endStr, 10) : total - 1;
+      const chunkSize = end - start + 1;
+      res.setHeader('Content-Range', `bytes ${start}-${end}/${total}`);
+      res.setHeader('Content-Length', chunkSize);
+      res.status(206).send(buf.slice(start, end + 1));
+      return;
+    }
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     return res.send(buf);
   }
