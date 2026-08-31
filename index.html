@@ -340,7 +340,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
-    <video id="hero-video" class="hero-img" autoplay muted playsinline style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top">
+    <video id="hero-video" class="hero-img" muted playsinline style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top">
       <source id="hero-video-src" src="" type="video/mp4">
     </video>
     <img src="/uploads/carlos-vaquera.png" alt="Carlos Vaquera" class="hero-img" id="hero-img-bg">
@@ -910,9 +910,16 @@ async function loadContent(){
       document.getElementById('hero-video-src').src=videoUrl;
       vid.load();
       vid.oncanplay=function(){
-        vid.style.display='block';
-        img.style.opacity='0';
-        vid.play();
+        const p=vid.play();
+        if(p!==undefined){
+          p.then(function(){
+            vid.style.display='block';
+            img.style.opacity='0';
+          }).catch(function(){
+            vid.style.display='none';
+            img.style.opacity='1';
+          });
+        }
       };
       vid.onended=function(){
         vid.style.display='none';
