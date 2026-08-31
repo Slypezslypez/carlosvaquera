@@ -340,9 +340,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
-    <video id="hero-video" class="hero-img" muted playsinline style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top">
-      <source id="hero-video-src" src="" type="video/mp4">
-    </video>
+    <video id="hero-video" class="hero-img" muted playsinline webkit-playsinline style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top;transition:opacity .5s"></video>
     <img src="/uploads/carlos-vaquera.png" alt="Carlos Vaquera" class="hero-img" id="hero-img-bg">
     <div class="hero-overlay"></div>
     <div class="hero-overlay2"></div>
@@ -907,7 +905,7 @@ async function loadContent(){
       const vid=document.getElementById('hero-video');
       const img=document.getElementById('hero-img-bg');
       if(!vid||!img) return;
-      document.getElementById('hero-video-src').src=videoUrl;
+      vid.src=videoUrl;
       vid.load();
       vid.oncanplay=function(){
         const p=vid.play();
