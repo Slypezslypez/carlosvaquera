@@ -360,8 +360,10 @@ footer p{font-size:.72rem;color:var(--muted)}
   /* Books carousel */
   .book{width:calc((100% - 24px) / 3) !important}
 
-  /* Contact — cadre mobile */
-  #contact{margin:1rem;border:1px solid rgba(201,168,76,.25);border-radius:2px;padding:3rem 0 !important}
+  /* Contact — ligne dorée gauche + fix overflow */
+  #contact{border-left:3px solid rgba(201,168,76,.4);padding:3rem 0 !important}
+  #contact .contact-inner{padding:0 1.5rem !important;overflow:hidden}
+  #contact .field input,#contact .field textarea,#contact .field select{max-width:100%;width:100%}
 
   /* Footer */
   footer{flex-direction:column;gap:1.5rem;text-align:center;padding:3rem 1.5rem}
