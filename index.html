@@ -360,10 +360,18 @@ footer p{font-size:.72rem;color:var(--muted)}
   /* Books carousel */
   .book{width:calc((100% - 24px) / 3) !important}
 
-  /* Contact — ligne dorée gauche + fix overflow */
-  #contact{border-left:3px solid rgba(201,168,76,.4);padding:3rem 0 !important}
-  #contact .contact-inner{padding:0 1.5rem !important;overflow:hidden}
+  /* Sections — cadre mobile */
+  #artiste,#spectacles,#animations,#conferences,#auteur,#videos,#agenda,#contact{
+    margin:.8rem;
+    border:1px solid rgba(201,168,76,.2);
+    border-radius:2px;
+    overflow:hidden
+  }
   #contact .field input,#contact .field textarea,#contact .field select{max-width:100%;width:100%}
+
+  /* Section label — plus visible sur mobile */
+  .section-label{font-size:.78rem;letter-spacing:.35em;margin-bottom:1.4rem}
+  .section-label::before{width:20px}
 
   /* Footer */
   footer{flex-direction:column;gap:1.5rem;text-align:center;padding:3rem 1.5rem}
