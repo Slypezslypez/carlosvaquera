@@ -904,20 +904,24 @@ async function loadContent(){
     // Vidéo hero (se joue une fois, puis laisse place à l'image)
     (function(){
       const videoUrl='/api/upload?key=hero_video&t='+Date.now();
-      fetch(videoUrl,{method:'HEAD'}).then(r=>{
-        if(!r.ok) return;
-        const vid=document.getElementById('hero-video');
-        const img=document.getElementById('hero-img-bg');
-        if(!vid||!img) return;
-        document.getElementById('hero-video-src').src=videoUrl;
-        vid.load();
+      const vid=document.getElementById('hero-video');
+      const img=document.getElementById('hero-img-bg');
+      if(!vid||!img) return;
+      document.getElementById('hero-video-src').src=videoUrl;
+      vid.load();
+      vid.oncanplay=function(){
         vid.style.display='block';
         img.style.opacity='0';
-        vid.onended=function(){
-          vid.style.display='none';
-          img.style.opacity='1';
-        };
-      }).catch(()=>{});
+        vid.play();
+      };
+      vid.onended=function(){
+        vid.style.display='none';
+        img.style.opacity='1';
+      };
+      vid.onerror=function(){
+        vid.style.display='none';
+        img.style.opacity='1';
+      };
     })();
     // Portrait hero optionnel
     (function(){
