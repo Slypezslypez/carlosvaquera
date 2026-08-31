@@ -62,7 +62,6 @@
   }
 }
 </script>
-<link rel="preload" href="/hero.mp4" as="video" type="video/mp4">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -341,9 +340,6 @@ footer p{font-size:.72rem;color:var(--muted)}
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
-    <video id="hero-video" class="hero-img" autoplay muted playsinline webkit-playsinline preload="auto" style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top;transition:opacity .5s">
-      <source src="/hero.mp4#t=0.001" type="video/mp4">
-    </video>
     <img src="/uploads/carlos-vaquera.png" alt="Carlos Vaquera" class="hero-img" id="hero-img-bg">
     <div class="hero-overlay"></div>
     <div class="hero-overlay2"></div>
@@ -902,27 +898,6 @@ async function loadContent(){
     if(c.hero_btn1)document.querySelectorAll('.btn-primary')[0]&&(document.querySelectorAll('.btn-primary')[0].textContent=c.hero_btn1);
     if(c.hero_btn2)document.querySelectorAll('.btn-ghost')[0]&&(document.querySelectorAll('.btn-ghost')[0].textContent=c.hero_btn2);
     setImg('hero-img-bg','hero_bg');
-    // Vidéo hero (se joue une fois, puis laisse place à l'image)
-    (function(){
-      const vid=document.getElementById('hero-video');
-      const img=document.getElementById('hero-img-bg');
-      if(!vid||!img) return;
-      vid.addEventListener('timeupdate',function ontu(){
-        if(vid.currentTime>0){
-          vid.removeEventListener('timeupdate',ontu);
-          vid.style.display='block';
-          img.style.opacity='0';
-        }
-      });
-      vid.onended=function(){
-        vid.style.display='none';
-        img.style.opacity='1';
-      };
-      vid.onerror=function(){
-        vid.style.display='none';
-        img.style.opacity='1';
-      };
-    })();
     // Portrait hero optionnel
     (function(){
       const url='/api/upload?key=hero_portrait&t='+Date.now();
