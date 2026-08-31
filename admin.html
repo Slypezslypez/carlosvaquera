@@ -406,6 +406,51 @@ async function uploadImg(event, key) {
   } catch { status.textContent = 'Erreur upload'; }
 }
 
+async function uploadVideo(event, key) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const status = document.getElementById('status-' + key);
+  if (file.size > 1 * 1024 * 1024) {
+    status.textContent = '⚠️ Vidéo trop lourde — maximum 1 Mo (votre fichier : ' + Math.round(file.size/1024) + ' Ko)';
+    event.target.value = '';
+    return;
+  }
+  status.textContent = 'Lecture…';
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64 = e.target.result.split(',')[1];
+    const kb = Math.round(base64.length * 0.75 / 1024);
+    status.textContent = `Upload en cours… (${kb} Ko)`;
+    try {
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
+        body: JSON.stringify({ key, data: base64, mime_type: file.type || 'video/mp4' })
+      });
+      if (r.status === 401) { logout(); return; }
+      status.textContent = '✓ Vidéo mise à jour';
+      const prev = document.getElementById('prev-video-' + key);
+      if (prev) { prev.src = `/api/upload?key=${key}&t=${Date.now()}`; prev.style.display = 'block'; }
+      toast('Vidéo mise à jour ✓');
+      setTimeout(() => status.textContent = '', 4000);
+    } catch { status.textContent = 'Erreur upload'; }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function deleteVideo(key) {
+  if (!confirm('Supprimer cette vidéo ?')) return;
+  try {
+    const r = await fetch('/api/upload?action=delete&key=' + key, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${TOKEN}` }
+    });
+    const prev = document.getElementById('prev-video-' + key);
+    if (prev) { prev.src = ''; prev.style.display = 'none'; }
+    toast('Vidéo supprimée ✓');
+  } catch(e) { toast('Erreur : ' + e.message, true); }
+}
+
 function toast(msg, err = false) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -429,6 +474,22 @@ function renderHero() {
     <div class="form-section">
       <h3>Image de fond (hero)</h3>
       ${imgHtml('Photo principale', 'hero_bg')}
+    </div>
+    <div class="form-section">
+      <h3>Vidéo de fond (optionnel)</h3>
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Se joue une fois au chargement de la page, puis l'image de fond apparaît. Format MP4 recommandé.</p>
+      <div class="field">
+        <label>Vidéo hero</label>
+        <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <label style="cursor:pointer;padding:.5rem 1rem;border:1px solid rgba(201,168,76,.4);border-radius:4px;color:var(--gold);font-size:.85rem">
+            Choisir une vidéo
+            <input type="file" accept="video/mp4,video/*" style="display:none" onchange="uploadVideo(event,'hero_video')">
+          </label>
+          <button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem" onclick="deleteVideo('hero_video')">🗑 Supprimer la vidéo</button>
+        </div>
+        <div class="img-status" id="status-hero_video"></div>
+        <video id="prev-video-hero_video" src="/api/upload?key=hero_video" controls style="margin-top:.8rem;max-width:100%;max-height:200px;border-radius:4px;display:none" onerror="this.style.display='none'" onloadeddata="this.style.display='block'"></video>
+      </div>
     </div>
     <div class="form-section">
       <h3>Portrait (optionnel)</h3>
