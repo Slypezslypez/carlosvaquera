@@ -340,7 +340,9 @@ footer p{font-size:.72rem;color:var(--muted)}
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg">
-    <video id="hero-video" class="hero-img" muted playsinline webkit-playsinline style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top;transition:opacity .5s"></video>
+    <video id="hero-video" class="hero-img" autoplay muted playsinline webkit-playsinline preload="auto" style="display:none;width:100%;height:100%;object-fit:cover;object-position:center top;transition:opacity .5s">
+      <source src="/hero.mp4#t=0.001" type="video/mp4">
+    </video>
     <img src="/uploads/carlos-vaquera.png" alt="Carlos Vaquera" class="hero-img" id="hero-img-bg">
     <div class="hero-overlay"></div>
     <div class="hero-overlay2"></div>
@@ -904,12 +906,13 @@ async function loadContent(){
       const vid=document.getElementById('hero-video');
       const img=document.getElementById('hero-img-bg');
       if(!vid||!img) return;
-      vid.muted=true;
-      vid.src='/hero.mp4';
-      vid.onplaying=function(){
-        vid.style.display='block';
-        img.style.opacity='0';
-      };
+      vid.addEventListener('timeupdate',function ontu(){
+        if(vid.currentTime>0){
+          vid.removeEventListener('timeupdate',ontu);
+          vid.style.display='block';
+          img.style.opacity='0';
+        }
+      });
       vid.onended=function(){
         vid.style.display='none';
         img.style.opacity='1';
@@ -918,8 +921,6 @@ async function loadContent(){
         vid.style.display='none';
         img.style.opacity='1';
       };
-      const p=vid.play();
-      if(p!==undefined) p.catch(function(){ /* autoplay bloqué, image reste */ });
     })();
     // Portrait hero optionnel
     (function(){
