@@ -288,12 +288,29 @@ footer p{font-size:.72rem;color:var(--muted)}
 
 
 /* ── RESPONSIVE ── */
+/* ── HAMBURGER ── */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;z-index:201}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all .3s;transform-origin:center}
+.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── MOBILE MENU OVERLAY ── */
+.nav-mobile{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,8,16,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;transition:opacity .3s}
+.nav-mobile.open{opacity:1}
+.nav-mobile a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;transition:color .2s;font-weight:500}
+.nav-mobile a:hover{color:var(--gold)}
+.nav-mobile .nav-cta-m{margin-top:1rem;border:1px solid var(--gold);color:var(--gold)!important;padding:.6rem 2rem;letter-spacing:.15em}
+.nav-mobile .lang-m{display:flex;gap:.8rem;margin-top:.5rem}
+.nav-mobile .lang-m button{background:none;border:none;font-size:1.3rem;cursor:pointer;opacity:.7;transition:opacity .2s}
+.nav-mobile .lang-m button:hover{opacity:1}
+
 @media(max-width:900px){
   .artiste-inner,.contact-inner{grid-template-columns:1fr;gap:4rem}
   .cards-grid{grid-template-columns:1fr 1fr}
-  
   #nav{padding:1rem 1.5rem}
   .nav-links{display:none}
+  .nav-burger{display:flex}
   .hero-content{text-align:center}
   .hero-tag{justify-content:center}
   .hero-btns{justify-content:center}
@@ -305,7 +322,6 @@ footer p{font-size:.72rem;color:var(--muted)}
 }
 @media(max-width:600px){
   .cards-grid{grid-template-columns:1fr}
-  
   .artiste-inner{padding:0 1.5rem}
 }
 </style>
@@ -335,7 +351,28 @@ footer p{font-size:.72rem;color:var(--muted)}
     <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
     <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
   </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MENU MOBILE -->
+<div class="nav-mobile" id="nav-mobile">
+  <a href="#artiste" data-i18n="nav_artiste" onclick="closeMobileMenu()">L'Artiste</a>
+  <a href="#spectacles" data-i18n="nav_spectacles" onclick="closeMobileMenu()">Spectacles</a>
+  <a href="#animations" data-i18n="nav_animations" onclick="closeMobileMenu()">Animations</a>
+  <a href="#conferences" data-i18n="nav_conferences" onclick="closeMobileMenu()">Conférences</a>
+  <a href="#auteur" data-i18n="nav_auteur" onclick="closeMobileMenu()">L'Auteur</a>
+  <a href="#videos" data-i18n="nav_videos" onclick="closeMobileMenu()">Vidéos</a>
+  <a href="#agenda" data-i18n="nav_agenda" onclick="closeMobileMenu()">Agenda</a>
+  <a href="#contact" data-i18n="nav_contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="#contact" class="nav-cta-m" data-i18n="nav_reserver" onclick="closeMobileMenu()">Réserver</a>
+  <div class="lang-m">
+    <button onclick="setLang('fr');closeMobileMenu()" title="Français">🇫🇷</button>
+    <button onclick="setLang('en');closeMobileMenu()" title="English">🇬🇧</button>
+    <button onclick="setLang('es');closeMobileMenu()" title="Español">🇪🇸</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -861,6 +898,23 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obse
 
 // ── YEAR ─────────────────────────────────
 document.getElementById('yr').textContent=new Date().getFullYear();
+
+// ── MOBILE MENU ──────────────────────────
+function toggleMobileMenu(){
+  const burger=document.getElementById('nav-burger');
+  const menu=document.getElementById('nav-mobile');
+  const open=burger.classList.toggle('open');
+  if(open){menu.style.display='flex';requestAnimationFrame(()=>menu.classList.add('open'));document.body.style.overflow='hidden';}
+  else{closeMobileMenu();}
+}
+function closeMobileMenu(){
+  const burger=document.getElementById('nav-burger');
+  const menu=document.getElementById('nav-mobile');
+  burger.classList.remove('open');
+  menu.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{if(!menu.classList.contains('open'))menu.style.display='none';},300);
+}
 
 // ── CONTENT ──────────────────────────────
 function setImg(id,key){
