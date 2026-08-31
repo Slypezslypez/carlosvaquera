@@ -786,7 +786,7 @@ footer p{font-size:.72rem;color:var(--muted)}
       drot:(Math.random()-0.5)*0.012,
       w:55+depth*40,
       h:77+depth*56,
-      o:Math.random()*0.25+0.18,
+      o:Math.random()*0.45+0.30,
       suit,val,red,depth,
       parallaxOff:0,
     };
@@ -810,7 +810,7 @@ footer p{font-size:.72rem;color:var(--muted)}
     ctx.arcTo(-w/2,h/2,-w/2,-h/2,r);
     ctx.arcTo(-w/2,-h/2,w/2,-h/2,r);
     ctx.closePath();
-    ctx.fillStyle='rgba(255,255,255,0.14)';
+    ctx.fillStyle='rgba(255,255,255,0.25)';
     ctx.fill();
     ctx.strokeStyle=red?'rgba(220,60,60,0.6)':'rgba(201,168,76,0.6)';
     ctx.lineWidth=1;
