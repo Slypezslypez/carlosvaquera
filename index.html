@@ -306,23 +306,83 @@ footer p{font-size:.72rem;color:var(--muted)}
 .nav-mobile .lang-m button:hover{opacity:1}
 
 @media(max-width:900px){
-  .artiste-inner,.contact-inner{grid-template-columns:1fr;gap:4rem}
-  .cards-grid{grid-template-columns:1fr 1fr}
+  /* Nav */
   #nav{padding:1rem 1.5rem}
   .nav-links{display:none}
   .nav-burger{display:flex}
+  .nav-cta{display:none}
+
+  /* Hero */
+  .hero-inner{flex-direction:column-reverse;gap:2rem}
+  .hero-portrait{width:180px}
   .hero-content{text-align:center}
   .hero-tag{justify-content:center}
   .hero-btns{justify-content:center}
-  .spectacles-inner,.auteur-inner,.agenda-inner,.band-content{padding:0 1.5rem}
-  footer{flex-direction:column;gap:1.5rem;text-align:center}
-  .show-row{grid-template-columns:70px 44px 1fr;grid-template-rows:auto auto}
+  .hero-intro{margin:0 auto 2rem}
+
+  /* Sections padding */
+  #artiste,#spectacles,#videos,#agenda,#contact{padding:5rem 0 !important}
+  #auteur{padding:3rem 0 !important}
+
+  /* Inner padding */
+  .artiste-inner,.spectacles-inner,.auteur-inner,.agenda-inner,
+  .videos-inner,.contact-inner,.band-content{padding:0 1.5rem !important}
+
+  /* Artiste */
+  .artiste-inner{grid-template-columns:1fr;gap:3rem}
+  .artiste-counter{bottom:1rem;right:1rem}
+
+  /* Spectacles */
+  .cards-grid{grid-template-columns:1fr 1fr}
+  .spec-grid{grid-template-columns:1fr 1fr !important}
+
+  /* Animations & Conférences (inline styles → !important) */
+  #animations > div, #conferences > div{
+    grid-template-columns:1fr !important;
+    gap:3rem !important;
+    padding:3rem 1.5rem !important;
+    width:100%
+  }
+  #animations > div > .reveal-right{order:-1}
+  #conferences > div > .reveal-left{order:-1}
+
+  /* Contact */
+  .contact-inner{grid-template-columns:1fr;gap:3rem}
+
+  /* Agenda */
+  .show-row{grid-template-columns:70px 44px 1fr;grid-template-rows:auto auto;gap:1rem;padding:1.2rem 1rem}
   .show-status{grid-column:3}
   .show-img,.show-img-empty{width:44px;height:44px}
+
+  /* Band */
+  .band{min-height:50vh}
+
+  /* Books carousel */
+  .book{width:calc((100% - 24px) / 3) !important}
+
+  /* Footer */
+  footer{flex-direction:column;gap:1.5rem;text-align:center;padding:3rem 1.5rem}
 }
+
 @media(max-width:600px){
-  .cards-grid{grid-template-columns:1fr}
+  /* Grilles → 1 colonne */
+  .cards-grid,.spec-grid{grid-template-columns:1fr !important}
   .artiste-inner{padding:0 1.5rem}
+
+  /* Typography */
+  h2{font-size:clamp(1.8rem,7vw,2.5rem)}
+  .lead{font-size:1.05rem}
+  .hero-h1{font-size:clamp(2.5rem,10vw,4rem)}
+
+  /* Books → 2 colonnes */
+  .book{width:calc((100% - 12px) / 2) !important}
+
+  /* Animations/Conferences inner padding */
+  #animations > div, #conferences > div{padding:2rem 1rem !important}
+
+  /* Featured book */
+  .featured-book.visible{flex-direction:column;gap:2rem}
+  .featured-book-cover{width:140px}
 }
 </style>
 </head>
