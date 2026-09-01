@@ -90,12 +90,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.45rem 1.2rem;border-radius:1px;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .2s;font-weight:500}
 .nav-cta:hover{background:var(--gold);color:var(--bg)}
 
-/* ── CADRE DORÉ SECTIONS ── */
-.section-frame{position:relative;padding:30px}
-.section-frame::after{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:10;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='none'%3E%3Crect x='22' y='22' width='1556' height='856' rx='5' fill='none' stroke='%23c9a84c' stroke-width='1.2' opacity='0.35'/%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.75' opacity='0.3'%3E%3Cpath d='M42 112V42H172 M1428 42H1558V112'/%3E%3Cpath d='M42 788V858H172 M1428 858H1558V788'/%3E%3C/g%3E%3Cg fill='none' stroke='%23c9a84c' stroke-linecap='square' stroke-linejoin='miter' opacity='0.5'%3E%3Cpath d='M22 128V22H128 M22 76L76 22' stroke-width='2'/%3E%3Cpath d='M1472 22H1578V128 M1524 22L1578 76' stroke-width='2'/%3E%3Cpath d='M22 772V878H128 M22 824L76 878' stroke-width='2'/%3E%3Cpath d='M1472 878H1578V772 M1524 878L1578 824' stroke-width='2'/%3E%3C/g%3E%3Cg fill='%23c9a84c' opacity='0.8'%3E%3Cpath d='M746 22h36l18 7 18-7h36l-28 2-26 12-26-12z'/%3E%3Cpath d='M746 878h36l18-7 18 7h36l-28-2-26-12-26 12z'/%3E%3Cpath d='M22 396v36l7 18-7 18v36l2-28 12-26-12-26z'/%3E%3Cpath d='M1578 396v36l-7 18 7 18v36l-2-28-12-26 12-26z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/100% 100%;
-}
 
 /* ── HERO ── */
 #hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -487,7 +481,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </div>
 
 <!-- HERO -->
-<section id="hero" class="section-frame">
+<section id="hero">
   <div class="hero-bg">
     <img src="/uploads/carlos-vaquera.png" alt="Carlos Vaquera" class="hero-img" id="hero-img-bg">
     <div class="hero-overlay"></div>
@@ -519,7 +513,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- L'ARTISTE -->
-<section id="artiste" class="section-frame">
+<section id="artiste">
   <div class="artiste-inner">
     <div class="artiste-img-wrap reveal-left">
       <div class="artiste-ph ph" style="aspect-ratio:3/4" id="artiste-ph">
@@ -549,7 +543,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- SPECTACLES -->
-<section id="spectacles" class="section-frame">
+<section id="spectacles">
   <div class="spectacles-inner">
     <div class="spectacles-head reveal">
       <div class="section-label" style="justify-content:center" data-i18n="section_spectacles">Les Spectacles</div>
@@ -597,7 +591,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- ANIMATIONS -->
-<section id="animations" class="section-frame" style="min-height:100vh;display:flex;align-items:center;background:var(--bg3)">
+<section id="animations" style="min-height:100vh;display:flex;align-items:center;background:var(--bg3)">
   <div style="max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center">
     <div class="reveal-left">
       <div class="section-label">Animations</div>
@@ -622,7 +616,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </div>
 
 <!-- CONFÉRENCES -->
-<section id="conferences" class="section-frame" style="min-height:100vh;display:flex;align-items:center;background:var(--bg2)">
+<section id="conferences" style="min-height:100vh;display:flex;align-items:center;background:var(--bg2)">
   <div style="max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center">
     <div class="reveal-left" style="position:relative">
       <div id="conf-bg" class="ph" style="width:100%;aspect-ratio:4/3;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px">
@@ -641,7 +635,7 @@ footer p{font-size:.72rem;color:var(--muted)}
   </div>
 </section>
 <!-- L'AUTEUR -->
-<section id="auteur" class="section-frame">
+<section id="auteur">
   <div class="auteur-inner">
     <div class="auteur-head reveal">
       <div class="section-label" data-i18n="section_auteur">L'Auteur</div>
@@ -839,7 +833,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- VIDÉOS -->
-<section id="videos" class="section-frame">
+<section id="videos">
   <div class="videos-inner">
     <div class="videos-head reveal">
       <div class="section-label" style="justify-content:center" data-i18n="section_videos">Vidéos</div>
@@ -856,7 +850,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- AGENDA -->
-<section id="agenda" class="section-frame">
+<section id="agenda">
   <div class="agenda-inner">
     <div class="agenda-head reveal">
       <div class="section-label" style="justify-content:center" data-i18n="section_agenda">Prochaines dates</div>
@@ -867,7 +861,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section-frame">
+<section id="contact">
   <div class="contact-inner">
     <div class="reveal-left">
       <div class="section-label" data-i18n="section_contact">Contact</div>
@@ -1383,5 +1377,41 @@ document.getElementById('contact-form').addEventListener('submit',async function
   btn.disabled=false;btn.textContent=TRANSLATIONS[currentLang].form_send;
 });
 </script>
+
+<!-- Cadre décoratif fixe -->
+<div id="fixed-frame" style="position:fixed;top:80px;left:0;right:0;bottom:0;pointer-events:none;z-index:99">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="none" style="width:100%;height:100%">
+    <defs>
+      <linearGradient id="gf" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#8f681c"/>
+        <stop offset="28%" stop-color="#d7b85a"/>
+        <stop offset="52%" stop-color="#f1dc91"/>
+        <stop offset="76%" stop-color="#c69b37"/>
+        <stop offset="100%" stop-color="#745015"/>
+      </linearGradient>
+    </defs>
+    <!-- Filet principal -->
+    <rect x="18" y="18" width="1564" height="864" rx="3" fill="none" stroke="url(#gf)" stroke-width="1.2" opacity="0.35"/>
+    <!-- Filets partiels coins -->
+    <g fill="none" stroke="url(#gf)" stroke-width="0.8" opacity="0.3">
+      <path d="M40 110V40H170 M1430 40H1560V110"/>
+      <path d="M40 790V860H170 M1430 860H1560V790"/>
+    </g>
+    <!-- Angles signature -->
+    <g fill="none" stroke="url(#gf)" stroke-linecap="square" stroke-linejoin="miter" opacity="0.55">
+      <path d="M18 130V18H130 M18 74L74 18" stroke-width="2"/>
+      <path d="M1470 18H1582V130 M1526 18L1582 74" stroke-width="2"/>
+      <path d="M18 770V882H130 M18 826L74 882" stroke-width="2"/>
+      <path d="M1470 882H1582V770 M1526 882L1582 826" stroke-width="2"/>
+    </g>
+    <!-- Ornements centre des côtés -->
+    <g fill="url(#gf)" opacity="0.85">
+      <path d="M746 18h36l18 7 18-7h36l-28 2-26 12-26-12z"/>
+      <path d="M746 882h36l18-7 18 7h36l-28-2-26-12-26 12z"/>
+      <path d="M18 396v36l7 18-7 18v36l2-28 12-26-12-26z"/>
+      <path d="M1582 396v36l-7 18 7 18v36l-2-28-12-26 12-26z"/>
+    </g>
+  </svg>
+</div>
 </body>
 </html>
