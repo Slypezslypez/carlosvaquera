@@ -1,792 +1,1511 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<script>
+// Accès preview : carlosvaquera.com/?preview=carlos
+(function(){
+  var p=new URLSearchParams(location.search).get('preview');
+  if(p==='carlos'){sessionStorage.setItem('cv_preview','1');return;}
+  if(sessionStorage.getItem('cv_preview')==='1')return;
+  // Coming soon
+  document.addEventListener('DOMContentLoaded',function(){
+    document.body.innerHTML='';
+    document.body.style.cssText='margin:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Georgia,serif;color:#c9a84c;text-align:center;';
+    document.body.innerHTML='<div><div style="font-size:1rem;letter-spacing:.3em;text-transform:uppercase;opacity:.6;margin-bottom:1.5rem">Carlos Vaquera</div><div style="font-size:2.5rem;font-weight:300;margin-bottom:1rem">Site en cours de création</div><div style="font-size:1rem;opacity:.5;letter-spacing:.1em">Coming soon</div></div>';
+  });
+})();
+</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin — Carlos Vaquera</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO primaire -->
+<title>Carlos Vaquera — Magicien, Mentaliste &amp; Conférencier | Belgique</title>
+<meta name="description" content="Carlos Vaquera, magicien mentaliste de renommée internationale. Lauréat du Mandrake d'Or, Champion d'Europe de close-up. Spectacles, animations corporate et conférences en Belgique, France et international.">
+<meta name="keywords" content="magicien belgique, mentaliste, close-up, conférencier, magie corporate, one-man show, Carlos Vaquera, Mandrake d'Or, animation entreprise, spectacle magie">
+<meta name="author" content="Carlos Vaquera">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.carlosvaquera.com/">
+
+<!-- Open Graph (réseaux sociaux) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.carlosvaquera.com/">
+<meta property="og:title" content="Carlos Vaquera — Magicien, Mentaliste &amp; Conférencier">
+<meta property="og:description" content="Lauréat du Mandrake d'Or et Champion d'Europe de close-up. Spectacles, animations corporate et conférences en Belgique et à l'international.">
+<meta property="og:image" content="https://www.carlosvaquera.com/api/upload?key=hero_bg">
+<meta property="og:locale" content="fr_BE">
+<meta property="og:site_name" content="Carlos Vaquera">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Carlos Vaquera — Magicien, Mentaliste &amp; Conférencier">
+<meta name="twitter:description" content="Lauréat du Mandrake d'Or. Spectacles et conférences en Belgique et à l'international.">
+<meta name="twitter:image" content="https://www.carlosvaquera.com/api/upload?key=hero_bg">
+
+<!-- Données structurées Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Carlos Vaquera",
+  "jobTitle": "Magicien, Mentaliste et Conférencier",
+  "description": "Magicien mentaliste de renommée internationale, lauréat du Mandrake d'Or et Champion d'Europe de close-up.",
+  "url": "https://www.carlosvaquera.com",
+  "image": "https://www.carlosvaquera.com/api/upload?key=hero_bg",
+  "sameAs": [],
+  "address": { "@type": "PostalAddress", "addressCountry": "BE" },
+  "knowsAbout": ["Magie", "Mentalisme", "Close-up", "Conférence", "Animation corporate"],
+  "award": ["Mandrake d'Or", "Champion d'Europe de Close-Up", "Prix Las Vegas Close-Up Magic"],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Artiste de magie et mentaliste",
+    "occupationLocation": { "@type": "Country", "name": "Belgique" }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--gold:#c9a84c;--gold-l:#e8c97a;--bg:#0d0d14;--bg2:#141420;--bg3:#1c1c2a;--bg4:#242436;--text:#e8e4d8;--muted:#7878a0;--border:rgba(255,255,255,0.07);--r:4px}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+:root{
+  --gold:#c9a84c;--gold-l:#e8c97a;--gold-d:#8a6e2f;
+  --bg:#080810;--bg2:#0f0f1a;--bg3:#161625;--bg4:#1e1e30;
+  --text:#ede9e0;--muted:#7878a0;--border:rgba(255,255,255,0.06);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
 
-/* LOGIN */
-.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
-.login-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:3rem;width:100%;max-width:360px;text-align:center}
-.login-logo{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);margin-bottom:.3rem}
-.login-sub{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
-.login-box input{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem}
-.login-box input:focus{border-color:var(--gold)}
-.login-box button{width:100%;background:var(--gold);color:var(--bg);border:none;padding:.85rem;border-radius:var(--r);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
-.login-box button:hover{background:var(--gold-l)}
-.login-error{color:#e05;font-size:.8rem;margin-top:.8rem}
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
 
-/* LAYOUT */
-.layout{display:flex;min-height:100vh}
-.sidebar{width:230px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
-.sidebar-logo{padding:1.6rem 1.4rem;border-bottom:1px solid var(--border)}
-.sidebar-logo span{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);display:block}
-.sidebar-logo small{font-size:.65rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-nav.side-nav{flex:1;padding:.8rem 0}
-nav.side-nav a{display:flex;align-items:center;gap:.7rem;padding:.65rem 1.4rem;color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;cursor:pointer;border-left:2px solid transparent;transition:color .15s,background .15s}
-nav.side-nav a:hover{color:var(--text);background:rgba(255,255,255,.02)}
-nav.side-nav a.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.05)}
-nav.side-nav a svg{width:15px;height:15px;flex-shrink:0;opacity:.7}
-.sidebar-foot{padding:1rem 1.4rem;border-top:1px solid var(--border)}
-.sidebar-foot a{color:var(--muted);font-size:.75rem;text-decoration:none;transition:color .15s;cursor:pointer;margin-right:.8rem}
-.sidebar-foot a:hover{color:var(--text)}
-.main{flex:1;overflow:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:10}
-.topbar h1{font-family:'Playfair Display',serif;font-size:1.2rem}
-.content{padding:2rem;max-width:860px}
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+#nav.solid{background:rgba(8,8,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 3rem}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);text-decoration:none;letter-spacing:.04em}
+.nav-logo span{display:block;font-size:.6rem;letter-spacing:.25em;color:var(--muted);font-family:'Inter',sans-serif;font-style:italic;margin-top:.1rem;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;transition:color .2s;font-weight:500}
+.nav-links a:hover{color:var(--gold)}
+.nav-sep{width:1px;height:14px;background:rgba(255,255,255,.15);margin:0 .2rem}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.45rem 1.2rem;border-radius:1px;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:all .2s;font-weight:500}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
 
-/* FORM */
-.form-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;margin-bottom:1.5rem}
-.form-section h3{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
-.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
-.field label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.field input,.field textarea,.field select{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:.65rem .9rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;width:100%}
-.field input:focus,.field textarea:focus{border-color:var(--gold)}
-.field textarea{resize:vertical;min-height:90px}
-.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+/* ── HERO ── */
+#hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.65;filter:saturate(.6)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,16,.7) 0%,rgba(8,8,16,.3) 50%,rgba(8,8,16,.8) 100%)}
+.hero-overlay2{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(201,168,76,.04) 0%,transparent 70%)}
+#particles{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1100px;padding:0 2rem;display:flex;align-items:center;gap:4rem}
+.hero-content{flex:1;text-align:left}
+.hero-portrait{flex-shrink:0;width:320px;display:none}
+.hero-portrait.visible{display:block}
+.hero-portrait-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px;filter:saturate(.85)}
+@media(max-width:900px){.hero-inner{flex-direction:column-reverse;gap:2rem}.hero-portrait{width:180px}}
+.hero-tag{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;opacity:.9}
+.hero-tag::after{content:'';flex:1;height:1px;background:var(--gold);opacity:.3;max-width:80px}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6.5rem);line-height:1.02;font-weight:700;margin-bottom:1rem}
+.hero-intro{font-size:1rem;color:rgba(255,255,255,.65);max-width:520px;line-height:1.7;margin-bottom:2rem;font-weight:300}
+.hero-awards{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.hero-award{display:flex;align-items:center;gap:.4rem;font-size:.7rem;letter-spacing:.08em;color:rgba(201,168,76,.8);text-transform:uppercase}
+.award-icon{font-size:.85rem}
+.hero-award-sep{color:rgba(201,168,76,.3);font-size:.8rem}
+.hero-h1 em{font-style:italic;color:var(--gold);display:block}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.4rem);color:rgba(255,255,255,.45);font-style:italic;margin-bottom:2.5rem;letter-spacing:.06em}
+.hero-btns{display:flex;gap:1.2rem;flex-wrap:wrap}
+.btn-primary{display:inline-block;background:var(--gold);color:var(--bg);padding:.8rem 2.2rem;text-decoration:none;font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;transition:all .2s;border:1px solid var(--gold)}
+.btn-primary:hover{background:var(--gold-l);border-color:var(--gold-l)}
+.btn-ghost{display:inline-block;background:transparent;color:var(--text);padding:.8rem 2.2rem;text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);transition:all .2s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.8rem;color:var(--muted);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;z-index:2;animation:bob 2s ease-in-out infinite}
+.hero-scroll::after{content:'';width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent)}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
 
-/* IMAGE UPLOAD */
-.img-upload{border:1px dashed rgba(255,255,255,.12);border-radius:var(--r);padding:1.2rem;text-align:center;cursor:pointer;transition:border-color .2s;background:rgba(255,255,255,.01);position:relative}
-.img-upload:hover{border-color:rgba(201,168,76,.3)}
-.img-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.img-upload .img-preview{width:100%;max-height:160px;object-fit:cover;border-radius:2px;display:none;margin-bottom:.8rem;pointer-events:none}
-.img-upload .img-preview.show{display:block}
-.img-upload p{font-size:.72rem;color:var(--muted);pointer-events:none}
-.img-upload p strong{color:var(--gold)}
-.img-status{font-size:.7rem;color:var(--gold);margin-top:.4rem;min-height:1em}
+/* ── SECTION BASE ── */
+section{position:relative}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .9s ease,transform .9s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(50px);transition:opacity .9s ease,transform .9s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.section-label{font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+.section-label::before{content:'';width:30px;height:1px;background:var(--gold);opacity:.5}
+h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem}
+.lead{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:rgba(255,255,255,.6);font-style:italic;line-height:1.7;margin-bottom:1.5rem}
+p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin-bottom:1.2rem}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:var(--r);font-family:'Inter',sans-serif;font-size:.78rem;font-weight:500;cursor:pointer;border:none;transition:all .15s;letter-spacing:.04em}
-.btn-gold{background:var(--gold);color:var(--bg)}.btn-gold:hover{background:var(--gold-l)}
-.btn-outline{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-outline:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
-.btn-danger{background:rgba(200,50,50,.1);color:#e05;border:1px solid rgba(200,50,50,.15)}.btn-danger:hover{background:rgba(200,50,50,.2)}
-.btn svg{width:14px;height:14px}
-.save-bar{display:flex;align-items:center;gap:1rem;padding-top:.5rem}
-.save-msg{font-size:.78rem;color:#3c8;min-height:1.2em}
-.save-msg.err{color:#e05}
+/* ── PLACEHOLDER IMAGE ── */
+.ph{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.2);border:1px dashed rgba(255,255,255,.1);background:linear-gradient(135deg,rgba(255,255,255,.02),rgba(201,168,76,.03));transition:border-color .3s;cursor:default;user-select:none}
+.ph svg{width:28px;height:28px;opacity:.3}
+.ph:hover{border-color:rgba(201,168,76,.2)}
 
-/* AGENDA TABLE */
-table{width:100%;border-collapse:collapse}
-thead th{text-align:left;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.5rem 1rem;border-bottom:1px solid var(--border)}
-tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
-tbody tr:hover{background:rgba(255,255,255,.02)}
-tbody td{padding:.75rem 1rem;font-size:.83rem;vertical-align:middle}
-.badge{display:inline-block;padding:.18rem .55rem;border-radius:20px;font-size:.65rem;font-weight:500}
-.badge-av{background:rgba(50,180,100,.12);color:#3c8}
-.badge-so{background:rgba(200,50,50,.1);color:#c55}
-.actions{display:flex;gap:.4rem}
-.empty-state{text-align:center;padding:3rem;color:var(--muted);font-size:.83rem}
+/* ── ARTISTE ── */
+#artiste{padding:10rem 0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%)}
+.artiste-inner{max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center}
+.artiste-img-wrap{position:relative}
+.artiste-ph{width:100%;aspect-ratio:3/4;border-radius:1px;outline:1px solid rgba(201,168,76,0.45);outline-offset:-1px}
+.artiste-frame{position:absolute;top:-20px;left:-20px;right:20px;bottom:20px;border:1px solid var(--gold);opacity:.2;pointer-events:none;border-radius:1px}
+.artiste-counter{position:absolute;bottom:-2rem;right:-2rem;background:var(--gold);color:var(--bg);padding:1.5rem;text-align:center;font-family:'Playfair Display',serif}
+.artiste-counter span{display:block;font-size:2rem;font-weight:700;line-height:1}
+.artiste-counter small{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-family:'Inter',sans-serif;opacity:.7}
 
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;padding:1rem}
-.overlay.open{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);width:100%;max-width:480px}
-.modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;border-bottom:1px solid var(--border)}
-.modal-head h3{font-size:.9rem;font-weight:600}
-.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem}
-.modal-close:hover{color:var(--text)}
-.modal-body{padding:1.4rem}
-.modal-foot{display:flex;justify-content:flex-end;gap:.6rem;padding:.9rem 1.4rem;border-top:1px solid var(--border)}
+/* ── SPECTACLES ── */
+#spectacles{padding:10rem 0;background:var(--bg2)}
+.spectacles-inner{max-width:1300px;margin:0 auto;padding:0 3rem}
+.spectacles-head{text-align:center;margin-bottom:5rem}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.card{position:relative;overflow:hidden;cursor:pointer;background:var(--bg3)}
+.card-ph{width:100%;aspect-ratio:2/3;outline:1px solid rgba(201,168,76,0.45);outline-offset:-1px}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,16,.95) 0%,rgba(8,8,16,.3) 60%,transparent 100%);transition:all .4s}
+.card:hover .card-overlay{background:linear-gradient(to top,rgba(8,8,16,.98) 0%,rgba(8,8,16,.7) 60%,rgba(8,8,16,.2) 100%)}
+.card-body{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.8rem;transform:translateY(10px);transition:transform .4s}
+.card:hover .card-body{transform:translateY(0)}
+.card-tag{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.card-title{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.5rem;line-height:1.2}
+.card-desc{font-size:.8rem;color:var(--muted);line-height:1.6;max-height:0;overflow:hidden;transition:max-height .4s,opacity .4s;opacity:0}
+.card:hover .card-desc{max-height:100px;opacity:1}
+.card-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-top:.8rem;opacity:0;transition:opacity .4s;text-decoration:none}
+.card:hover .card-link{opacity:1}
+/* ── SPECTACLES GRID ── */
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.card.sp-hidden{display:none}
 
-/* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r);padding:.75rem 1.1rem;font-size:.8rem;z-index:999;transform:translateY(100px);opacity:0;transition:all .3s;max-width:280px}
-.toast.show{transform:translateY(0);opacity:1}
-.toast.err{border-left-color:#e05}
 
-/* CARD GRID for spectacles/books */
-.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.card-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem}
-.card-item h4{font-size:.75rem;color:var(--gold);margin-bottom:1rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.book-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+
+/* ── IMMERSIVE BAND ── */
+.band{position:relative;min-height:70vh;display:flex;align-items:center;overflow:hidden}
+.band-ph{position:absolute;inset:0}
+.band-ph img{width:100%;height:100%;object-fit:cover;opacity:.25}
+.band-grad{position:absolute;inset:0}
+.band-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:5rem 3rem;width:100%}
+.band-content.right{text-align:right;margin-left:auto}
+
+/* ── AUTEUR ── */
+#auteur{padding:5rem 0;background:var(--bg)}
+.auteur-inner{max-width:1200px;margin:0 auto;padding:0 3rem}
+.auteur-head{margin-bottom:2rem}
+.books-carousel-wrap{position:relative;display:flex;align-items:center;gap:.8rem}
+.books-track-outer{overflow:hidden;flex:1;min-width:0;position:relative}
+.books-track{display:flex;gap:12px;transition:transform .5s cubic-bezier(.4,0,.2,1);flex-wrap:nowrap}
+.book{flex-shrink:0;width:calc((100% - 48px) / 5)}
+.books-nav{flex-shrink:0;background:none;border:1px solid rgba(201,168,76,.3);color:var(--gold);width:38px;height:38px;cursor:pointer;font-size:1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;border-radius:1px}
+.books-nav:hover{background:rgba(201,168,76,.12);border-color:var(--gold)}
+.books-nav:disabled{opacity:.2;cursor:default}
+.books-dots{display:flex;gap:.4rem;justify-content:center;margin-top:1.5rem}
+.books-dots span{width:24px;height:2px;background:rgba(255,255,255,.15);cursor:pointer;transition:background .2s}
+.books-dots span.active{background:var(--gold)}
+.book{position:relative;cursor:pointer;transition:opacity .3s}
+.book:hover{opacity:.85}
+.book-ph{width:100%;aspect-ratio:2/3;outline:1px solid rgba(201,168,76,0.45);outline-offset:-1px}
+.book-spine{display:none}
+.book-title{margin-top:.8rem;font-size:.8rem;font-weight:500;line-height:1.3}
+.book-sub{font-size:.7rem;color:var(--muted)}
+
+/* ── FEATURED BOOK ── */
+.featured-book{display:none;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.featured-book.visible{display:flex;gap:4rem;align-items:center}
+.featured-book-cover{flex-shrink:0;width:200px}
+.featured-book-cover img{width:100%;aspect-ratio:2/3;object-fit:cover;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.featured-book-info{flex:1}
+.featured-book-label{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.featured-book-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;margin-bottom:.6rem}
+.featured-book-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.2rem;font-style:italic}
+.featured-book-desc{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px;margin-bottom:2rem}
+.featured-book-video{flex-shrink:0;width:320px;display:none}
+.featured-book-video.visible{display:block}
+.featured-book-video-frame{position:relative;width:100%;padding-bottom:56.25%;background:var(--bg3);border-radius:2px;overflow:hidden;outline:1px solid rgba(201,168,76,.2);outline-offset:-1px}
+.featured-book-video-frame iframe,.featured-book-video-frame video{position:absolute;top:0;left:0;width:100%;height:100%;border:0;object-fit:cover}
+@media(max-width:700px){.featured-book.visible{flex-direction:column;gap:2rem}.featured-book-cover{width:140px}.featured-book-video{width:100%}}
+/* ── AGENDA ── */
+/* ── VIDEOS ── */
+#videos{padding:10rem 0;background:var(--bg)}
+.videos-inner{max-width:1100px;margin:0 auto;padding:0 3rem}
+.videos-head{text-align:center;margin-bottom:4rem}
+.video-featured{margin-bottom:3rem}
+.video-embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:2px;outline:1px solid rgba(201,168,76,.2);outline-offset:-1px}
+.video-embed-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.video-featured-title{margin-top:1rem;font-size:1rem;font-weight:500;color:var(--text);text-align:center;opacity:.8}
+.video-strip{display:flex;gap:10px;overflow-x:auto;margin-top:1.5rem;padding-bottom:.8rem;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,.3) transparent}
+.video-strip::-webkit-scrollbar{height:3px}
+.video-strip::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:2px}
+.video-thumb{position:relative;cursor:pointer;flex-shrink:0;width:180px;aspect-ratio:16/9;overflow:hidden;border-radius:2px;outline:1px solid rgba(201,168,76,.15);outline-offset:-1px;background:var(--bg3);transition:outline-color .2s}
+.video-thumb.active{outline-color:var(--gold)}
+.video-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.video-thumb:hover img{transform:scale(1.05)}
+.video-thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);transition:background .2s}
+.video-thumb:hover .video-thumb-play,.video-thumb.active .video-thumb-play{background:rgba(0,0,0,.5)}
+.video-thumb-play::after{content:'▶';font-size:1.1rem;color:#fff;opacity:.9}
+.video-thumb-label{position:absolute;bottom:0;left:0;right:0;padding:.35rem .4rem;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:.6rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#agenda{padding:10rem 0;background:var(--bg2)}
+.agenda-inner{max-width:1000px;margin:0 auto;padding:0 3rem}
+.agenda-head{text-align:center;margin-bottom:4rem}
+#agenda-list{display:flex;flex-direction:column;gap:1px}
+.show-row{display:grid;grid-template-columns:80px auto 1fr auto;align-items:center;gap:2rem;padding:1.8rem 2rem;background:var(--bg3);transition:all .2s;border-left:2px solid transparent;position:relative;overflow:hidden}
+.show-img{width:56px;height:56px;object-fit:cover;border-radius:4px;outline:1px solid rgba(201,168,76,.35);outline-offset:-1px}
+.show-img-empty{width:56px;height:56px}
+.show-row::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(201,168,76,.04),transparent);opacity:0;transition:opacity .3s}
+.show-row:hover{border-left-color:var(--gold)}
+.show-row:hover::before{opacity:1}
+.show-date{text-align:center}
+.show-day{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);line-height:1;font-weight:700}
+.show-month{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+.show-title{font-size:.95rem;font-weight:500;margin-bottom:.3rem}
+.show-venue{font-size:.8rem;color:var(--muted)}
+.badge{display:inline-block;padding:.2rem .7rem;border-radius:20px;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.badge-av{background:rgba(50,180,100,.1);color:#3c8;border:1px solid rgba(50,180,100,.2)}
+.badge-so{background:rgba(200,60,60,.08);color:#c66;border:1px solid rgba(200,60,60,.15)}
+.agenda-empty{text-align:center;padding:4rem;color:var(--muted);font-size:.85rem}
+
+/* ── CONTACT ── */
+#contact{padding:10rem 0;background:var(--bg)}
+.contact-inner{max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start}
+.contact-quote{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:rgba(255,255,255,.35);line-height:1.5;margin-bottom:2rem;padding-left:1.5rem;border-left:2px solid var(--gold-d)}
+.contact-info{margin-top:2rem}
+.contact-info a{color:var(--gold);text-decoration:none;font-size:.9rem;display:block;margin-bottom:.8rem;transition:color .2s}
+.contact-info a:hover{color:var(--gold-l)}
+.contact-flags{display:flex;gap:.8rem;margin-top:1.5rem;font-size:1.4rem}
+form{display:flex;flex-direction:column;gap:0}
+.field{margin-bottom:1.2rem}
+.field label{display:block;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.field input,.field textarea,.field select{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;resize:none;border-radius:0}
+.field input:focus,.field textarea:focus{border-color:rgba(201,168,76,.4)}
+.field textarea{min-height:120px}
+.btn-send{background:var(--gold);color:var(--bg);border:none;padding:.85rem 2.5rem;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .2s;width:100%;margin-top:.5rem}
+.btn-send:hover{background:var(--gold-l)}
+.form-msg{font-size:.8rem;margin-top:.8rem;min-height:1.2em;text-align:center}
+.form-msg.ok{color:#3c8}.form-msg.err{color:#e05}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:4rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold)}
+.footer-logo small{display:block;font-size:.6rem;letter-spacing:.2em;color:var(--muted);font-family:'Inter',sans-serif;font-style:italic;text-transform:uppercase}
+footer p{font-size:.72rem;color:var(--muted)}
+.footer-admin{color:var(--muted);font-size:.65rem;text-decoration:none;transition:color .2s;margin-left:.3rem}
+.footer-admin:hover{color:var(--gold)}
+/* ── LANG SWITCH ── */
+.lang-switch{display:flex;gap:.2rem;align-items:center}
+.lang-switch button{background:none;border:none;cursor:pointer;font-size:1rem;opacity:.4;transition:opacity .2s;padding:.15rem .1rem;line-height:1}
+.lang-switch button:hover{opacity:.75}
+.lang-switch button.active{opacity:1}
+
+
+/* ── RESPONSIVE ── */
+/* ── HAMBURGER ── */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;background:none;border:none;cursor:pointer;padding:6px;z-index:201}
+.nav-burger span{display:block;width:28px;height:2px;background:var(--text);transition:all .3s;transform-origin:center}
+.nav-burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ── MOBILE MENU OVERLAY ── */
+.nav-mobile{display:none;position:fixed;inset:0;z-index:200;background:rgba(8,8,16,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;opacity:0;transition:opacity .3s}
+.nav-mobile.open{opacity:1}
+.nav-mobile a{color:rgba(255,255,255,.7);text-decoration:none;font-size:1.1rem;letter-spacing:.22em;text-transform:uppercase;transition:color .2s;font-weight:500}
+.nav-mobile a:hover{color:var(--gold)}
+.nav-mobile .nav-cta-m{margin-top:1.2rem;border:1px solid var(--gold);color:var(--gold)!important;padding:.9rem 3rem;letter-spacing:.18em;font-size:1rem}
+.nav-mobile .lang-m{display:flex;gap:1.2rem;margin-top:.8rem}
+.nav-mobile .lang-m button{background:none;border:none;font-size:1.8rem;cursor:pointer;opacity:.7;transition:opacity .2s}
+.nav-mobile .lang-m button:hover{opacity:1}
+
+@media(max-width:900px){
+  /* Nav */
+  #nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .nav-cta{display:none}
+
+  /* Hero */
+  .hero-inner{flex-direction:column-reverse;gap:2rem}
+  .hero-portrait{width:180px}
+  .hero-content{text-align:center}
+  .hero-tag{justify-content:center}
+  .hero-btns{justify-content:center}
+  .hero-intro{margin:0 auto 2rem}
+
+  /* Textes centrés sur mobile */
+  h2,.lead,p.body,.contact-quote,.artiste-counter{text-align:center}
+  .btn-primary,.btn-ghost{display:block;text-align:center}
+  .hero-awards{justify-content:center}
+
+  /* Ancres : espace sous la nav fixe */
+  #artiste,#spectacles,#animations,#conferences,#auteur,#videos,#agenda,#contact{scroll-margin-top:70px}
+
+  /* Sections padding */
+  #artiste,#spectacles,#videos,#agenda,#contact{padding:5rem 0 !important}
+  #auteur{padding:3rem 0 !important}
+
+  /* Inner padding */
+  .artiste-inner,.spectacles-inner,.auteur-inner,.agenda-inner,
+  .videos-inner,.contact-inner,.band-content{padding:0 1.5rem !important}
+
+  /* Artiste */
+  .artiste-inner{grid-template-columns:1fr;gap:3rem}
+  .artiste-counter{bottom:1rem;right:1rem}
+
+  /* Spectacles */
+  .cards-grid{grid-template-columns:1fr 1fr}
+  .spec-grid{grid-template-columns:1fr 1fr !important}
+
+  /* Animations & Conférences (inline styles → !important) */
+  #animations > div, #conferences > div{
+    grid-template-columns:1fr !important;
+    gap:3rem !important;
+    padding:3rem 1.5rem !important;
+    width:100%
+  }
+  #animations > div > .reveal-right{order:-1}
+  #conferences > div > .reveal-left{order:-1}
+
+  /* Contact */
+  .contact-inner{grid-template-columns:1fr;gap:3rem}
+
+  /* Agenda */
+  .show-row{grid-template-columns:70px 44px 1fr;grid-template-rows:auto auto;gap:1rem;padding:1.2rem 1rem}
+  .show-status{grid-column:3}
+  .show-img,.show-img-empty{width:44px;height:44px}
+
+  /* Band */
+  .band{min-height:50vh}
+
+  /* Featured book masqué sur mobile */
+  .featured-book.visible{display:none !important}
+
+  /* Carrousel : touch scroll natif */
+  .books-track-outer{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .books-track-outer::-webkit-scrollbar{display:none}
+  .books-track{flex-wrap:nowrap}
+  .book{scroll-snap-align:start;width:45vw !important;flex-shrink:0 !important}
+  .books-nav{display:none !important}
+  .books-dots{display:none}
+
+  /* Sections — cadre mobile */
+  #artiste,#spectacles,#animations,#conferences,#auteur,#videos,#agenda,#contact{
+    margin:.8rem;
+    border:1px solid rgba(201,168,76,.2);
+    border-radius:2px;
+    overflow:hidden
+  }
+  #contact .field input,#contact .field textarea,#contact .field select{
+    max-width:100%;width:100%;
+    border:1px solid rgba(201,168,76,.5);
+    background:rgba(255,255,255,.07);
+  }
+
+  /* Label déplacé en haut par JS */
+  section > .section-label{
+    display:flex !important;
+    justify-content:center;
+    text-align:center;
+    width:100%;
+    padding:1rem 1.5rem !important;
+    margin:0 !important;
+    background:rgba(201,168,76,.08);
+    border-bottom:1px solid rgba(201,168,76,.2);
+    font-size:.88rem;
+    letter-spacing:.42em;
+  }
+  section > .section-label::before{display:none}
+  /* Animations/Conferences: colonne pour que label soit en premier */
+  #animations,#conferences{flex-direction:column !important;justify-content:flex-start !important;align-items:stretch !important}
+
+  /* Footer */
+  footer{flex-direction:column;gap:1.5rem;text-align:center;padding:3rem 1.5rem}
+}
+
+@media(max-width:600px){
+  /* Grilles → 1 colonne */
+  .cards-grid,.spec-grid{grid-template-columns:1fr !important}
+  .artiste-inner{padding:0 1.5rem}
+
+  /* Typography */
+  h2{font-size:clamp(1.8rem,7vw,2.5rem)}
+  .lead{font-size:1.05rem}
+  .hero-h1{font-size:clamp(2.5rem,10vw,4rem)}
+
+  /* Animations/Conferences inner padding */
+  #animations > div, #conferences > div{padding:2rem 1rem !important}
+
+  /* Featured book */
+  .featured-book.visible{flex-direction:column;gap:2rem}
+  .featured-book-cover{width:140px}
+}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-wrap" id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">Carlos Vaquera</div>
-    <div class="login-sub">Administration</div>
-    <input type="password" id="pw-input" placeholder="Mot de passe" autocomplete="current-password">
-    <button onclick="login()">Connexion</button>
-    <p class="login-error" id="login-error"></p>
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Carlos Vaquera <span>Your illusions are my reality</span></a>
+  <ul class="nav-links">
+    <li><a href="#artiste" data-i18n="nav_artiste">L'Artiste</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="#spectacles" data-i18n="nav_spectacles">Spectacles</a></li>
+    <li><a href="#animations" data-i18n="nav_animations">Animations</a></li>
+    <li><a href="#conferences" data-i18n="nav_conferences">Conférences</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="#auteur" data-i18n="nav_auteur">L'Auteur</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="#videos" data-i18n="nav_videos">Vidéos</a></li>
+    <li><a href="#agenda" data-i18n="nav_agenda">Agenda</a></li>
+    <li class="nav-sep"></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="lang-switch" id="lang-switch">
+    <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
+    <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
+    <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MENU MOBILE -->
+<div class="nav-mobile" id="nav-mobile">
+  <a href="#artiste" data-i18n="nav_artiste" onclick="closeMobileMenu()">L'Artiste</a>
+  <a href="#spectacles" data-i18n="nav_spectacles" onclick="closeMobileMenu()">Spectacles</a>
+  <a href="#animations" data-i18n="nav_animations" onclick="closeMobileMenu()">Animations</a>
+  <a href="#conferences" data-i18n="nav_conferences" onclick="closeMobileMenu()">Conférences</a>
+  <a href="#auteur" data-i18n="nav_auteur" onclick="closeMobileMenu()">L'Auteur</a>
+  <a href="#videos" data-i18n="nav_videos" onclick="closeMobileMenu()">Vidéos</a>
+  <a href="#agenda" data-i18n="nav_agenda" onclick="closeMobileMenu()">Agenda</a>
+  <a href="#contact" data-i18n="nav_contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="#contact" class="nav-cta-m" data-i18n="nav_reserver" onclick="closeMobileMenu()">Réserver</a>
+  <div class="lang-m">
+    <button onclick="setLang('fr');closeMobileMenu()" title="Français">🇫🇷</button>
+    <button onclick="setLang('en');closeMobileMenu()" title="English">🇬🇧</button>
+    <button onclick="setLang('es');closeMobileMenu()" title="Español">🇪🇸</button>
   </div>
 </div>
 
-<!-- DASHBOARD -->
-<div class="layout" id="dashboard" style="display:none">
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <span>Carlos Vaquera</span>
-      <small>Administration</small>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="/uploads/carlos-vaquera.png" alt="Carlos Vaquera" class="hero-img" id="hero-img-bg">
+    <div class="hero-overlay"></div>
+    <div class="hero-overlay2"></div>
+    <!-- Cadre décoratif or -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="none"
+         style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3">
+      <defs>
+        <linearGradient id="gold-frame" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#8f681c"/>
+          <stop offset="0.28" stop-color="#d7b85a"/>
+          <stop offset="0.52" stop-color="#f1dc91"/>
+          <stop offset="0.76" stop-color="#c69b37"/>
+          <stop offset="1" stop-color="#745015"/>
+        </linearGradient>
+        <filter id="glow-frame" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="1.4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect x="22" y="22" width="1556" height="856" rx="5"
+            fill="none" stroke="url(#gold-frame)" stroke-width="1.2"
+            vector-effect="non-scaling-stroke" opacity="0.72"/>
+      <g fill="none" stroke="url(#gold-frame)" stroke-width="0.75"
+         vector-effect="non-scaling-stroke" opacity="0.42">
+        <path d="M42 112V42H172 M1428 42H1558V112"/>
+        <path d="M42 788V858H172 M1428 858H1558V788"/>
+      </g>
+      <g fill="none" stroke="url(#gold-frame)" stroke-linecap="square"
+         stroke-linejoin="miter" vector-effect="non-scaling-stroke" filter="url(#glow-frame)">
+        <path d="M22 128V22H128 M22 76L76 22" stroke-width="2"/>
+        <path d="M1472 22H1578V128 M1524 22L1578 76" stroke-width="2"/>
+        <path d="M22 772V878H128 M22 824L76 878" stroke-width="2"/>
+        <path d="M1472 878H1578V772 M1524 878L1578 824" stroke-width="2"/>
+      </g>
+      <g fill="url(#gold-frame)" opacity="0.9">
+        <path d="M746 22h36l18 7 18-7h36l-28 2-26 12-26-12z"/>
+        <path d="M746 878h36l18-7 18 7h36l-28-2-26-12-26 12z"/>
+        <path d="M22 396v36l7 18-7 18v36l2-28 12-26-12-26z"/>
+        <path d="M1578 396v36l-7 18 7 18v36l-2-28-12-26 12-26z"/>
+      </g>
+    </svg>
+  </div>
+  <canvas id="particles"></canvas>
+  <div class="hero-inner">
+  <div class="hero-portrait" id="hero-portrait">
+    <img class="hero-portrait-img" id="hero-portrait-img" src="" alt="Carlos Vaquera">
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag" data-i18n="hero_subtitle">Magicien · Mentaliste · Conférencier</div>
+    <h1 class="hero-h1">Carlos<br><em>Vaquera</em></h1>
+    <p class="hero-tagline" data-i18n="hero_tagline">« Your illusions are my reality »</p>
+    <p class="hero-intro" data-i18n="hero_intro">Créateur d'illusions et explorateur de l'esprit — un univers où la frontière entre le réel et l'imaginaire s'efface.</p>
+    <div class="hero-awards">
+      <div class="hero-award"><span class="award-icon">🏆</span><span>Mandrake d'Or</span></div>
+      <div class="hero-award-sep">·</div>
+      <div class="hero-award"><span class="award-icon">🥇</span><span>Champion d'Europe Close-Up</span></div>
+      <div class="hero-award-sep">·</div>
+      <div class="hero-award"><span class="award-icon">🎖️</span><span>Prix Las Vegas Close-Up Magic</span></div>
     </div>
-    <nav class="side-nav" id="side-nav">
-      <a onclick="showTab('hero')" data-tab="hero" class="active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Accueil
-      </a>
-      <a onclick="showTab('artiste')" data-tab="artiste">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>L'Artiste
-      </a>
-      <a onclick="showTab('spectacles')" data-tab="spectacles">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>Spectacles
-      </a>
-      <a onclick="showTab('animations')" data-tab="animations">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Animations
-      </a>
-      <a onclick="showTab('conferences')" data-tab="conferences">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Conférences
-      </a>
-      <a onclick="showTab('auteur')" data-tab="auteur">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>L'Auteur
-      </a>
-      <a onclick="showTab('videos')" data-tab="videos">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Vidéos
-      </a>
-      <a onclick="showTab('agenda')" data-tab="agenda">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Agenda
-      </a>
-      <a onclick="showTab('contact')" data-tab="contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Contact
-      </a>
-    </nav>
-    <div class="sidebar-foot">
-      <a href="/" >← Site</a>
-      <a onclick="logout()">Déconnexion</a>
-    </div>
-  </aside>
-
-  <div class="main">
-    <div class="topbar">
-      <h1 id="topbar-title">Accueil</h1>
-      <div style="font-size:.72rem;color:var(--muted)">Les modifications sont sauvegardées en direct</div>
-    </div>
-    <div class="content" id="tab-content">
-      <div class="empty-state">Chargement…</div>
+    <div class="hero-btns">
+      <a href="#spectacles" class="btn-primary" data-i18n="hero_btn1">Découvrir les spectacles</a>
+      <a href="#artiste" class="btn-ghost" data-i18n="hero_btn2">L'univers de Carlos</a>
     </div>
   </div>
-</div>
+  </div><!-- /hero-inner -->
+  <div class="hero-scroll" data-i18n="hero_scroll">Défiler</div>
+</section>
 
-<!-- AGENDA MODAL -->
-<div class="overlay" id="agenda-modal">
-  <div class="modal">
-    <div class="modal-head">
-      <h3 id="modal-title">Ajouter une date</h3>
-      <button class="modal-close" onclick="closeAgendaModal()">✕</button>
+<!-- L'ARTISTE -->
+<section id="artiste">
+  <div class="artiste-inner">
+    <div class="artiste-img-wrap reveal-left">
+      <div class="artiste-ph ph" style="aspect-ratio:3/4" id="artiste-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        Photo de Carlos
+      </div>
+      <div class="artiste-frame"></div>
+      <div class="artiste-counter reveal">
+        <span>30+</span>
+        <small>ans de magie</small>
+      </div>
     </div>
-    <div class="modal-body">
-      <input type="hidden" id="edit-id">
-      <div class="field">
-        <label>Date</label>
-        <input type="date" id="f-date" style="width:100%;padding:.55rem .8rem;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:.9rem;color-scheme:dark" onchange="syncDateFields(this.value)">
-        <input type="hidden" id="f-day">
-        <input type="hidden" id="f-month">
+    <div class="artiste-text reveal-right">
+      <div class="section-label" data-i18n="section_artiste">L'Artiste</div>
+      <h2>Créateur<br><em style="font-style:italic;color:var(--gold)">d'émotions</em></h2>
+      <p class="lead">Carlos Vaquera est un prestidigitateur de renommée internationale qui conjugue magie et poésie, mime et comique, illusionnisme et mentalisme.</p>
+      <p class="body">Lauréat du championnat d'Europe de magie de close-up à Londres, du premier Prix de « Close-up Magic » à Las Vegas, et du prestigieux <strong>Mandrake d'Or</strong> — l'équivalent du César dans le monde de la magie —, Carlos compte parmi les plus grands illusionnistes de sa génération.</p>
+      <p class="body">Il a eu l'immense privilège de se produire pour la Famille Princière de Monaco, la Famille Royale de Belgique, le Président français Jacques Chirac à l'Élysée, et le ministre des Finances chinois à Hong-Kong.</p>
+      <p class="body">À l'origine de quatre one-man shows — dont son dernier spectacle <em>« RIEN »</em> —, il transmet également sa philosophie de vie à travers ses douze ouvrages publiés.</p>
+      <div style="margin-top:2rem;display:flex;gap:3rem">
+        <div><div class="stat-val" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold)">3</div><div class="stat-lbl" style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Langues</div></div>
+        <div><div class="stat-val" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold)">12+</div><div class="stat-lbl" style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Livres publiés</div></div>
+        <div><div class="stat-val" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold)">EU</div><div class="stat-lbl" style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">International</div></div>
       </div>
-      <div class="field"><label>Titre</label><input type="text" id="f-title" placeholder="Grand Gala de Magie"></div>
-      <div class="field"><label>Lieu</label><input type="text" id="f-venue" placeholder="Théâtre — Paris"></div>
-      <div class="field"><label>Statut</label>
-        <select id="f-status">
-          <option value="available">Disponible</option>
-          <option value="sold-out">Complet</option>
-        </select>
-      </div>
-      <div class="field"><label>Image du spectacle</label>
-        <div style="display:flex;align-items:center;gap:1rem;margin-top:.4rem">
-          <img id="f-img-preview" src="" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid rgba(201,168,76,.3);display:none">
-          <label style="cursor:pointer;padding:.5rem 1rem;border:1px solid rgba(201,168,76,.4);border-radius:4px;color:var(--gold);font-size:.85rem">
-            Choisir une image
-            <input type="file" id="f-img" accept="image/*" style="display:none" onchange="previewAgendaImg(this)">
-          </label>
-          <button type="button" onclick="clearAgendaImg()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem">Supprimer</button>
+    </div>
+  </div>
+</section>
+
+<!-- SPECTACLES -->
+<section id="spectacles">
+  <div class="spectacles-inner">
+    <div class="spectacles-head reveal">
+      <div class="section-label" style="justify-content:center" data-i18n="section_spectacles">Les Spectacles</div>
+      <h2 data-i18n="spectacles_h2">Des univers à explorer</h2>
+    </div>
+    <div class="spec-grid" id="spec-grid">
+      <div class="card sp-hidden" id="sp1-card">
+        <div class="card-ph ph" id="sp1-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp1-tag">One-man show</div>
+          <div class="card-title" id="sp1-title">Démons & Merveilles</div>
+          <div class="card-desc" id="sp1-desc"></div>
         </div>
-        <input type="hidden" id="f-img-b64">
+      </div>
+      <div class="card sp-hidden" id="sp2-card">
+        <div class="card-ph ph" id="sp2-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp2-tag">Mentalisme</div>
+          <div class="card-title" id="sp2-title">Imagienaire</div>
+          <div class="card-desc" id="sp2-desc"></div>
+        </div>
+      </div>
+      <div class="card sp-hidden" id="sp3-card">
+        <div class="card-ph ph" id="sp3-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp3-tag">Philosophie & Magie</div>
+          <div class="card-title" id="sp3-title">Le Mentaliste Philosophe</div>
+          <div class="card-desc" id="sp3-desc"></div>
+        </div>
+      </div>
+      <div class="card sp-hidden" id="sp4-card">
+        <div class="card-ph ph" id="sp4-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>Affiche du spectacle</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="card-tag" id="sp4-tag">Close-up</div>
+          <div class="card-title" id="sp4-title">Spectacle 4</div>
+          <div class="card-desc" id="sp4-desc"></div>
+        </div>
       </div>
     </div>
-    <div class="modal-foot">
-      <button class="btn btn-outline" onclick="closeAgendaModal()">Annuler</button>
-      <button class="btn btn-gold" onclick="saveAgenda()">Enregistrer</button>
+  </div>
+</section>
+
+<!-- ANIMATIONS -->
+<section id="animations" style="min-height:100vh;display:flex;align-items:center;background:var(--bg3)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center">
+    <div class="reveal-left">
+      <div class="section-label">Animations</div>
+      <h2 id="anim-title">Close-Up &amp;<br><em style="font-style:italic;color:var(--gold)">Corporate</em></h2>
+      <p id="anim-lead" class="lead">Des prestations d'illusionnisme et de mentalisme subtiles et intelligentes, présentées à proximité immédiate des invités.</p>
+      <p id="anim-body" class="body">De table en table ou de groupe en groupe, Carlos crée des moments de stupéfaction et de complicité. Un souvenir mémorable pour vos événements d'entreprise, galas et soirées privées.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:2rem;display:inline-block">Organiser une animation</a>
+    </div>
+    <div class="reveal-right" style="position:relative">
+      <div id="anim-bg" class="ph" style="width:100%;aspect-ratio:4/3;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        Photo d'animation close-up
+      </div>
+      <div style="position:absolute;top:-15px;right:-15px;left:15px;bottom:15px;border:1px solid var(--gold);opacity:.15;pointer-events:none"></div>
     </div>
   </div>
+</section>
+
+<!-- SÉPARATEUR -->
+<div style="padding:3rem 0;background:var(--bg2);display:flex;align-items:center;justify-content:center">
+  <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent)"></div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- CONFÉRENCES -->
+<section id="conferences" style="min-height:100vh;display:flex;align-items:center;background:var(--bg2)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center">
+    <div class="reveal-left" style="position:relative">
+      <div id="conf-bg" class="ph" style="width:100%;aspect-ratio:4/3;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        Photo de conférence
+      </div>
+      <div style="position:absolute;top:-15px;left:-15px;right:15px;bottom:15px;border:1px solid var(--gold);opacity:.15;pointer-events:none"></div>
+    </div>
+    <div class="reveal-right">
+      <div class="section-label">Conférences-Spectacles</div>
+      <h2 id="conf-title">Mettez de la magie<br><em style="font-style:italic;color:var(--gold)">dans votre communication</em></h2>
+      <p id="conf-lead" class="lead">Depuis 2009, Carlos séduit les entreprises avec ses conférences-spectacles alliant magie, mentalisme et messages percutants.</p>
+      <p id="conf-body" class="body">ING, Euroclear, BNP Paribas Fortis, Air Liquide, GSK, TEDx… Des centaines d'entreprises en Belgique, France, Russie et Hong-Kong lui ont fait confiance.</p>
+      <a href="#contact" class="btn-primary" style="margin-top:2rem;display:inline-block">Discuter de votre projet</a>
+    </div>
+  </div>
+</section>
+<!-- L'AUTEUR -->
+<section id="auteur">
+  <div class="auteur-inner">
+    <div class="auteur-head reveal">
+      <div class="section-label" data-i18n="section_auteur">L'Auteur</div>
+      <h2 data-i18n="auteur_h2">Amoureux des mots</h2>
+      <p class="lead" style="max-width:600px" id="auteur-lead">Les mots nous permettent de mettre sur papier des émotions que nous transportons en nous depuis un long moment. Un livre, comme par magie, devient la plus courte distance entre deux sensibilités.</p>
+    </div>
+
+    <!-- Dernier livre en avant -->
+    <div class="featured-book reveal" id="featured-book">
+      <div class="featured-book-cover">
+        <img id="featured-book-img" src="" alt="Dernier livre de Carlos Vaquera">
+      </div>
+      <div class="featured-book-info">
+        <div class="featured-book-label">Dernière publication</div>
+        <div class="featured-book-title" id="featured-book-title"></div>
+        <div class="featured-book-sub" id="featured-book-sub"></div>
+        <div class="featured-book-desc" id="featured-book-desc"></div>
+        <a id="featured-book-link" href="#" class="btn-primary" style="display:none">Commander →</a>
+      </div>
+      <div class="featured-book-video" id="featured-book-video">
+        <div class="featured-book-video-frame" id="featured-book-video-frame"></div>
+      </div>
+    </div>
+
+    <div class="books-carousel-wrap">
+      <button class="books-nav" id="books-prev" onclick="booksCarousel(-1)">&#8592;</button>
+      <div class="books-track-outer">
+        <div class="books-track" id="books-track">
+      <div class="book" style="transition-delay:0.00s">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book1-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book1-title">Livre 1</div>
+        <div class="book-sub" id="book1-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book" style="transition-delay:0.08s">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book2-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book2-title">Livre 2</div>
+        <div class="book-sub" id="book2-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book" style="transition-delay:0.16s">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book3-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book3-title">Livre 3</div>
+        <div class="book-sub" id="book3-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book" style="transition-delay:0.24s">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book4-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book4-title">Livre 4</div>
+        <div class="book-sub" id="book4-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book" style="transition-delay:0.32s">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book5-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book5-title">Livre 5</div>
+        <div class="book-sub" id="book5-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book6-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book6-title">Livre 6</div>
+        <div class="book-sub" id="book6-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book7-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book7-title">Livre 7</div>
+        <div class="book-sub" id="book7-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book8-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book8-title">Livre 8</div>
+        <div class="book-sub" id="book8-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book9-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book9-title">Livre 9</div>
+        <div class="book-sub" id="book9-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book10-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book10-title">Livre 10</div>
+        <div class="book-sub" id="book10-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book11-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book11-title">Livre 11</div>
+        <div class="book-sub" id="book11-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book12-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book12-title">Livre 12</div>
+        <div class="book-sub" id="book12-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book13-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book13-title">Livre 13</div>
+        <div class="book-sub" id="book13-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book14-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book14-title">Livre 14</div>
+        <div class="book-sub" id="book14-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book15-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book15-title">Livre 15</div>
+        <div class="book-sub" id="book15-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book16-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book16-title">Livre 16</div>
+        <div class="book-sub" id="book16-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book17-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book17-title">Livre 17</div>
+        <div class="book-sub" id="book17-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book18-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book18-title">Livre 18</div>
+        <div class="book-sub" id="book18-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book19-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book19-title">Livre 19</div>
+        <div class="book-sub" id="book19-sub">Carlos Vaquera</div>
+      </div>
+      <div class="book">
+        <div class="book-ph ph" style="aspect-ratio:2/3" id="book20-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Œuvre à venir
+        </div>
+        <div class="book-title" id="book20-title">Livre 20</div>
+        <div class="book-sub" id="book20-sub">Carlos Vaquera</div>
+      </div>
+        </div>
+      </div>
+      <button class="books-nav" id="books-next" onclick="booksCarousel(1)">&#8594;</button>
+    </div>
+    <div class="books-dots" id="books-dots"><span onclick="booksGoTo(0)" data-dot="0"></span><span onclick="booksGoTo(1)" data-dot="1"></span><span onclick="booksGoTo(2)" data-dot="2"></span><span onclick="booksGoTo(3)" data-dot="3"></span></div>
+  </div>
+</section>
+
+<!-- VIDÉOS -->
+<section id="videos">
+  <div class="videos-inner">
+    <div class="videos-head reveal">
+      <div class="section-label" style="justify-content:center" data-i18n="section_videos">Vidéos</div>
+      <h2 data-i18n="videos_h2">Carlos en action</h2>
+    </div>
+    <!-- Featured video -->
+    <div class="video-featured" id="video-featured" style="display:none">
+      <div class="video-embed-wrap" id="video-featured-wrap"></div>
+      <div class="video-featured-title" id="video-featured-title"></div>
+    </div>
+    <!-- Strip -->
+    <div class="video-strip" id="video-grid"></div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda">
+  <div class="agenda-inner">
+    <div class="agenda-head reveal">
+      <div class="section-label" style="justify-content:center" data-i18n="section_agenda">Prochaines dates</div>
+      <h2 data-i18n="agenda_h2">Agenda des spectacles</h2>
+    </div>
+    <div id="agenda-list"><div class="agenda-empty">Chargement…</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal-left">
+      <div class="section-label" data-i18n="section_contact">Contact</div>
+      <h2 data-i18n="contact_h2">Parlons de<br>votre événement</h2>
+      <blockquote class="contact-quote" id="contact-quote">"L'illusion est une vérité qui se donne en spectacle pour mieux réveiller notre émerveillement."</blockquote>
+      <div class="contact-info">
+        <a id="contact-email" href="mailto:carlosvaquera@carlosvaquera.com?subject=Demande%20d'infos%20depuis%20le%20site">✉ carlosvaquera@carlosvaquera.com</a>
+      </div>
+      <div class="contact-flags">🇫🇷 🇬🇧 🇪🇸</div>
+    </div>
+    <div class="reveal-right">
+      <form id="contact-form" action="/api/contact" method="POST">
+        <div class="field"><label data-i18n="form_name">Votre nom</label><input type="text" name="name" required placeholder="Prénom Nom" data-i18n-placeholder="form_placeholder_name"></div>
+        <div class="field"><label data-i18n="form_email">E-mail</label><input type="email" name="email" required placeholder="vous@exemple.com" data-i18n-placeholder="form_placeholder_email"></div>
+        <div class="field">
+          <label data-i18n="form_type">Type de prestation</label>
+          <select name="prestation">
+            <option value="" data-i18n="form_type_opt0">— Choisir —</option>
+            <option data-i18n="form_type_opt1">Spectacle one-man show</option>
+            <option data-i18n="form_type_opt2">Animation close-up / corporate</option>
+            <option data-i18n="form_type_opt3">Conférence-spectacle</option>
+            <option data-i18n="form_type_opt4">Soirée privée</option>
+            <option data-i18n="form_type_opt5">Autre</option>
+          </select>
+        </div>
+        <div class="field"><label data-i18n="form_message">Message</label><textarea name="message" required placeholder="Décrivez votre événement, la date souhaitée, le lieu…" data-i18n-placeholder="form_placeholder_message"></textarea></div>
+        <button type="submit" class="btn-send" data-i18n="form_send">Envoyer le message</button>
+        <p class="form-msg" id="form-msg"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Carlos Vaquera <small><span data-i18n="footer_sub">Magicien · Mentaliste · Conférencier</span><a href="/admin" class="footer-admin">*</a></small></div>
+  <p>© <span id="yr"></span> Carlos Vaquera. <span data-i18n="footer_rights">Tous droits réservés</span>.</p>
+</footer>
 
 <script>
-let TOKEN = localStorage.getItem('cv_token');
-let CONTENT = {};
+// ── FLYING CARDS ──────────────────────────────
+(function(){
+  const canvas=document.getElementById('particles');
+  const ctx=canvas.getContext('2d');
+  let W,H,scrollY=0,cards=[];
 
-if (TOKEN) initDashboard();
+  const SUITS=['♠','♥','♦','♣'];
+  const VALS=['A','K','Q','J','10','9','7','2'];
 
-document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  window.addEventListener('scroll',()=>{scrollY=window.scrollY;},{ passive:true });
 
-async function login() {
-  const pw = document.getElementById('pw-input').value;
-  const r = await fetch('/api/auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: pw }) });
-  const j = await r.json();
-  if (j.error) { document.getElementById('login-error').textContent = j.error; return; }
-  TOKEN = j.token;
-  localStorage.setItem('cv_token', TOKEN);
-  initDashboard();
-}
-
-function logout() {
-  localStorage.removeItem('cv_token');
-  TOKEN = null;
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
-}
-
-async function initDashboard() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'flex';
-  // Load existing content
-  try {
-    const r = await fetch('/api/content');
-    CONTENT = await r.json();
-  } catch(e) { CONTENT = {}; }
-  showTab('hero');
-}
-
-// ── TABS ─────────────────────────────────────────────────────────
-const TAB_TITLES = { hero:'Accueil', artiste:"L'Artiste", spectacles:'Spectacles', animations:'Animations', conferences:'Conférences', auteur:"L'Auteur", videos:'Vidéos', agenda:'Agenda', contact:'Contact' };
-
-function showTab(tab) {
-  document.querySelectorAll('.side-nav a').forEach(a => a.classList.toggle('active', a.dataset.tab === tab));
-  document.getElementById('topbar-title').textContent = TAB_TITLES[tab];
-  const fn = { hero: renderHero, artiste: renderArtiste, spectacles: renderSpectacles, animations: renderAnimations, conferences: renderConferences, auteur: renderAuteur, videos: renderVideos, agenda: renderAgenda, contact: renderContact };
-  fn[tab]?.();
-}
-
-// ── HELPERS ──────────────────────────────────────────────────────
-function c(key, fallback = '') { return CONTENT[key] || fallback; }
-
-function toggleHtml(label, key, fallback = 'true') {
-  const val = c(key, fallback);
-  const on = val !== 'false';
-  return `<div class="field" style="display:flex;align-items:center;gap:1rem">
-    <label style="margin:0">${label}</label>
-    <button type="button" onclick="cvToggle(this)" data-key="${key}" data-toggle="true" data-val="${on?'true':'false'}"
-      style="position:relative;width:48px;height:26px;border-radius:26px;border:none;cursor:pointer;transition:background .3s;background:${on?'#c9a84c':'#555'}">
-      <span style="position:absolute;top:3px;left:${on?'23':'3'}px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .3s;display:block"></span>
-    </button>
-    <span style="font-size:.8rem;color:#aaa" id="lbl-${key}">${on?'Visible':'Masqué'}</span>
-  </div>`;
-}
-function cvToggle(btn) {
-  const on = btn.dataset.val !== 'true';
-  btn.dataset.val = on ? 'true' : 'false';
-  btn.style.background = on ? '#c9a84c' : '#555';
-  btn.querySelector('span').style.left = on ? '23px' : '3px';
-  const lbl = document.getElementById('lbl-' + btn.dataset.key);
-  if(lbl) lbl.textContent = on ? 'Visible' : 'Masqué';
-}
-
-function fieldHtml(label, key, fallback = '', type = 'input') {
-  const val = c(key, fallback).replace(/"/g, '&quot;');
-  if (type === 'textarea') return `<div class="field"><label>${label}</label><textarea data-key="${key}">${c(key, fallback)}</textarea></div>`;
-  return `<div class="field"><label>${label}</label><input type="text" data-key="${key}" value="${val}"></div>`;
-}
-
-function imgHtml(label, key) {
-  return `<div class="field"><label>${label}</label>
-    <div class="img-upload" id="upload-${key}">
-      <input type="file" accept="image/*" onchange="uploadImg(event,'${key}')">
-      <img class="img-preview" id="prev-${key}" src="/api/upload?key=${key}&t=${Date.now()}" onerror="this.style.display='none'" onload="this.style.display='block'">
-      <p>📷 <strong>Cliquez ou glissez</strong> une image<br><span style="font-size:.65rem;opacity:.5">JPG, PNG — max 2 Mo</span></p>
-    </div>
-    <div style="margin-top:.4rem">
-      <button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem" onclick="deleteImg('${key}')">🗑 Supprimer l'image</button>
-    </div>
-    <div class="img-status" id="status-${key}"></div>
-  </div>`;
-}
-
-function videoHtml(label, key, loopKey) {
-  const url = `/api/upload?key=${key}&t=${Date.now()}`;
-  const loopChecked = loopKey && c(loopKey,'0')==='1' ? 'checked' : '';
-  const loopField = loopKey ? `<div class="field" style="margin-top:-.5rem">
-    <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.82rem">
-      <input type="checkbox" data-key="${loopKey}" data-checkbox="true" ${loopChecked} style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer">
-      Lecture en boucle
-    </label>
-  </div>` : '';
-  return `<div class="field"><label>${label}</label>
-    <div class="img-upload" id="upload-${key}" style="padding:1.5rem;min-height:90px">
-      <input type="file" accept="video/*" onchange="uploadVideo(event,'${key}')">
-      <video id="prev-video-${key}" src="${url}" controls style="width:100%;max-height:180px;display:none;margin-bottom:.8rem;border-radius:4px" onloadeddata="this.style.display='block'" onerror="this.style.display='none'"></video>
-      <p>🎬 <strong>Cliquez ou glissez</strong> une vidéo<br><span style="font-size:.65rem;opacity:.5">MP4 — max 3 Mo. Remplace l'image sur le site.</span></p>
-    </div>
-    <div style="margin-top:.4rem">
-      <button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem" onclick="deleteVideo('${key}')">🗑 Supprimer la vidéo</button>
-    </div>
-    <div class="img-status" id="status-${key}"></div>
-  </div>${loopField}`;
-}
-
-function saveBar(section) {
-  return `<div class="save-bar">
-    <button class="btn btn-gold" onclick="saveSection('${section}')">💾 Enregistrer ${TAB_TITLES[section]}</button>
-    <div class="save-msg" id="msg-${section}"></div>
-  </div>`;
-}
-
-async function saveSection(section) {
-  const container = document.getElementById('tab-content');
-  const inputs = container.querySelectorAll('[data-key]');
-  const updates = Array.from(inputs).map(el => ({ key: el.dataset.key, value: el.dataset.toggle ? el.dataset.val : el.dataset.checkbox ? (el.checked ? '1' : '0') : el.value }));
-  const msg = document.getElementById('msg-' + section);
-  msg.textContent = 'Sauvegarde…';
-  try {
-    const r = await fetch('/api/content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
-      body: JSON.stringify({ updates })
-    });
-    if (r.status === 401) { logout(); return; }
-    CONTENT = await r.json();
-    msg.textContent = '✓ Sauvegardé';
-    msg.className = 'save-msg';
-    toast('Section sauvegardée ✓');
-    setTimeout(() => msg.textContent = '', 3000);
-  } catch {
-    msg.textContent = 'Erreur';
-    msg.className = 'save-msg err';
-  }
-}
-
-async function deleteImg(key) {
-  if (!confirm('Supprimer cette image ?')) return;
-  try {
-    const r = await fetch('/api/delete-img', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
-      body: JSON.stringify({ key })
-    });
-    if (r.status === 401) { logout(); return; }
-    const j = await r.json().catch(() => ({}));
-    if (!r.ok) { toast('Erreur ' + r.status + ' : ' + (j.error || '?'), true); return; }
-    if (!j.success) { toast('Erreur : ' + (j.error || 'inconnue'), true); return; }
-    const prev = document.getElementById('prev-' + key);
-    if (prev) { prev.src = ''; prev.style.display = 'none'; }
-    toast('Image supprimée ✓');
-  } catch(e) {
-    toast('Erreur réseau : ' + e.message, true);
-  }
-}
-
-function compressImage(file, maxW, maxH, quality) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = new Image();
-      img.onload = () => {
-        let w = img.width, h = img.height;
-        if (w > maxW || h > maxH) {
-          const ratio = Math.min(maxW / w, maxH / h);
-          w = Math.round(w * ratio);
-          h = Math.round(h * ratio);
-        }
-        const canvas = document.createElement('canvas');
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        const dataUrl = canvas.toDataURL('image/jpeg', quality);
-        resolve({ dataUrl, mime_type: 'image/jpeg' });
-      };
-      img.src = e.target.result;
+  function mkCard(){
+    const suit=SUITS[Math.floor(Math.random()*4)];
+    const val=VALS[Math.floor(Math.random()*8)];
+    const red=suit==='♥'||suit==='♦';
+    const depth=Math.random()*0.7+0.15; // parallax layer 0.15..0.85
+    return{
+      x:Math.random()*W,
+      y:Math.random()*H,
+      vx:(Math.random()-0.5)*(0.3+depth*0.5),
+      vy:-(0.15+Math.random()*0.35)*(0.5+depth),
+      rot:Math.random()*Math.PI*2,
+      drot:(Math.random()-0.5)*0.012,
+      w:55+depth*40,
+      h:77+depth*56,
+      o:Math.random()*0.45+0.30,
+      suit,val,red,depth,
+      parallaxOff:0,
     };
-    reader.readAsDataURL(file);
+  }
+
+  for(let i=0;i<22;i++) cards.push(mkCard());
+
+  function drawCard(p){
+    const {x,y,rot,w,h,o,suit,val,red}=p;
+    ctx.save();
+    ctx.globalAlpha=o;
+    ctx.translate(x,y+p.parallaxOff);
+    ctx.rotate(rot);
+
+    // Card body
+    const r=4;
+    ctx.beginPath();
+    ctx.moveTo(-w/2+r,-h/2);
+    ctx.arcTo(w/2,-h/2,w/2,h/2,r);
+    ctx.arcTo(w/2,h/2,-w/2,h/2,r);
+    ctx.arcTo(-w/2,h/2,-w/2,-h/2,r);
+    ctx.arcTo(-w/2,-h/2,w/2,-h/2,r);
+    ctx.closePath();
+    ctx.fillStyle='rgba(255,255,255,0.25)';
+    ctx.fill();
+    ctx.strokeStyle=red?'rgba(220,60,60,0.6)':'rgba(201,168,76,0.6)';
+    ctx.lineWidth=1;
+    ctx.stroke();
+
+    // Suit + value
+    const fs=Math.round(w*0.36);
+    ctx.font=`bold ${fs}px serif`;
+    ctx.fillStyle=red?'rgba(230,80,80,0.95)':'rgba(215,185,90,0.95)';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(suit,0,h*0.1);
+    const fv=Math.round(w*0.28);
+    ctx.font=`bold ${fv}px serif`;
+    ctx.fillText(val,-w*0.28,-h*0.32);
+
+    ctx.restore();
+  }
+
+  let lastScroll=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const ds=scrollY-lastScroll; lastScroll=scrollY;
+    cards.forEach(p=>{
+      // parallax: deeper cards move more with scroll
+      p.parallaxOff= -scrollY * p.depth * 0.18;
+
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.drot;
+      if(p.y+p.h/2< -60) { p.y=H+60; p.x=Math.random()*W; }
+      if(p.x< -50) p.x=W+50;
+      if(p.x>W+50) p.x=-50;
+      drawCard(p);
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── NAV ──────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',scrollY>80);
+});
+
+// ── REVEAL ───────────────────────────────
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
+
+// ── YEAR ─────────────────────────────────
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+// ── MOBILE LABELS ────────────────────────
+if(window.innerWidth<=900){
+  ['artiste','spectacles','animations','conferences','auteur','agenda','contact'].forEach(function(id){
+    var sec=document.getElementById(id);
+    if(!sec)return;
+    var label=sec.querySelector('.section-label');
+    if(!label||label.parentNode===sec)return;
+    sec.insertBefore(label,sec.firstChild);
   });
 }
 
-async function uploadImg(event, key) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const status = document.getElementById('status-' + key);
-  status.textContent = 'Compression…';
-  // Compress to max 1600x1600, quality 0.82 — target < 1.5 Mo
-  const { dataUrl, mime_type } = await compressImage(file, 1600, 1600, 0.82);
-  const base64 = dataUrl.split(',')[1];
-  const kb = Math.round(base64.length * 0.75 / 1024);
-  status.textContent = `Upload en cours… (${kb} Ko)`;
-  try {
-    const r = await fetch('/api/upload', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
-      body: JSON.stringify({ key, data: base64, mime_type })
-    });
-    if (r.status === 401) { logout(); return; }
-    status.textContent = '✓ Image mise à jour';
-    const prev = document.getElementById('prev-' + key);
-    if (prev) { prev.src = `/api/upload?key=${key}&t=${Date.now()}`; prev.style.display = 'block'; }
-    toast('Image mise à jour ✓');
-    setTimeout(() => status.textContent = '', 3000);
-  } catch { status.textContent = 'Erreur upload'; }
+// ── MOBILE MENU ──────────────────────────
+function toggleMobileMenu(){
+  const burger=document.getElementById('nav-burger');
+  const menu=document.getElementById('nav-mobile');
+  const open=burger.classList.toggle('open');
+  if(open){menu.style.display='flex';requestAnimationFrame(()=>menu.classList.add('open'));document.body.style.overflow='hidden';}
+  else{closeMobileMenu();}
+}
+function closeMobileMenu(){
+  const burger=document.getElementById('nav-burger');
+  const menu=document.getElementById('nav-mobile');
+  burger.classList.remove('open');
+  menu.classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{if(!menu.classList.contains('open'))menu.style.display='none';},300);
 }
 
-async function uploadVideo(event, key) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const status = document.getElementById('status-' + key);
-  if (file.size > 3 * 1024 * 1024) {
-    status.textContent = '⚠️ Vidéo trop lourde — maximum 3 Mo (votre fichier : ' + Math.round(file.size/1024) + ' Ko)';
-    event.target.value = '';
-    return;
+// ── CONTENT ──────────────────────────────
+async function setVideoOrImg(id,videoKey,imgKey,loop){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const videoUrl=`/api/upload?key=${videoKey}&t=${Date.now()}`;
+  try{
+    const ctrl=new AbortController();
+    const r=await fetch(videoUrl,{signal:ctrl.signal});
+    const ct=r.headers.get('content-type')||'';
+    ctrl.abort();
+    if(r.ok&&ct.startsWith('video/')){
+      el.style.cssText=(el.style.cssText||'')+'background:none;border:none;';
+      el.innerHTML='';
+      const v=document.createElement('video');
+      v.src=`/api/upload?key=${videoKey}`;
+      v.autoplay=true;v.muted=true;v.controls=true;v.playsInline=true;v.loop=!!loop;
+      v.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
+      el.appendChild(v);
+      return;
+    }
+  }catch(e){}
+  setImg(id,imgKey);
+}
+
+function embedVideoUrl(url,opts){
+  if(!url)return null;
+  opts=opts||{};
+  const loop=!!opts.loop;
+  // YouTube
+  const ytm=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+  if(ytm){
+    let p='autoplay=1&mute=1&playsinline=1';
+    if(loop)p+=`&loop=1&playlist=${ytm[1]}`;
+    return`<iframe src="https://www.youtube.com/embed/${ytm[1]}?${p}" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
   }
-  status.textContent = 'Lecture…';
-  const reader = new FileReader();
-  reader.onload = async function(e) {
-    const base64 = e.target.result.split(',')[1];
-    const kb = Math.round(base64.length * 0.75 / 1024);
-    status.textContent = `Upload en cours… (${kb} Ko)`;
-    try {
-      const r = await fetch('/api/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
-        body: JSON.stringify({ key, data: base64, mime_type: file.type || 'video/mp4' })
-      });
-      if (r.status === 401) { logout(); return; }
-      status.textContent = '✓ Vidéo mise à jour';
-      const prev = document.getElementById('prev-video-' + key);
-      if (prev) { prev.src = `/api/upload?key=${key}&t=${Date.now()}`; prev.style.display = 'block'; }
-      toast('Vidéo mise à jour ✓');
-      setTimeout(() => status.textContent = '', 4000);
-    } catch { status.textContent = 'Erreur upload'; }
+  // Vimeo
+  const vim=url.match(/vimeo\.com\/(\d+)/);
+  if(vim){
+    let p='autoplay=1&muted=1&playsinline=1';
+    if(loop)p+='&loop=1';
+    return`<iframe src="https://player.vimeo.com/video/${vim[1]}?${p}" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
+  }
+  // Direct video
+  const loopAttr=loop?' loop':'';
+  return`<video src="${url}" autoplay muted playsinline controls${loopAttr} style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"></video>`;
+}
+
+function setImg(id,key){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const url=`/api/upload?key=${key}&t=${Date.now()}`;
+  const t=new Image();
+  t.onload=()=>{
+    if(el.tagName==='IMG'){
+      el.src=url;
+    }else{
+      el.style.backgroundImage=`url(${url})`;
+      el.style.backgroundSize='cover';
+      el.style.backgroundPosition='center';
+      el.style.border='none';
+      el.innerHTML='';
+    }
   };
-  reader.readAsDataURL(file);
+  t.onerror=()=>{};
+  t.src=url;
+}
+function setText(sel,val,html=false){
+  const el=document.querySelector(sel);
+  if(el&&val){if(html)el.innerHTML=val;else el.textContent=val;}
+}
+async function loadContent(){
+  try{
+    const r=await fetch('/api/content');
+    const c=await r.json();
+    // Hero
+    if(c.hero_title)document.querySelector('.hero-h1').innerHTML=c.hero_title;
+    setText('.hero-tagline',c.hero_tagline);
+    setText('.hero-tag',c.hero_subtitle);
+    if(c.hero_btn1)document.querySelectorAll('.btn-primary')[0]&&(document.querySelectorAll('.btn-primary')[0].textContent=c.hero_btn1);
+    if(c.hero_btn2)document.querySelectorAll('.btn-ghost')[0]&&(document.querySelectorAll('.btn-ghost')[0].textContent=c.hero_btn2);
+    setImg('hero-img-bg','hero_bg');
+    // Portrait hero optionnel
+    (function(){
+      const url='/api/upload?key=hero_portrait&t='+Date.now();
+      const t=new Image();
+      t.onload=function(){
+        const img=document.getElementById('hero-portrait-img');
+        const wrap=document.getElementById('hero-portrait');
+        if(img&&wrap){img.src=url;wrap.classList.add('visible');}
+      };
+      t.src=url;
+    })();
+    // Artiste
+    setText('#artiste h2',c.artiste_title,true);
+    setText('#artiste .lead',c.artiste_lead);
+    const bodies=document.querySelectorAll('#artiste .body');
+    if(c.artiste_body1&&bodies[0])bodies[0].textContent=c.artiste_body1;
+    if(c.artiste_body2&&bodies[1])bodies[1].textContent=c.artiste_body2;
+    if(c.artiste_body3&&bodies[2])bodies[2].textContent=c.artiste_body3;
+    const stats=document.querySelectorAll('.stat-val');
+    if(c.artiste_stat1&&stats[0])stats[0].textContent=c.artiste_stat1;
+    if(c.artiste_stat2&&stats[1])stats[1].textContent=c.artiste_stat2;
+    if(c.artiste_stat3&&stats[2])stats[2].textContent=c.artiste_stat3;
+    const statlbls=document.querySelectorAll('.stat-lbl');
+    if(c.artiste_stat1_label&&statlbls[0])statlbls[0].textContent=c.artiste_stat1_label;
+    if(c.artiste_stat2_label&&statlbls[1])statlbls[1].textContent=c.artiste_stat2_label;
+    if(c.artiste_stat3_label&&statlbls[2])statlbls[2].textContent=c.artiste_stat3_label;
+    setVideoOrImg('artiste-ph','artiste_video','artiste_img',c.artiste_video_loop==='1');
+    // Spectacles — grille fixe 4 slots, visible si image chargée
+    for(let i=1;i<=4;i++){
+      setText('#sp'+i+'-tag', c['sp'+i+'_tag']);
+      setText('#sp'+i+'-title', c['sp'+i+'_title']);
+      setText('#sp'+i+'-desc', c['sp'+i+'_desc']);
+      (function(idx){
+        const el=document.getElementById('sp'+idx+'-img');
+        const card=document.getElementById('sp'+idx+'-card');
+        if(!el)return;
+        const url='/api/upload?key=sp'+idx+'_img&t='+Date.now();
+        const img=new Image();
+        img.onload=function(){
+          el.style.backgroundImage='url('+url+')';
+          el.style.backgroundSize='cover';
+          el.style.backgroundPosition='center';
+          el.style.border='none';
+          el.innerHTML='';
+          if(card) card.classList.remove('sp-hidden');
+        };
+        img.src=url;
+      })(i);
+    }
+    // Animations
+    setText('#anim-title',c.anim_title);
+    setText('#anim-lead',c.anim_lead);
+    setText('#anim-body',c.anim_body);
+    setVideoOrImg('anim-bg','anim_video','anim_bg',c.anim_video_loop==='1');
+    // Conférences
+    setText('#conf-title',c.conf_title);
+    setText('#conf-lead',c.conf_lead);
+    setText('#conf-body',c.conf_body);
+    setVideoOrImg('conf-bg','conf_video','conf_bg',c.conf_video_loop==='1');
+    // Auteur
+    setText('#auteur-lead',c.auteur_lead);
+    for(let i=1;i<=20;i++){setText(`#book${i}-title`,c[`book${i}_title`]);setText(`#book${i}-sub`,c[`book${i}_sub`]);setImg(`book${i}-img`,`book${i}_img`);}
+    // Livre en avant
+    (function(){
+      const url='/api/upload?key=featured_book_img&t='+Date.now();
+      const t=new Image();
+      t.onload=function(){
+        const img=document.getElementById('featured-book-img');
+        const wrap=document.getElementById('featured-book');
+        if(img&&wrap){img.src=url;wrap.classList.add('visible');}
+        setText('#featured-book-title',c.featured_book_title);
+        setText('#featured-book-sub',c.featured_book_sub);
+        setText('#featured-book-desc',c.featured_book_desc);
+        const link=document.getElementById('featured-book-link');
+        if(link&&c.featured_book_link){link.href=c.featured_book_link;link.style.display='inline-block';}
+      };
+      t.src=url;
+    })();
+    // Auteur — vidéo à droite du livre mis en avant
+    if(c.auteur_video_url){
+      const frame=document.getElementById('featured-book-video-frame');
+      const wrap=document.getElementById('featured-book-video');
+      if(frame&&wrap){
+        const embed=embedVideoUrl(c.auteur_video_url,{loop:c.auteur_video_loop==='1'});
+        if(embed){frame.innerHTML=embed;wrap.classList.add('visible');}
+      }
+    }
+    // Contact
+    setText('#contact-quote',c.contact_quote);
+    if(c.contact_email){const a=document.getElementById('contact-email');if(a){a.textContent='✉ '+c.contact_email;a.href='mailto:'+c.contact_email+'?subject=Demande%20d\'infos%20depuis%20le%20site';}}
+    if(c.contact_email_visible==='false'){const a=document.getElementById('contact-email');if(a)a.style.display='none';}
+    loadVideos(c);
+  }catch(e){console.log('Content unavailable, using defaults');}
+}
+loadContent();
+
+// ── AGENDA ───────────────────────────────
+async function loadAgenda(){
+  const el=document.getElementById('agenda-list');
+  try{
+    const r=await fetch('/api/agenda');
+    const rows=await r.json();
+    if(!rows.length){el.innerHTML='<div class="agenda-empty">Aucun spectacle programmé pour le moment.</div>';return;}
+    el.innerHTML=rows.map(s=>`
+      <div class="show-row">
+        <div class="show-date">
+          <div class="show-day">${s.day}</div>
+          <div class="show-month">${s.month}</div>
+        </div>
+        ${s.image ? `<img class="show-img" src="${s.image}" alt="${s.title}">` : '<div class="show-img-empty"></div>'}
+        <div>
+          <div class="show-title">${s.title}</div>
+          <div class="show-venue">${s.venue}</div>
+        </div>
+        <div class="show-status">
+          ${s.status==='sold-out'
+            ?'<span class="badge badge-so">Complet</span>'
+            :'<span class="badge badge-av">Disponible</span>'}
+        </div>
+      </div>`).join('');
+  }catch{
+    el.innerHTML='<div class="agenda-empty">Impossible de charger l\'agenda.</div>';
+  }
+}
+loadAgenda();
+
+// ── VIDEOS ───────────────────────────────
+function ytId(url){
+  if(!url)return null;
+  const m=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+  return m?m[1]:null;
+}
+function playVideo(id, title, el){
+  const featWrap=document.getElementById('video-featured-wrap');
+  const featTitle=document.getElementById('video-featured-title');
+  const featEl=document.getElementById('video-featured');
+  featWrap.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allowfullscreen allow="autoplay"></iframe>`;
+  featTitle.textContent=title||'';
+  featEl.style.display='block';
+  document.querySelectorAll('.video-thumb').forEach(t=>t.classList.remove('active'));
+  if(el)el.classList.add('active');
+  featEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function loadVideos(c){
+  const allVideos=[];
+  for(let i=1;i<=20;i++){
+    const id=ytId(c['video'+i+'_url']);
+    if(id)allVideos.push({id,title:c['video'+i+'_title']||''});
+  }
+  if(!allVideos.length)return;
+  const featEl=document.getElementById('video-featured');
+  const featWrap=document.getElementById('video-featured-wrap');
+  const featTitle=document.getElementById('video-featured-title');
+  const first=allVideos[0];
+  featWrap.innerHTML=`<iframe src="https://www.youtube.com/embed/${first.id}" allowfullscreen></iframe>`;
+  featTitle.textContent=first.title;
+  featEl.style.display='block';
+  // Strip (all videos as thumbnails)
+  const grid=document.getElementById('video-grid');
+  if(!grid)return;
+  grid.innerHTML=allVideos.map((v,idx)=>`
+    <div class="video-thumb${idx===0?' active':''}" onclick="playVideo('${v.id}','${v.title.replace(/'/g,"\\'")}',this)">
+      <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.title}" loading="lazy">
+      <div class="video-thumb-play"></div>
+      ${v.title?`<div class="video-thumb-label">${v.title}</div>`:''}
+    </div>`).join('');
 }
 
-async function deleteVideo(key) {
-  if (!confirm('Supprimer cette vidéo ?')) return;
-  try {
-    const r = await fetch('/api/upload?action=delete&key=' + key, {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${TOKEN}` }
-    });
-    const prev = document.getElementById('prev-video-' + key);
-    if (prev) { prev.src = ''; prev.style.display = 'none'; }
-    toast('Vidéo supprimée ✓');
-  } catch(e) { toast('Erreur : ' + e.message, true); }
+
+
+
+// ── SPECTACLES (grille fixe 4 slots) ─────
+
+
+// ── BOOKS CAROUSEL ───────────────────────
+let booksPage = 0;
+const BOOKS_PER_PAGE = 5;
+const BOOKS_TOTAL = 20;
+const BOOKS_PAGES = Math.ceil(BOOKS_TOTAL / BOOKS_PER_PAGE);
+
+function booksUpdateUI() {
+  // Sur mobile : scroll natif, pas de JS carousel
+  if(window.innerWidth <= 600) return;
+  const outer = document.querySelector('.books-track-outer');
+  const track = document.getElementById('books-track');
+  if (!outer || !track || !track.children.length) return;
+  const gap = 12;
+  const outerW = outer.clientWidth;
+  const bookW = Math.floor((outerW - gap * (BOOKS_PER_PAGE - 1)) / BOOKS_PER_PAGE);
+  Array.from(track.children).forEach(b => { b.style.width = bookW + 'px'; b.style.flexShrink = '0'; });
+  const offset = booksPage * BOOKS_PER_PAGE * (bookW + gap);
+  track.style.transform = `translateX(-${offset}px)`;
+  const bkPrev = document.getElementById('books-prev');
+  const bkNext = document.getElementById('books-next');
+  bkPrev.style.display = booksPage === 0 ? 'none' : '';
+  bkNext.style.display = booksPage >= BOOKS_PAGES - 1 ? 'none' : '';
+  bkPrev.disabled = booksPage === 0;
+  bkNext.disabled = booksPage >= BOOKS_PAGES - 1;
+  document.querySelectorAll('#books-dots [data-dot]').forEach(d => {
+    d.classList.toggle('active', +d.dataset.dot === booksPage);
+  });
+}
+function booksCarousel(dir) {
+  booksPage = Math.max(0, Math.min(BOOKS_PAGES - 1, booksPage + dir));
+  booksUpdateUI();
+}
+function booksGoTo(page) { booksPage = page; booksUpdateUI(); }
+window.addEventListener('load', () => { booksUpdateUI(); });
+window.addEventListener('resize', () => { booksUpdateUI(); });
+
+
+// ── I18N ─────────────────────────────────
+const TRANSLATIONS = {
+  fr: {
+    nav_artiste:"L'Artiste",nav_spectacles:"Spectacles",nav_animations:"Animations",nav_conferences:"Conférences",nav_auteur:"L'Auteur",nav_videos:"Vidéos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Réserver",
+    section_videos:"Vidéos",videos_h2:"Carlos en action",
+    hero_subtitle:"Magicien · Mentaliste · Conférencier",hero_tagline:"« Your illusions are my reality »",
+    hero_intro:"Créateur d'illusions et explorateur de l'esprit — un univers où la frontière entre le réel et l'imaginaire s'efface.",
+    hero_btn1:"Découvrir les spectacles",hero_btn2:"L'univers de Carlos",hero_scroll:"Défiler",
+    section_artiste:"L'Artiste",section_spectacles:"Les Spectacles",spectacles_h2:"Des univers à explorer",
+    section_auteur:"L'Auteur",auteur_h2:"Amoureux des mots",
+    section_agenda:"Prochaines dates",agenda_h2:"Agenda des spectacles",
+    section_contact:"Contact",contact_h2:"Parlons de<br>votre événement",
+    card_link:"Réserver →",
+    form_name:"Votre nom",form_email:"E-mail",form_type:"Type de prestation",form_message:"Message",
+    form_type_opt0:"— Choisir —",form_type_opt1:"Spectacle one-man show",form_type_opt2:"Animation close-up / corporate",
+    form_type_opt3:"Conférence-spectacle",form_type_opt4:"Soirée privée",form_type_opt5:"Autre",
+    form_placeholder_name:"Prénom Nom",form_placeholder_email:"vous@exemple.com",
+    form_placeholder_message:"Décrivez votre événement, la date souhaitée, le lieu…",
+    form_send:"Envoyer le message",form_sending:"Envoi en cours…",
+    form_ok:"Message envoyé ! Carlos vous répondra rapidement.",form_err:"Erreur. Contactez directement par e-mail.",
+    badge_av:"Disponible",badge_so:"Complet",
+    agenda_empty:"Aucun spectacle programmé pour le moment.",agenda_error:"Impossible de charger l'agenda.",
+    footer_sub:"Magicien · Mentaliste · Conférencier",footer_rights:"Tous droits réservés"
+  },
+  en: {
+    nav_artiste:"The Artist",nav_spectacles:"Shows",nav_animations:"Animations",nav_conferences:"Conferences",nav_auteur:"The Author",nav_videos:"Videos",nav_agenda:"Agenda",nav_contact:"Contact",nav_reserver:"Book Now",
+    section_videos:"Videos",videos_h2:"Carlos in action",
+    hero_subtitle:"Magician · Mentalist · Speaker",hero_tagline:"« Your illusions are my reality »",
+    hero_intro:"Creator of illusions and explorer of the mind — a universe where the boundary between reality and imagination fades away.",
+    hero_btn1:"Discover the shows",hero_btn2:"Carlos's universe",hero_scroll:"Scroll",
+    section_artiste:"The Artist",section_spectacles:"The Shows",spectacles_h2:"Worlds to explore",
+    section_auteur:"The Author",auteur_h2:"A lover of words",
+    section_agenda:"Upcoming dates",agenda_h2:"Show schedule",
+    section_contact:"Contact",contact_h2:"Let's talk about<br>your event",
+    card_link:"Book →",
+    form_name:"Your name",form_email:"E-mail",form_type:"Type of service",form_message:"Message",
+    form_type_opt0:"— Choose —",form_type_opt1:"One-man show",form_type_opt2:"Close-up / corporate animation",
+    form_type_opt3:"Keynote show",form_type_opt4:"Private event",form_type_opt5:"Other",
+    form_placeholder_name:"First Last",form_placeholder_email:"you@example.com",
+    form_placeholder_message:"Describe your event, preferred date, venue…",
+    form_send:"Send message",form_sending:"Sending…",
+    form_ok:"Message sent! Carlos will reply shortly.",form_err:"Error. Please contact directly by email.",
+    badge_av:"Available",badge_so:"Sold out",
+    agenda_empty:"No shows scheduled at the moment.",agenda_error:"Unable to load the agenda.",
+    footer_sub:"Magician · Mentalist · Speaker",footer_rights:"All rights reserved"
+  },
+  es: {
+    nav_artiste:"El Artista",nav_spectacles:"Espectáculos",nav_animations:"Animaciones",nav_conferences:"Conferencias",nav_auteur:"El Autor",nav_videos:"Vídeos",nav_agenda:"Agenda",nav_contact:"Contacto",nav_reserver:"Reservar",
+    section_videos:"Vídeos",videos_h2:"Carlos en acción",
+    hero_subtitle:"Mago · Mentalista · Conferenciante",hero_tagline:"« Your illusions are my reality »",
+    hero_intro:"Creador de ilusiones y explorador de la mente — un universo donde la frontera entre lo real y lo imaginario se desvanece.",
+    hero_btn1:"Descubrir los espectáculos",hero_btn2:"El universo de Carlos",hero_scroll:"Desplazar",
+    section_artiste:"El Artista",section_spectacles:"Los Espectáculos",spectacles_h2:"Mundos por explorar",
+    section_auteur:"El Autor",auteur_h2:"Enamorado de las palabras",
+    section_agenda:"Próximas fechas",agenda_h2:"Agenda de espectáculos",
+    section_contact:"Contacto",contact_h2:"Hablemos de<br>su evento",
+    card_link:"Reservar →",
+    form_name:"Su nombre",form_email:"Correo electrónico",form_type:"Tipo de prestación",form_message:"Mensaje",
+    form_type_opt0:"— Elegir —",form_type_opt1:"Espectáculo one-man show",form_type_opt2:"Animación close-up / corporativa",
+    form_type_opt3:"Conferencia-espectáculo",form_type_opt4:"Velada privada",form_type_opt5:"Otro",
+    form_placeholder_name:"Nombre Apellido",form_placeholder_email:"usted@ejemplo.com",
+    form_placeholder_message:"Describa su evento, fecha deseada, lugar…",
+    form_send:"Enviar mensaje",form_sending:"Enviando…",
+    form_ok:"¡Mensaje enviado! Carlos le responderá pronto.",form_err:"Error. Contáctenos directamente por correo.",
+    badge_av:"Disponible",badge_so:"Agotado",
+    agenda_empty:"No hay espectáculos programados por el momento.",agenda_error:"No se puede cargar la agenda.",
+    footer_sub:"Mago · Mentalista · Conferenciante",footer_rights:"Todos los derechos reservados"
+  }
+};
+
+let currentLang = localStorage.getItem('cv_lang') || 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('cv_lang', lang);
+  const t = TRANSLATIONS[lang];
+  // Update text elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (t[key] !== undefined) el.placeholder = t[key];
+  });
+  // Update active button
+  document.querySelectorAll('#lang-switch button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  // Re-render agenda with new lang badges
+  if (document.getElementById('agenda-list') && window._agendaRows) {
+    renderAgendaBadges(window._agendaRows);
+  }
 }
 
-function toast(msg, err = false) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (err ? ' err' : '');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// ── RENDER TABS ───────────────────────────────────────────────────
-
-function renderHero() {
-  document.getElementById('tab-content').innerHTML = `
-    <div class="form-section">
-      <h3>Texte principal</h3>
-      ${fieldHtml('Titre principal', 'hero_title', 'Carlos<br><em>Vaquera</em>')}
-      ${fieldHtml('Phrase signature', 'hero_tagline', '« Your illusions are my reality »')}
-      ${fieldHtml('Sous-titre', 'hero_subtitle', 'Magicien · Mentaliste · Conférencier')}
-      ${fieldHtml('Texte bouton 1', 'hero_btn1', 'Découvrir les spectacles')}
-      ${fieldHtml('Texte bouton 2', 'hero_btn2', "L'univers de Carlos")}
-    </div>
-    <div class="form-section">
-      <h3>Image de fond (hero)</h3>
-      ${imgHtml('Photo principale', 'hero_bg')}
-    </div>
-    <div class="form-section">
-      <h3>Portrait (optionnel)</h3>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Apparaît sur le côté gauche de la page d'accueil. Si vide, aucun cadre n'est affiché.</p>
-      ${imgHtml('Portrait de Carlos', 'hero_portrait')}
-    </div>
-    ${saveBar('hero')}`;
-}
-
-function renderArtiste() {
-  document.getElementById('tab-content').innerHTML = `
-    <div class="form-section">
-      <h3>Textes</h3>
-      ${fieldHtml('Titre', 'artiste_title', "Créateur d'émotions")}
-      ${fieldHtml('Introduction (italique)', 'artiste_lead', "Créateur d'illusions et explorateur de l'esprit…", 'textarea')}
-      ${fieldHtml('Paragraphe 1', 'artiste_body1', "Mentaliste au talent reconnu…", 'textarea')}
-      ${fieldHtml('Paragraphe 2', 'artiste_body2', "Formateur passionné…", 'textarea')}
-      ${fieldHtml('Paragraphe 3', 'artiste_body3', "Son talent l'a conduit…", 'textarea')}
-      <div class="row-3">
-        ${fieldHtml('Chiffre 1 (ex: 30+)', 'artiste_stat1', '30+')}
-        ${fieldHtml('Label 1', 'artiste_stat1_label', 'ans de magie')}
-        ${fieldHtml('Chiffre 2', 'artiste_stat2', '12+')}
-        ${fieldHtml('Label 2', 'artiste_stat2_label', 'Livres publiés')}
-        ${fieldHtml('Chiffre 3', 'artiste_stat3', 'EU')}
-        ${fieldHtml('Label 3', 'artiste_stat3_label', 'International')}
+function renderAgendaBadges(rows) {
+  const t = TRANSLATIONS[currentLang];
+  const el = document.getElementById('agenda-list');
+  if (!el || !rows.length) return;
+  el.innerHTML = rows.map(s => `
+    <div class="show-row">
+      <div class="show-date">
+        <div class="show-day">${s.day}</div>
+        <div class="show-month">${s.month}</div>
       </div>
-    </div>
-    <div class="form-section">
-      <h3>Photo</h3>
-      ${imgHtml('Photo de Carlos', 'artiste_img')}
-    </div>
-    <div class="form-section">
-      <h3>Vidéo (remplace la photo)</h3>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace la photo dans la section L'Artiste. Max 2 Mo.</p>
-      ${videoHtml('Vidéo', 'artiste_video', 'artiste_video_loop')}
-    </div>
-    ${saveBar('artiste')}`;
+      <div>
+        <div class="show-title">${s.title}</div>
+        <div class="show-venue">${s.venue}</div>
+      </div>
+      <div class="show-status">
+        ${s.status==='sold-out'
+          ?`<span class="badge badge-so">${t.badge_so}</span>`
+          :`<span class="badge badge-av">${t.badge_av}</span>`}
+      </div>
+    </div>`).join('');
 }
 
-function renderSpectacles() {
-  let cards = '';
-  const titles = ['Démons & Merveilles','Imagienaire','Le Mentaliste Philosophe','Spectacle 4','Spectacle 5','Spectacle 6','Spectacle 7','Spectacle 8'];
-  const tags = ['One-man show','Mentalisme','Philosophie & Magie','Close-up','Corporate','Gala','Jeune public','Conférence'];
-  for (let i = 1; i <= 8; i++) {
-    cards += '<div class="card-item"><h4>Spectacle ' + i + '</h4>'
-      + fieldHtml('Tag', 'sp' + i + '_tag', tags[i-1])
-      + fieldHtml('Titre', 'sp' + i + '_title', titles[i-1])
-      + fieldHtml('Description', 'sp' + i + '_desc', '', 'textarea')
-      + imgHtml('Affiche / Photo', 'sp' + i + '_img')
-      + '</div>';
+// Init language on load
+setLang(currentLang);
+
+// ── CONTACT FORM ─────────────────────────
+document.getElementById('contact-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const msg=document.getElementById('form-msg');
+  const btn=this.querySelector('.btn-send');
+  btn.disabled=true;btn.textContent=TRANSLATIONS[currentLang].form_sending;
+  try{
+    const data={name:this.name.value,email:this.email.value,prestation:this.prestation.value,message:this.message.value};
+    const r=await fetch(this.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    if(r.ok){
+      msg.textContent=TRANSLATIONS[currentLang].form_ok;
+      msg.className='form-msg ok';this.reset();
+    }else throw new Error();
+  }catch{
+    msg.textContent=TRANSLATIONS[currentLang].form_err;
+    msg.className='form-msg err';
   }
-  document.getElementById('tab-content').innerHTML =
-    '<div class="form-section"><h3>Les 8 spectacles</h3>'
-    + '<div class="card-grid" style="grid-template-columns:repeat(4,1fr)">' + cards + '</div>'
-    + '</div>' + saveBar('spectacles');
-}
-
-function renderAnimations() {
-  document.getElementById('tab-content').innerHTML = `
-    <div class="form-section">
-      <h3>Textes</h3>
-      ${fieldHtml('Titre', 'anim_title', 'Close-Up & Corporate')}
-      ${fieldHtml('Introduction', 'anim_lead', "Des prestations d'illusionnisme et de mentalisme subtiles…", 'textarea')}
-      ${fieldHtml('Corps de texte', 'anim_body', "De table en table ou de groupe en groupe…", 'textarea')}
-      ${fieldHtml('Texte du bouton', 'anim_btn', 'Organiser une animation')}
-    </div>
-    <div class="form-section">
-      <h3>Image de fond</h3>
-      ${imgHtml('Photo / fond', 'anim_bg')}
-    </div>
-    <div class="form-section">
-      <h3>Vidéo (remplace l'image)</h3>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace l'image dans la section Animations. Max 2 Mo.</p>
-      ${videoHtml('Vidéo', 'anim_video', 'anim_video_loop')}
-    </div>
-    ${saveBar('animations')}`;
-}
-
-function renderConferences() {
-  document.getElementById('tab-content').innerHTML = `
-    <div class="form-section">
-      <h3>Textes</h3>
-      ${fieldHtml('Titre', 'conf_title', 'Mettez de la magie dans votre communication')}
-      ${fieldHtml('Introduction', 'conf_lead', 'Depuis 2009, Carlos séduit les entreprises…', 'textarea')}
-      ${fieldHtml('Liste de clients', 'conf_body', 'ING, Euroclear, BNP Paribas Fortis…', 'textarea')}
-      ${fieldHtml('Texte du bouton', 'conf_btn', 'Discuter de votre projet')}
-    </div>
-    <div class="form-section">
-      <h3>Image de fond</h3>
-      ${imgHtml('Photo / fond', 'conf_bg')}
-    </div>
-    <div class="form-section">
-      <h3>Vidéo (remplace l'image)</h3>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace l'image dans la section Conférences. Max 2 Mo.</p>
-      ${videoHtml('Vidéo', 'conf_video', 'conf_video_loop')}
-    </div>
-    ${saveBar('conferences')}`;
-}
-
-function renderAuteur() {
-  const defaults = ['Graines de Mentalisme','Aspirations','Rencontres',"L'Émotion Magique"];
-  let books = '';
-  for (let i = 1; i <= 20; i++) {
-    const def = i <= 4 ? defaults[i-1] : 'Livre ' + i;
-    books += '<div class="card-item"><h4>Livre ' + i + '</h4>'
-      + fieldHtml('Titre', 'book' + i + '_title', def)
-      + fieldHtml('Sous-titre', 'book' + i + '_sub', 'Carlos Vaquera')
-      + imgHtml('Couverture', 'book' + i + '_img')
-      + '</div>';
-  }
-  document.getElementById('tab-content').innerHTML =
-    '<div class="form-section"><h3>Introduction</h3>'
-    + fieldHtml('Texte intro', 'auteur_lead', "Les mots nous permettent de mettre sur papier des émotions…", 'textarea')
-    + '</div><div class="form-section"><h3>⭐ Dernier livre en avant</h3>'
-    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Apparaît sous le carrousel uniquement si une image est uploadée.</p>'
-    + imgHtml('Couverture du livre', 'featured_book_img')
-    + fieldHtml('Titre du livre', 'featured_book_title', '')
-    + fieldHtml('Sous-titre / collection', 'featured_book_sub', '')
-    + fieldHtml('Description courte', 'featured_book_desc', '', 'textarea')
-    + fieldHtml('Lien de commande (URL)', 'featured_book_link', '')
-    + '</div><div class="form-section"><h3>Vidéo (à droite du livre mis en avant)</h3>'
-    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Collez une URL YouTube, Vimeo ou MP4. La vidéo apparaît à droite du livre mis en avant.</p>'
-    + fieldHtml('URL de la vidéo', 'auteur_video_url', '')
-    + `<div class="field" style="margin-top:-.5rem">
-        <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.82rem">
-          <input type="checkbox" data-key="auteur_video_loop" data-checkbox="true" ${c('auteur_video_loop','0')==='1'?'checked':''} style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer">
-          Lecture en boucle
-        </label>
-      </div>`
-    + '</div><div class="form-section"><h3>Les livres (20 emplacements)</h3>'
-    + '<div class="book-grid" style="grid-template-columns:repeat(4,1fr)">' + books + '</div>'
-    + '</div>' + saveBar('auteur');
-}
-
-function renderContact() {
-  document.getElementById('tab-content').innerHTML = `
-    <div class="form-section">
-      <h3>Coordonnées</h3>
-      ${fieldHtml('Citation', 'contact_quote', '"L\'illusion est une vérité qui se donne en spectacle…"', 'textarea')}
-      ${fieldHtml('E-mail de contact', 'contact_email', 'carlosvaquera@carlosvaquera.com')}
-      ${toggleHtml('Afficher l\'e-mail sur le site', 'contact_email_visible', 'true')}
-    </div>
-    ${saveBar('contact')}`;
-}
-
-// ── AGENDA ────────────────────────────────────────────────────────
-let agendaRows = [];
-
-function renderVideos() {
-  let fields = '<div class="form-section"><h3>Vidéo mise en avant (n°1)</h3>'
-    + fieldHtml('URL YouTube (vidéo principale)', 'video1_url', '')
-    + fieldHtml('Titre de la vidéo', 'video1_title', '')
-    + '</div><div class="form-section"><h3>Autres vidéos (2 à 20)</h3>'
-    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Collez l\'URL YouTube de chaque vidéo. Laissez vide pour ne pas afficher.</p>'
-    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">';
-  for (let i = 2; i <= 20; i++) {
-    fields += '<div style="border:1px solid var(--border);border-radius:6px;padding:1rem">'
-      + '<div style="font-size:.75rem;color:var(--gold);margin-bottom:.5rem;letter-spacing:.05em">Vidéo ' + i + '</div>'
-      + fieldHtml('URL YouTube', 'video' + i + '_url', '')
-      + fieldHtml('Titre', 'video' + i + '_title', '')
-      + '</div>';
-  }
-  fields += '</div></div>' + saveBar('videos');
-  document.getElementById('tab-content').innerHTML = fields;
-}
-
-async function renderAgenda() {
-  document.getElementById('tab-content').innerHTML = `
-    <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
-      <button class="btn btn-gold" onclick="openAgendaModal()">+ Ajouter une date</button>
-    </div>
-    <div class="form-section" style="padding:0;overflow:hidden">
-      <div id="agenda-table"><div class="empty-state">Chargement…</div></div>
-    </div>`;
-  const r = await fetch('/api/agenda');
-  agendaRows = await r.json();
-  renderAgendaTable();
-}
-
-function renderAgendaTable() {
-  const el = document.getElementById('agenda-table');
-  if (!agendaRows.length) { el.innerHTML = '<div class="empty-state">Aucune date.</div>'; return; }
-  el.innerHTML = `<table>
-    <thead><tr><th>Image</th><th>Date</th><th>Spectacle</th><th>Lieu</th><th>Statut</th><th></th></tr></thead>
-    <tbody>${agendaRows.map(s => `
-      <tr>
-        <td>${s.image ? `<img src="${s.image}" style="width:44px;height:44px;object-fit:cover;border-radius:4px;border:1px solid rgba(201,168,76,.3)">` : '<span style="color:var(--muted);font-size:.75rem">—</span>'}</td>
-        <td style="color:var(--gold);font-weight:600">${s.day} ${s.month}</td>
-        <td>${s.title}</td>
-        <td style="color:var(--muted)">${s.venue}</td>
-        <td><span class="badge badge-${s.status==='sold-out'?'so':'av'}">${s.status==='sold-out'?'Complet':'Disponible'}</span></td>
-        <td><div class="actions">
-          <button class="btn btn-outline" onclick='editAgenda(${JSON.stringify(s)})'>Modifier</button>
-          <button class="btn btn-danger" onclick="deleteAgenda(${s.id})">Suppr.</button>
-        </div></td>
-      </tr>`).join('')}
-    </tbody></table>`;
-}
-
-const MONTHS_FR = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'];
-
-function syncDateFields(val) {
-  if (!val) return;
-  const [y, m, d] = val.split('-');
-  document.getElementById('f-day').value = String(parseInt(d));
-  document.getElementById('f-month').value = MONTHS_FR[parseInt(m)-1] + ' ' + y;
-}
-
-function dateFromDayMonth(day, month) {
-  // month = "Sep 2026" → try to parse back to YYYY-MM-DD
-  if (!day || !month) return '';
-  const parts = month.split(' ');
-  if (parts.length < 2) return '';
-  const year = parts[1];
-  const mIdx = MONTHS_FR.indexOf(parts[0]);
-  if (mIdx < 0) return '';
-  return `${year}-${String(mIdx+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-}
-
-function openAgendaModal(item = null) {
-  document.getElementById('modal-title').textContent = item ? 'Modifier la date' : 'Ajouter une date';
-  document.getElementById('edit-id').value  = item?.id    ?? '';
-  document.getElementById('f-day').value    = item?.day   ?? '';
-  document.getElementById('f-month').value  = item?.month ?? '';
-  document.getElementById('f-date').value   = item ? dateFromDayMonth(item.day, item.month) : '';
-  document.getElementById('f-title').value  = item?.title ?? '';
-  document.getElementById('f-venue').value  = item?.venue ?? '';
-  document.getElementById('f-status').value = item?.status ?? 'available';
-  document.getElementById('f-img-b64').value = item?.image ?? '';
-  const prev = document.getElementById('f-img-preview');
-  if (item?.image) { prev.src = item.image; prev.style.display = 'block'; }
-  else { prev.src = ''; prev.style.display = 'none'; }
-  document.getElementById('f-img').value = '';
-  document.getElementById('agenda-modal').classList.add('open');
-}
-
-function previewAgendaImg(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    document.getElementById('f-img-b64').value = e.target.result;
-    const prev = document.getElementById('f-img-preview');
-    prev.src = e.target.result;
-    prev.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-}
-
-function clearAgendaImg() {
-  document.getElementById('f-img-b64').value = '';
-  document.getElementById('f-img').value = '';
-  const prev = document.getElementById('f-img-preview');
-  prev.src = ''; prev.style.display = 'none';
-}
-
-function editAgenda(item) { openAgendaModal(item); }
-function closeAgendaModal() { document.getElementById('agenda-modal').classList.remove('open'); }
-document.getElementById('agenda-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAgendaModal(); });
-
-async function saveAgenda() {
-  const body = {
-    id:     document.getElementById('edit-id').value || undefined,
-    day:    document.getElementById('f-day').value.trim(),
-    month:  document.getElementById('f-month').value.trim(),
-    title:  document.getElementById('f-title').value.trim(),
-    venue:  document.getElementById('f-venue').value.trim(),
-    status: document.getElementById('f-status').value,
-    image:  document.getElementById('f-img-b64').value || null,
-  };
-  if (!body.title) { toast('Le titre est requis.', true); return; }
-  const r = await fetch('/api/agenda', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${TOKEN}` },
-    body: JSON.stringify(body)
-  });
-  if (r.status === 401) { logout(); return; }
-  agendaRows = await r.json();
-  renderAgendaTable();
-  closeAgendaModal();
-  toast('Enregistré ✓');
-}
-
-async function deleteAgenda(id) {
-  if (!confirm('Supprimer cette date ?')) return;
-  const r = await fetch(`/api/agenda?id=${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${TOKEN}` } });
-  if (r.status === 401) { logout(); return; }
-  agendaRows = agendaRows.filter(s => s.id !== id);
-  renderAgendaTable();
-  toast('Supprimé ✓');
-}
+  btn.disabled=false;btn.textContent=TRANSLATIONS[currentLang].form_send;
+});
 </script>
 </body>
 </html>
