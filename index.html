@@ -975,7 +975,7 @@ function embedVideoUrl(url,opts){
   // YouTube
   const ytm=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
   if(ytm){
-    let p='autoplay=1&mute=1&playsinline=1';
+    let p='autoplay=1&mute=1&playsinline=1&enablejsapi=1';
     if(loop)p+=`&loop=1&playlist=${ytm[1]}`;
     return`<iframe src="https://www.youtube.com/embed/${ytm[1]}?${p}" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
   }
@@ -1103,24 +1103,24 @@ async function loadContent(){
       };
       t.src=url;
     })();
-    // Auteur — vidéo à droite du livre mis en avant (démarre au scroll)
+    // Auteur — vidéo à droite du livre mis en avant
     if(c.auteur_video_url){
       const frame=document.getElementById('featured-book-video-frame');
       const wrap=document.getElementById('featured-book-video');
       if(frame&&wrap){
-        const section=document.getElementById('auteur');
-        const startVideo=()=>{
-          if(frame.dataset.loaded)return;
-          frame.dataset.loaded='1';
-          const embed=embedVideoUrl(c.auteur_video_url,{loop:c.auteur_video_loop==='1'});
-          if(embed){frame.innerHTML=embed;wrap.classList.add('visible');}
-        };
-        if(section){
-          const obs=new IntersectionObserver((entries)=>{
-            if(entries[0].isIntersecting){startVideo();obs.disconnect();}
-          },{threshold:0});
-          obs.observe(section);
-        }else{startVideo();}
+        const embed=embedVideoUrl(c.auteur_video_url,{loop:c.auteur_video_loop==='1'});
+        if(embed){
+          frame.innerHTML=embed;
+          wrap.classList.add('visible');
+          const yt=frame.querySelector('iframe');
+          if(yt){
+            yt.addEventListener('load',function(){
+              setTimeout(function(){
+                try{yt.contentWindow.postMessage(JSON.stringify({event:'command',func:'playVideo',args:[]}),'https://www.youtube.com');}catch(e){}
+              },400);
+            });
+          }
+        }
       }
     }
     // Contact
