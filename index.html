@@ -1022,7 +1022,7 @@ footer p{font-size:.72rem;color:var(--muted)}
     ctx.rect(FRAME,FRAME,W-FRAME*2,H-FRAME*2);
     ctx.clip();
     const ds=scrollY-lastScroll; lastScroll=scrollY;
-    cards.forEach(p=>{
+    cards.slice().sort((a,b)=>a.depth-b.depth).forEach(p=>{
       // parallax: deeper cards move more with scroll
       p.parallaxOff= -scrollY * p.depth * 0.18;
 
