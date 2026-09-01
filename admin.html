@@ -331,7 +331,7 @@ function saveBar(section) {
 async function saveSection(section) {
   const container = document.getElementById('tab-content');
   const inputs = container.querySelectorAll('[data-key]');
-  const updates = Array.from(inputs).map(el => ({ key: el.dataset.key, value: el.dataset.toggle ? el.dataset.val : el.value }));
+  const updates = Array.from(inputs).map(el => ({ key: el.dataset.key, value: el.dataset.toggle ? el.dataset.val : el.dataset.checkbox ? (el.checked ? '1' : '0') : el.value }));
   const msg = document.getElementById('msg-' + section);
   msg.textContent = 'Sauvegarde…';
   try {
@@ -612,6 +612,12 @@ function renderAuteur() {
     + '</div><div class="form-section"><h3>Vidéo (à droite du livre mis en avant)</h3>'
     + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Collez une URL YouTube, Vimeo ou MP4. La vidéo apparaît à droite du livre mis en avant.</p>'
     + fieldHtml('URL de la vidéo', 'auteur_video_url', '')
+    + `<div class="field" style="margin-top:-.5rem">
+        <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.82rem">
+          <input type="checkbox" data-key="auteur_video_loop" data-checkbox="true" ${c('auteur_video_loop','0')==='1'?'checked':''} style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer">
+          Lecture en boucle
+        </label>
+      </div>`
     + '</div><div class="form-section"><h3>Les livres (20 emplacements)</h3>'
     + '<div class="book-grid" style="grid-template-columns:repeat(4,1fr)">' + books + '</div>'
     + '</div>' + saveBar('auteur');
