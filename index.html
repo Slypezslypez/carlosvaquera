@@ -213,7 +213,11 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .featured-book-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;margin-bottom:.6rem}
 .featured-book-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.2rem;font-style:italic}
 .featured-book-desc{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px;margin-bottom:2rem}
-@media(max-width:700px){.featured-book.visible{flex-direction:column;gap:2rem}.featured-book-cover{width:140px}}
+.featured-book-video{flex-shrink:0;width:320px;display:none}
+.featured-book-video.visible{display:block}
+.featured-book-video-frame{position:relative;width:100%;padding-bottom:56.25%;background:var(--bg3);border-radius:2px;overflow:hidden;outline:1px solid rgba(201,168,76,.2);outline-offset:-1px}
+.featured-book-video-frame iframe,.featured-book-video-frame video{position:absolute;top:0;left:0;width:100%;height:100%;border:0;object-fit:cover}
+@media(max-width:700px){.featured-book.visible{flex-direction:column;gap:2rem}.featured-book-cover{width:140px}.featured-book-video{width:100%}}
 /* ── AGENDA ── */
 /* ── VIDEOS ── */
 #videos{padding:10rem 0;background:var(--bg)}
@@ -652,6 +656,9 @@ footer p{font-size:.72rem;color:var(--muted)}
         <div class="featured-book-desc" id="featured-book-desc"></div>
         <a id="featured-book-link" href="#" class="btn-primary" style="display:none">Commander →</a>
       </div>
+      <div class="featured-book-video" id="featured-book-video">
+        <div class="featured-book-video-frame" id="featured-book-video-frame"></div>
+      </div>
     </div>
 
     <div class="books-carousel-wrap">
@@ -1030,6 +1037,41 @@ function closeMobileMenu(){
 }
 
 // ── CONTENT ──────────────────────────────
+async function setVideoOrImg(id,videoKey,imgKey){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const videoUrl=`/api/upload?key=${videoKey}&t=${Date.now()}`;
+  try{
+    const ctrl=new AbortController();
+    const r=await fetch(videoUrl,{signal:ctrl.signal});
+    const ct=r.headers.get('content-type')||'';
+    ctrl.abort();
+    if(r.ok&&ct.startsWith('video/')){
+      el.style.cssText=(el.style.cssText||'')+'background:none;border:none;';
+      el.innerHTML='';
+      const v=document.createElement('video');
+      v.src=`/api/upload?key=${videoKey}`;
+      v.controls=true;v.playsInline=true;
+      v.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
+      el.appendChild(v);
+      return;
+    }
+  }catch(e){}
+  setImg(id,imgKey);
+}
+
+function embedVideoUrl(url){
+  if(!url)return null;
+  // YouTube
+  const ytm=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+  if(ytm)return`<iframe src="https://www.youtube.com/embed/${ytm[1]}" allowfullscreen></iframe>`;
+  // Vimeo
+  const vim=url.match(/vimeo\.com\/(\d+)/);
+  if(vim)return`<iframe src="https://player.vimeo.com/video/${vim[1]}" allowfullscreen></iframe>`;
+  // Direct video
+  return`<video src="${url}" controls playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"></video>`;
+}
+
 function setImg(id,key){
   const el=document.getElementById(id);
   if(!el)return;
@@ -1090,20 +1132,7 @@ async function loadContent(){
     if(c.artiste_stat1_label&&statlbls[0])statlbls[0].textContent=c.artiste_stat1_label;
     if(c.artiste_stat2_label&&statlbls[1])statlbls[1].textContent=c.artiste_stat2_label;
     if(c.artiste_stat3_label&&statlbls[2])statlbls[2].textContent=c.artiste_stat3_label;
-    (function(){
-      const url='/api/upload?key=artiste_img&t='+Date.now();
-      const t=new Image();
-      t.onload=function(){
-        const el=document.getElementById('artiste-ph');
-        if(!el)return;
-        el.style.backgroundImage='url('+url+')';
-        el.style.backgroundSize='cover';
-        el.style.backgroundPosition='center top';
-        el.style.border='none';
-        el.innerHTML='';
-      };
-      t.src=url;
-    })();
+    setVideoOrImg('artiste-ph','artiste_video','artiste_img');
     // Spectacles — grille fixe 4 slots, visible si image chargée
     for(let i=1;i<=4;i++){
       setText('#sp'+i+'-tag', c['sp'+i+'_tag']);
@@ -1130,12 +1159,12 @@ async function loadContent(){
     setText('#anim-title',c.anim_title);
     setText('#anim-lead',c.anim_lead);
     setText('#anim-body',c.anim_body);
-    setImg('anim-bg','anim_bg');
+    setVideoOrImg('anim-bg','anim_video','anim_bg');
     // Conférences
     setText('#conf-title',c.conf_title);
     setText('#conf-lead',c.conf_lead);
     setText('#conf-body',c.conf_body);
-    setImg('conf-bg','conf_bg');
+    setVideoOrImg('conf-bg','conf_video','conf_bg');
     // Auteur
     setText('#auteur-lead',c.auteur_lead);
     for(let i=1;i<=20;i++){setText(`#book${i}-title`,c[`book${i}_title`]);setText(`#book${i}-sub`,c[`book${i}_sub`]);setImg(`book${i}-img`,`book${i}_img`);}
@@ -1155,6 +1184,15 @@ async function loadContent(){
       };
       t.src=url;
     })();
+    // Auteur — vidéo à droite du livre mis en avant
+    if(c.auteur_video_url){
+      const frame=document.getElementById('featured-book-video-frame');
+      const wrap=document.getElementById('featured-book-video');
+      if(frame&&wrap){
+        const embed=embedVideoUrl(c.auteur_video_url);
+        if(embed){frame.innerHTML=embed;wrap.classList.add('visible');}
+      }
+    }
     // Contact
     setText('#contact-quote',c.contact_quote);
     if(c.contact_email){const a=document.getElementById('contact-email');if(a){a.textContent='✉ '+c.contact_email;a.href='mailto:'+c.contact_email+'?subject=Demande%20d\'infos%20depuis%20le%20site';}}
