@@ -306,6 +306,21 @@ function imgHtml(label, key) {
   </div>`;
 }
 
+function videoHtml(label, key) {
+  const url = `/api/upload?key=${key}&t=${Date.now()}`;
+  return `<div class="field"><label>${label}</label>
+    <div class="img-upload" id="upload-${key}" style="padding:1.5rem;min-height:90px">
+      <input type="file" accept="video/*" onchange="uploadVideo(event,'${key}')">
+      <video id="prev-video-${key}" src="${url}" controls style="width:100%;max-height:180px;display:none;margin-bottom:.8rem;border-radius:4px" onloadeddata="this.style.display='block'" onerror="this.style.display='none'"></video>
+      <p>🎬 <strong>Cliquez ou glissez</strong> une vidéo<br><span style="font-size:.65rem;opacity:.5">MP4 — max 2 Mo. Remplace l'image sur le site.</span></p>
+    </div>
+    <div style="margin-top:.4rem">
+      <button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem" onclick="deleteVideo('${key}')">🗑 Supprimer la vidéo</button>
+    </div>
+    <div class="img-status" id="status-${key}"></div>
+  </div>`;
+}
+
 function saveBar(section) {
   return `<div class="save-bar">
     <button class="btn btn-gold" onclick="saveSection('${section}')">💾 Enregistrer ${TAB_TITLES[section]}</button>
@@ -410,8 +425,8 @@ async function uploadVideo(event, key) {
   const file = event.target.files[0];
   if (!file) return;
   const status = document.getElementById('status-' + key);
-  if (file.size > 1 * 1024 * 1024) {
-    status.textContent = '⚠️ Vidéo trop lourde — maximum 1 Mo (votre fichier : ' + Math.round(file.size/1024) + ' Ko)';
+  if (file.size > 2 * 1024 * 1024) {
+    status.textContent = '⚠️ Vidéo trop lourde — maximum 2 Mo (votre fichier : ' + Math.round(file.size/1024) + ' Ko)';
     event.target.value = '';
     return;
   }
@@ -505,6 +520,11 @@ function renderArtiste() {
       <h3>Photo</h3>
       ${imgHtml('Photo de Carlos', 'artiste_img')}
     </div>
+    <div class="form-section">
+      <h3>Vidéo (remplace la photo)</h3>
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace la photo dans la section L'Artiste. Max 2 Mo.</p>
+      ${videoHtml('Vidéo', 'artiste_video')}
+    </div>
     ${saveBar('artiste')}`;
 }
 
@@ -539,6 +559,11 @@ function renderAnimations() {
       <h3>Image de fond</h3>
       ${imgHtml('Photo / fond', 'anim_bg')}
     </div>
+    <div class="form-section">
+      <h3>Vidéo (remplace l'image)</h3>
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace l'image dans la section Animations. Max 2 Mo.</p>
+      ${videoHtml('Vidéo', 'anim_video')}
+    </div>
     ${saveBar('animations')}`;
 }
 
@@ -554,6 +579,11 @@ function renderConferences() {
     <div class="form-section">
       <h3>Image de fond</h3>
       ${imgHtml('Photo / fond', 'conf_bg')}
+    </div>
+    <div class="form-section">
+      <h3>Vidéo (remplace l'image)</h3>
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace l'image dans la section Conférences. Max 2 Mo.</p>
+      ${videoHtml('Vidéo', 'conf_video')}
     </div>
     ${saveBar('conferences')}`;
 }
@@ -579,6 +609,9 @@ function renderAuteur() {
     + fieldHtml('Sous-titre / collection', 'featured_book_sub', '')
     + fieldHtml('Description courte', 'featured_book_desc', '', 'textarea')
     + fieldHtml('Lien de commande (URL)', 'featured_book_link', '')
+    + '</div><div class="form-section"><h3>Vidéo (à droite du livre mis en avant)</h3>'
+    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Collez une URL YouTube, Vimeo ou MP4. La vidéo apparaît à droite du livre mis en avant.</p>'
+    + fieldHtml('URL de la vidéo', 'auteur_video_url', '')
     + '</div><div class="form-section"><h3>Les livres (20 emplacements)</h3>'
     + '<div class="book-grid" style="grid-template-columns:repeat(4,1fr)">' + books + '</div>'
     + '</div>' + saveBar('auteur');
