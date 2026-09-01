@@ -306,8 +306,15 @@ function imgHtml(label, key) {
   </div>`;
 }
 
-function videoHtml(label, key) {
+function videoHtml(label, key, loopKey) {
   const url = `/api/upload?key=${key}&t=${Date.now()}`;
+  const loopChecked = loopKey && c(loopKey,'0')==='1' ? 'checked' : '';
+  const loopField = loopKey ? `<div class="field" style="margin-top:-.5rem">
+    <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.82rem">
+      <input type="checkbox" data-key="${loopKey}" data-checkbox="true" ${loopChecked} style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer">
+      Lecture en boucle
+    </label>
+  </div>` : '';
   return `<div class="field"><label>${label}</label>
     <div class="img-upload" id="upload-${key}" style="padding:1.5rem;min-height:90px">
       <input type="file" accept="video/*" onchange="uploadVideo(event,'${key}')">
@@ -318,7 +325,7 @@ function videoHtml(label, key) {
       <button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem" onclick="deleteVideo('${key}')">🗑 Supprimer la vidéo</button>
     </div>
     <div class="img-status" id="status-${key}"></div>
-  </div>`;
+  </div>${loopField}`;
 }
 
 function saveBar(section) {
@@ -523,7 +530,7 @@ function renderArtiste() {
     <div class="form-section">
       <h3>Vidéo (remplace la photo)</h3>
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace la photo dans la section L'Artiste. Max 2 Mo.</p>
-      ${videoHtml('Vidéo', 'artiste_video')}
+      ${videoHtml('Vidéo', 'artiste_video', 'artiste_video_loop')}
     </div>
     ${saveBar('artiste')}`;
 }
@@ -562,7 +569,7 @@ function renderAnimations() {
     <div class="form-section">
       <h3>Vidéo (remplace l'image)</h3>
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace l'image dans la section Animations. Max 2 Mo.</p>
-      ${videoHtml('Vidéo', 'anim_video')}
+      ${videoHtml('Vidéo', 'anim_video', 'anim_video_loop')}
     </div>
     ${saveBar('animations')}`;
 }
@@ -583,7 +590,7 @@ function renderConferences() {
     <div class="form-section">
       <h3>Vidéo (remplace l'image)</h3>
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Si uploadée, la vidéo remplace l'image dans la section Conférences. Max 2 Mo.</p>
-      ${videoHtml('Vidéo', 'conf_video')}
+      ${videoHtml('Vidéo', 'conf_video', 'conf_video_loop')}
     </div>
     ${saveBar('conferences')}`;
 }
