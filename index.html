@@ -1037,7 +1037,7 @@ function closeMobileMenu(){
 }
 
 // ── CONTENT ──────────────────────────────
-async function setVideoOrImg(id,videoKey,imgKey){
+async function setVideoOrImg(id,videoKey,imgKey,loop){
   const el=document.getElementById(id);
   if(!el)return;
   const videoUrl=`/api/upload?key=${videoKey}&t=${Date.now()}`;
@@ -1051,7 +1051,7 @@ async function setVideoOrImg(id,videoKey,imgKey){
       el.innerHTML='';
       const v=document.createElement('video');
       v.src=`/api/upload?key=${videoKey}`;
-      v.autoplay=true;v.muted=true;v.controls=true;v.playsInline=true;v.loop=false;
+      v.autoplay=true;v.muted=true;v.controls=true;v.playsInline=true;v.loop=!!loop;
       v.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
       el.appendChild(v);
       return;
@@ -1143,7 +1143,7 @@ async function loadContent(){
     if(c.artiste_stat1_label&&statlbls[0])statlbls[0].textContent=c.artiste_stat1_label;
     if(c.artiste_stat2_label&&statlbls[1])statlbls[1].textContent=c.artiste_stat2_label;
     if(c.artiste_stat3_label&&statlbls[2])statlbls[2].textContent=c.artiste_stat3_label;
-    setVideoOrImg('artiste-ph','artiste_video','artiste_img');
+    setVideoOrImg('artiste-ph','artiste_video','artiste_img',c.artiste_video_loop==='1');
     // Spectacles — grille fixe 4 slots, visible si image chargée
     for(let i=1;i<=4;i++){
       setText('#sp'+i+'-tag', c['sp'+i+'_tag']);
@@ -1170,12 +1170,12 @@ async function loadContent(){
     setText('#anim-title',c.anim_title);
     setText('#anim-lead',c.anim_lead);
     setText('#anim-body',c.anim_body);
-    setVideoOrImg('anim-bg','anim_video','anim_bg');
+    setVideoOrImg('anim-bg','anim_video','anim_bg',c.anim_video_loop==='1');
     // Conférences
     setText('#conf-title',c.conf_title);
     setText('#conf-lead',c.conf_lead);
     setText('#conf-body',c.conf_body);
-    setVideoOrImg('conf-bg','conf_video','conf_bg');
+    setVideoOrImg('conf-bg','conf_video','conf_bg',c.conf_video_loop==='1');
     // Auteur
     setText('#auteur-lead',c.auteur_lead);
     for(let i=1;i<=20;i++){setText(`#book${i}-title`,c[`book${i}_title`]);setText(`#book${i}-sub`,c[`book${i}_sub`]);setImg(`book${i}-img`,`book${i}_img`);}
