@@ -1014,8 +1014,13 @@ footer p{font-size:.72rem;color:var(--muted)}
   }
 
   let lastScroll=0;
+  const FRAME=22; // marge du cadre doré
   function draw(){
     ctx.clearRect(0,0,W,H);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(FRAME,FRAME,W-FRAME*2,H-FRAME*2);
+    ctx.clip();
     const ds=scrollY-lastScroll; lastScroll=scrollY;
     cards.forEach(p=>{
       // parallax: deeper cards move more with scroll
@@ -1027,6 +1032,7 @@ footer p{font-size:.72rem;color:var(--muted)}
       if(p.x>W+50) p.x=-50;
       drawCard(p);
     });
+    ctx.restore();
     requestAnimationFrame(draw);
   }
   draw();
