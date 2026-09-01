@@ -1060,16 +1060,27 @@ async function setVideoOrImg(id,videoKey,imgKey){
   setImg(id,imgKey);
 }
 
-function embedVideoUrl(url){
+function embedVideoUrl(url,opts){
   if(!url)return null;
+  opts=opts||{};
+  const loop=!!opts.loop;
   // YouTube
   const ytm=url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
-  if(ytm)return`<iframe src="https://www.youtube.com/embed/${ytm[1]}" allowfullscreen></iframe>`;
+  if(ytm){
+    let p='autoplay=1&mute=1';
+    if(loop)p+=`&loop=1&playlist=${ytm[1]}`;
+    return`<iframe src="https://www.youtube.com/embed/${ytm[1]}?${p}" allowfullscreen allow="autoplay"></iframe>`;
+  }
   // Vimeo
   const vim=url.match(/vimeo\.com\/(\d+)/);
-  if(vim)return`<iframe src="https://player.vimeo.com/video/${vim[1]}" allowfullscreen></iframe>`;
+  if(vim){
+    let p='autoplay=1&muted=1';
+    if(loop)p+='&loop=1';
+    return`<iframe src="https://player.vimeo.com/video/${vim[1]}?${p}" allowfullscreen allow="autoplay"></iframe>`;
+  }
   // Direct video
-  return`<video src="${url}" controls playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"></video>`;
+  const loopAttr=loop?' loop':'';
+  return`<video src="${url}" autoplay muted playsinline controls${loopAttr} style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"></video>`;
 }
 
 function setImg(id,key){
@@ -1189,7 +1200,7 @@ async function loadContent(){
       const frame=document.getElementById('featured-book-video-frame');
       const wrap=document.getElementById('featured-book-video');
       if(frame&&wrap){
-        const embed=embedVideoUrl(c.auteur_video_url);
+        const embed=embedVideoUrl(c.auteur_video_url,{loop:c.auteur_video_loop==='1'});
         if(embed){frame.innerHTML=embed;wrap.classList.add('visible');}
       }
     }
