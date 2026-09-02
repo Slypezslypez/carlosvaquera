@@ -364,7 +364,7 @@ async function deleteBook(i) {
   if(!confirm('Supprimer le livre '+i+' (titre, sous-titre et image) ?')) return;
   try {
     await fetch('/api/delete-img',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${TOKEN}`},body:JSON.stringify({key:'book'+i+'_img'})});
-    const r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${TOKEN}`},body:JSON.stringify({updates:[{key:'book'+i+'_title',value:''},{key:'book'+i+'_sub',value:''}]})});
+    const r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${TOKEN}`},body:JSON.stringify({updates:[{key:'book'+i+'_title',value:''},{key:'book'+i+'_sub',value:''},{key:'book'+i+'_link',value:''}]})});
     if(r.ok){
       CONTENT = await r.json();
       const ti=document.querySelector('[data-key="book'+i+'_title"]');if(ti)ti.value='';
@@ -694,6 +694,7 @@ function renderAuteur() {
     books += '<div class="card-item" data-book-n="' + i + '"><h4>Livre ' + i + '</h4>'
       + fieldHtml('Titre', 'book' + i + '_title', def)
       + fieldHtml('Sous-titre', 'book' + i + '_sub', 'Carlos Vaquera')
+      + fieldHtml('Lien de vente (URL)', 'book' + i + '_link', '')
       + imgHtml('Couverture', 'book' + i + '_img')
       + '<div style="margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--border)">'
       + '<button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem;width:100%" onclick="deleteBook(' + i + ')">🗑 Supprimer ce livre</button>'
