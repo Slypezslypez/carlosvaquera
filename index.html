@@ -202,6 +202,8 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .book-spine{display:none}
 .book-title{margin-top:.8rem;font-size:.8rem;font-weight:500;line-height:1.3}
 .book-sub{font-size:.7rem;color:var(--muted)}
+.book-link{display:block;margin-top:.5rem;font-size:.68rem;color:var(--gold);border:1px solid rgba(201,168,76,.4);padding:.3rem .5rem;text-align:center;text-decoration:none;border-radius:1px;transition:background .2s}
+.book-link:hover{background:rgba(201,168,76,.12)}
 
 /* ── FEATURED BOOK ── */
 .featured-book{display:none;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
@@ -1086,7 +1088,7 @@ async function loadContent(){
     setVideoOrImg('conf-bg','conf_video','conf_bg',c.conf_video_loop==='1');
     // Auteur
     setText('#auteur-lead',c.auteur_lead);
-    (()=>{let order=Array.from({length:20},(_,i)=>i+1);try{if(c.books_order)order=JSON.parse(c.books_order);}catch(e){}for(let i=0;i<20;i++){const n=order[i]||i+1;setText(`#book${i+1}-title`,c[`book${n}_title`]);setText(`#book${i+1}-sub`,c[`book${n}_sub`]);setImg(`book${i+1}-img`,`book${n}_img`);}})();
+    (()=>{let order=Array.from({length:20},(_,i)=>i+1);try{if(c.books_order)order=JSON.parse(c.books_order);}catch(e){}for(let i=0;i<20;i++){const n=order[i]||i+1;setText(`#book${i+1}-title`,c[`book${n}_title`]);setText(`#book${i+1}-sub`,c[`book${n}_sub`]);setImg(`book${i+1}-img`,`book${n}_img`);const link=c[`book${n}_link`];const sub=document.getElementById(`book${i+1}-sub`);if(sub){let a=document.getElementById(`book${i+1}-link`);if(link){if(!a){a=document.createElement('a');a.id=`book${i+1}-link`;a.className='book-link';a.target='_blank';a.rel='noopener';a.textContent='Commander →';sub.parentNode.insertBefore(a,sub.nextSibling);}a.href=link;a.style.display='';}else if(a){a.style.display='none';}}}})();
     // Livre en avant
     (function(){
       const url='/api/upload?key=featured_book_img&t='+Date.now();
