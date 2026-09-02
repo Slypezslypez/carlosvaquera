@@ -263,7 +263,7 @@ function showTab(tab) {
 }
 
 // ── HELPERS ──────────────────────────────────────────────────────
-function c(key, fallback = '') { return CONTENT[key] || fallback; }
+function c(key, fallback = '') { const v=CONTENT[key]; return (v!==undefined&&v!==null)?v:fallback; }
 
 function toggleHtml(label, key, fallback = 'true') {
   const val = c(key, fallback);
