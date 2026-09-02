@@ -67,7 +67,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --gold:#c9a84c;--gold-l:#e8c97a;--gold-d:#8a6e2f;
-  --bg:#080810;--bg2:#0f0f1a;--bg3:#161625;--bg4:#1e1e30;
+  --bg:#000000;--bg2:#0f0f1a;--bg3:#161625;--bg4:#1e1e30;
   --text:#ede9e0;--muted:#7878a0;--border:rgba(255,255,255,0.06);
 }
 html{scroll-behavior:smooth;font-size:16px}
@@ -152,7 +152,7 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .artiste-counter small{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-family:'Inter',sans-serif;opacity:.7}
 
 /* ── SPECTACLES ── */
-#spectacles{padding:10rem 0;background:var(--bg2)}
+#spectacles{padding:10rem 0;background:var(--bg)}
 .spectacles-inner{max-width:1300px;margin:0 auto;padding:0 3rem}
 .spectacles-head{text-align:center;margin-bottom:5rem}
 .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
@@ -238,7 +238,7 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.9;font-weight:300;margin
 .video-thumb:hover .video-thumb-play,.video-thumb.active .video-thumb-play{background:rgba(0,0,0,.5)}
 .video-thumb-play::after{content:'▶';font-size:1.1rem;color:#fff;opacity:.9}
 .video-thumb-label{position:absolute;bottom:0;left:0;right:0;padding:.35rem .4rem;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:.6rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#agenda{padding:10rem 0;background:var(--bg2)}
+#agenda{padding:10rem 0;background:var(--bg)}
 .agenda-inner{max-width:1000px;margin:0 auto;padding:0 3rem}
 .agenda-head{text-align:center;margin-bottom:4rem}
 #agenda-list{display:flex;flex-direction:column;gap:1px}
@@ -591,7 +591,7 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- ANIMATIONS -->
-<section id="animations" style="min-height:100vh;display:flex;align-items:center;background:var(--bg3)">
+<section id="animations" style="min-height:100vh;display:flex;align-items:center;background:var(--bg)">
   <div style="max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center">
     <div class="reveal-left">
       <div class="section-label">Animations</div>
@@ -611,12 +611,12 @@ footer p{font-size:.72rem;color:var(--muted)}
 </section>
 
 <!-- SÉPARATEUR -->
-<div style="padding:3rem 0;background:var(--bg2);display:flex;align-items:center;justify-content:center">
+<div style="padding:3rem 0;background:var(--bg);display:flex;align-items:center;justify-content:center">
   <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent)"></div>
 </div>
 
 <!-- CONFÉRENCES -->
-<section id="conferences" style="min-height:100vh;display:flex;align-items:center;background:var(--bg2)">
+<section id="conferences" style="min-height:100vh;display:flex;align-items:center;background:var(--bg)">
   <div style="max-width:1200px;margin:0 auto;padding:0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center">
     <div class="reveal-left" style="position:relative">
       <div id="conf-bg" class="ph" style="width:100%;aspect-ratio:4/3;outline:1px solid rgba(201,168,76,.4);outline-offset:-1px">
@@ -1086,7 +1086,7 @@ async function loadContent(){
     setVideoOrImg('conf-bg','conf_video','conf_bg',c.conf_video_loop==='1');
     // Auteur
     setText('#auteur-lead',c.auteur_lead);
-    for(let i=1;i<=20;i++){setText(`#book${i}-title`,c[`book${i}_title`]);setText(`#book${i}-sub`,c[`book${i}_sub`]);setImg(`book${i}-img`,`book${i}_img`);}
+    (()=>{let order=Array.from({length:20},(_,i)=>i+1);try{if(c.books_order)order=JSON.parse(c.books_order);}catch(e){}for(let i=0;i<20;i++){const n=order[i]||i+1;setText(`#book${i+1}-title`,c[`book${n}_title`]);setText(`#book${i+1}-sub`,c[`book${n}_sub`]);setImg(`book${i+1}-img`,`book${n}_img`);}})();
     // Livre en avant
     (function(){
       const url='/api/upload?key=featured_book_img&t='+Date.now();
