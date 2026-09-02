@@ -515,6 +515,7 @@ function initBooksOrder() {
   for(let i=1;i<=20;i++){if(!loaded.includes(i))loaded.push(i);}
   _booksOrder = loaded.filter(n=>CONTENT['book'+n+'_title']&&CONTENT['book'+n+'_title'].trim());
   buildOrderList();
+  reorderBookCards();
 }
 
 function buildOrderList() {
@@ -533,6 +534,15 @@ function buildOrderList() {
   }).join('');
 }
 
+function reorderBookCards() {
+  const grid = document.querySelector('.book-grid');
+  if(!grid) return;
+  _fullOrder().forEach(n => {
+    const card = grid.querySelector('[data-book-n="'+n+'"]');
+    if(card) grid.appendChild(card);
+  });
+}
+
 function moveBook(idx,dir){
   const ni=idx+dir;
   if(ni<0||ni>=_booksOrder.length)return;
@@ -549,6 +559,7 @@ async function saveBooksOrder(){
       CONTENT['books_order']=val;
       const hi=document.getElementById('books-order-hidden');
       if(hi)hi.value=val;
+      reorderBookCards();
       msg.textContent='✓ Ordre sauvegardé';msg.style.color='var(--gold)';setTimeout(()=>msg.textContent='',3000);
     }else{
       const err=await r.text();
@@ -676,7 +687,7 @@ function renderAuteur() {
   let books = '';
   for (let i = 1; i <= 20; i++) {
     const def = i <= 4 ? defaults[i-1] : 'Livre ' + i;
-    books += '<div class="card-item"><h4>Livre ' + i + '</h4>'
+    books += '<div class="card-item" data-book-n="' + i + '"><h4>Livre ' + i + '</h4>'
       + fieldHtml('Titre', 'book' + i + '_title', def)
       + fieldHtml('Sous-titre', 'book' + i + '_sub', 'Carlos Vaquera')
       + imgHtml('Couverture', 'book' + i + '_img')
