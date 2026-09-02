@@ -482,27 +482,36 @@ function toast(msg, err = false) {
 }
 
 // ── BOOKS ORDER ──────────────────────────────────────────────────
-let _booksOrder = [];
+let _booksOrder = []; // titled books only, in display order
+
+function _fullOrder() {
+  const full = [..._booksOrder];
+  for(let i=1;i<=20;i++){if(!full.includes(i))full.push(i);}
+  return full;
+}
 
 function initBooksOrder() {
-  _booksOrder = [];
+  let loaded = [];
   const stored = CONTENT['books_order'];
-  if(stored){try{_booksOrder=JSON.parse(stored);}catch(e){}}
-  for(let i=1;i<=20;i++){if(!_booksOrder.includes(i))_booksOrder.push(i);}
-  _booksOrder = _booksOrder.filter(n=>CONTENT['book'+n+'_title']&&CONTENT['book'+n+'_title'].trim());
+  if(stored){try{loaded=JSON.parse(stored);}catch(e){}}
+  if(!loaded.length){for(let i=1;i<=20;i++)loaded.push(i);}
+  for(let i=1;i<=20;i++){if(!loaded.includes(i))loaded.push(i);}
+  _booksOrder = loaded.filter(n=>CONTENT['book'+n+'_title']&&CONTENT['book'+n+'_title'].trim());
   buildOrderList();
 }
 
 function buildOrderList() {
   const list = document.getElementById('books-order-list');
   if(!list) return;
+  const hi = document.getElementById('books-order-hidden');
+  if(hi) hi.value = JSON.stringify(_fullOrder());
   list.innerHTML = _booksOrder.map((n,idx)=>{
     const title = CONTENT['book'+n+'_title']||('Livre '+n);
     return `<div style="display:flex;align-items:center;gap:.8rem;padding:.45rem .8rem;background:var(--bg3);border-radius:4px">
       <span style="font-size:.72rem;color:var(--muted);width:20px;text-align:right">${idx+1}.</span>
       <span style="flex:1;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${title}</span>
-      <button onclick="moveBook(${idx},-1)" style="background:none;border:1px solid var(--border);color:var(--gold);width:28px;height:28px;cursor:pointer;font-size:.9rem;border-radius:2px;line-height:1" ${idx===0?'disabled':''}>↑</button>
-      <button onclick="moveBook(${idx},1)" style="background:none;border:1px solid var(--border);color:var(--gold);width:28px;height:28px;cursor:pointer;font-size:.9rem;border-radius:2px;line-height:1" ${idx===_booksOrder.length-1?'disabled':''}>↓</button>
+      <button type="button" onclick="moveBook(${idx},-1)" style="background:none;border:1px solid var(--border);color:var(--gold);width:28px;height:28px;cursor:pointer;font-size:.9rem;border-radius:2px;line-height:1" ${idx===0?'disabled':''}>↑</button>
+      <button type="button" onclick="moveBook(${idx},1)" style="background:none;border:1px solid var(--border);color:var(--gold);width:28px;height:28px;cursor:pointer;font-size:.9rem;border-radius:2px;line-height:1" ${idx===_booksOrder.length-1?'disabled':''}>↓</button>
     </div>`;
   }).join('');
 }
@@ -516,13 +525,19 @@ function moveBook(idx,dir){
 
 async function saveBooksOrder(){
   const msg=document.getElementById('msg-books-order');
-  const full=[..._booksOrder];
-  for(let i=1;i<=20;i++){if(!full.includes(i))full.push(i);}
+  const val=JSON.stringify(_fullOrder());
   try{
-    const r=await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${TOKEN}`},body:JSON.stringify({updates:[{key:'books_order',value:JSON.stringify(full)}]})});
-    if(r.ok){CONTENT['books_order']=JSON.stringify(full);msg.textContent='✓ Ordre sauvegardé';msg.style.color='var(--gold)';setTimeout(()=>msg.textContent='',3000);}
-    else{msg.textContent='Erreur';msg.style.color='#f44';}
-  }catch(e){msg.textContent='Erreur réseau';msg.style.color='#f44';}
+    const r=await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${TOKEN}`},body:JSON.stringify({updates:[{key:'books_order',value:val}]})});
+    if(r.ok){
+      CONTENT['books_order']=val;
+      const hi=document.getElementById('books-order-hidden');
+      if(hi)hi.value=val;
+      msg.textContent='✓ Ordre sauvegardé';msg.style.color='var(--gold)';setTimeout(()=>msg.textContent='',3000);
+    }else{
+      const err=await r.text();
+      msg.textContent='Erreur '+r.status+': '+err.slice(0,60);msg.style.color='#f44';
+    }
+  }catch(e){msg.textContent='Erreur: '+e.message;msg.style.color='#f44';}
 }
 
 // ── RENDER TABS ───────────────────────────────────────────────────
@@ -670,9 +685,10 @@ function renderAuteur() {
         </label>
       </div>`
     + '</div><div class="form-section"><h3>📋 Ordre d\'affichage</h3>'
-    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Utilisez ↑ ↓ pour réordonner. Seuls les emplacements avec un titre sont listés.</p>'
+    + '<p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Utilisez ↑ ↓ pour réordonner, puis cliquez Sauvegarder l\'ordre. Seuls les emplacements avec un titre sont listés.</p>'
+    + '<input type="hidden" id="books-order-hidden" data-key="books_order" value="">'
     + '<div id="books-order-list" style="display:flex;flex-direction:column;gap:6px;max-height:380px;overflow-y:auto"></div>'
-    + '<div style="display:flex;align-items:center;gap:1rem;margin-top:.8rem"><button class="btn btn-gold" style="font-size:.8rem;padding:.4rem 1rem" onclick="saveBooksOrder()">💾 Sauvegarder l\'ordre</button><div id="msg-books-order" style="font-size:.8rem"></div></div>'
+    + '<div style="display:flex;align-items:center;gap:1rem;margin-top:.8rem"><button type="button" class="btn btn-gold" style="font-size:.8rem;padding:.4rem 1rem" onclick="saveBooksOrder()">💾 Sauvegarder l\'ordre</button><div id="msg-books-order" style="font-size:.8rem"></div></div>'
     + '</div><div class="form-section"><h3>Les livres (20 emplacements)</h3>'
     + '<div class="book-grid" style="grid-template-columns:repeat(4,1fr)">' + books + '</div>'
     + '</div>' + saveBar('auteur');
