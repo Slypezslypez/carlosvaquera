@@ -353,6 +353,7 @@ async function saveSection(section) {
     msg.className = 'save-msg';
     toast('Section sauvegardée ✓');
     setTimeout(() => msg.textContent = '', 3000);
+    if(section === 'auteur') setTimeout(initBooksOrder, 0);
   } catch {
     msg.textContent = 'Erreur';
     msg.className = 'save-msg err';
