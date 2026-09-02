@@ -541,6 +541,10 @@ function reorderBookCards() {
     const card = grid.querySelector('[data-book-n="'+n+'"]');
     if(card) grid.appendChild(card);
   });
+  grid.querySelectorAll('.card-item[data-book-n]').forEach((card, idx) => {
+    const h4 = card.querySelector('h4');
+    if(h4) h4.textContent = 'Livre ' + (idx + 1);
+  });
 }
 
 function moveBook(idx,dir){
