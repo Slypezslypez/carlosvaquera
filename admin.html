@@ -360,6 +360,22 @@ async function saveSection(section) {
   }
 }
 
+async function deleteBook(i) {
+  if(!confirm('Supprimer le livre '+i+' (titre, sous-titre et image) ?')) return;
+  try {
+    await fetch('/api/delete-img',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${TOKEN}`},body:JSON.stringify({key:'book'+i+'_img'})});
+    const r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${TOKEN}`},body:JSON.stringify({updates:[{key:'book'+i+'_title',value:''},{key:'book'+i+'_sub',value:''}]})});
+    if(r.ok){
+      CONTENT = await r.json();
+      const ti=document.querySelector('[data-key="book'+i+'_title"]');if(ti)ti.value='';
+      const si=document.querySelector('[data-key="book'+i+'_sub"]');if(si)si.value='';
+      const pi=document.getElementById('prev-book'+i+'_img');if(pi){pi.src='';pi.style.display='none';}
+      toast('Livre '+i+' supprimé ✓');
+      setTimeout(initBooksOrder,0);
+    }else{toast('Erreur lors de la suppression',true);}
+  }catch(e){toast('Erreur réseau : '+e.message,true);}
+}
+
 async function deleteImg(key) {
   if (!confirm('Supprimer cette image ?')) return;
   try {
@@ -664,7 +680,9 @@ function renderAuteur() {
       + fieldHtml('Titre', 'book' + i + '_title', def)
       + fieldHtml('Sous-titre', 'book' + i + '_sub', 'Carlos Vaquera')
       + imgHtml('Couverture', 'book' + i + '_img')
-      + '</div>';
+      + '<div style="margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--border)">'
+      + '<button type="button" class="btn btn-danger" style="font-size:.7rem;padding:.3rem .8rem;width:100%" onclick="deleteBook(' + i + ')">🗑 Supprimer ce livre</button>'
+      + '</div></div>';
   }
   document.getElementById('tab-content').innerHTML =
     '<div class="form-section"><h3>Introduction</h3>'
