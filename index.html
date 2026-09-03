@@ -1122,6 +1122,17 @@ async function loadContent(){
             yt.addEventListener('load',function(){
               setTimeout(function(){
                 try{yt.contentWindow.postMessage(JSON.stringify({event:'command',func:'playVideo',args:[]}),'https://www.youtube.com');}catch(e){}
+                // Bouton unmute
+                const btn=document.createElement('button');
+                btn.innerHTML='🔇 Activer le son';
+                btn.style.cssText='position:absolute;bottom:12px;right:12px;z-index:10;background:rgba(0,0,0,.75);color:#c9a84c;border:1px solid rgba(201,168,76,.5);padding:.35rem .75rem;font-size:.72rem;cursor:pointer;border-radius:2px;letter-spacing:.05em;font-family:Inter,sans-serif;transition:background .2s';
+                btn.onmouseenter=function(){btn.style.background='rgba(201,168,76,.15)'};
+                btn.onmouseleave=function(){btn.style.background='rgba(0,0,0,.75)'};
+                btn.onclick=function(){
+                  try{yt.contentWindow.postMessage(JSON.stringify({event:'command',func:'unMute',args:[]}),'https://www.youtube.com');}catch(e){}
+                  btn.remove();
+                };
+                frame.appendChild(btn);
               },400);
             });
           }
