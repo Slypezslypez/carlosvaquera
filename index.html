@@ -126,6 +126,9 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.5;font-weight:300;margin
 .ph{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.2);border:1px dashed rgba(255,255,255,.1);background:linear-gradient(135deg,rgba(255,255,255,.02),rgba(201,168,76,.03));transition:border-color .3s;cursor:default;user-select:none}
 .ph svg{width:28px;height:28px;opacity:.3}
 .ph:hover{border-color:rgba(201,168,76,.2)}
+@supports not (aspect-ratio: 1){
+  .book-ph{height:0!important;padding-bottom:150%!important;overflow:hidden}
+}
 
 /* ── ARTISTE ── */
 #artiste{padding:10rem 0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%)}
