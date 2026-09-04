@@ -491,11 +491,11 @@ footer p{font-size:.72rem;color:var(--muted)}
     <p class="hero-tagline" data-i18n="hero_tagline">« Your illusions are my reality »</p>
     <p class="hero-intro" data-i18n="hero_intro">Créateur d'illusions et explorateur de l'esprit — un univers où la frontière entre le réel et l'imaginaire s'efface.</p>
     <div class="hero-awards">
-      <div class="hero-award"><span class="award-icon">🏆</span><span>Mandrake d'Or</span></div>
+      <div class="hero-award"><span class="award-icon">🏆</span><span id="hero-award1">Mandrake d'Or</span></div>
       <div class="hero-award-sep">·</div>
-      <div class="hero-award"><span class="award-icon">🥇</span><span>Champion d'Europe Close-Up</span></div>
+      <div class="hero-award"><span class="award-icon">🥇</span><span id="hero-award2">Champion d'Europe Close-Up</span></div>
       <div class="hero-award-sep">·</div>
-      <div class="hero-award"><span class="award-icon">🎖️</span><span>Prix Las Vegas Close-Up Magic</span></div>
+      <div class="hero-award"><span class="award-icon">🎖️</span><span id="hero-award3">Prix Las Vegas Close-Up Magic</span></div>
     </div>
     <div class="hero-btns">
       <a href="#spectacles" class="btn-primary" data-i18n="hero_btn1">Découvrir les spectacles</a>
@@ -1018,6 +1018,9 @@ async function loadContent(){
     setText('.hero-tag',c.hero_subtitle);
     if(c.hero_btn1)document.querySelectorAll('.btn-primary')[0]&&(document.querySelectorAll('.btn-primary')[0].textContent=c.hero_btn1);
     if(c.hero_btn2)document.querySelectorAll('.btn-ghost')[0]&&(document.querySelectorAll('.btn-ghost')[0].textContent=c.hero_btn2);
+    setText('#hero-award1',c.hero_award1);
+    setText('#hero-award2',c.hero_award2);
+    setText('#hero-award3',c.hero_award3);
     setImg('hero-img-bg','hero_bg');
     // Portrait hero optionnel
     (function(){
