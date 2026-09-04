@@ -1010,7 +1010,7 @@ function setText(sel,val,html=false){
 }
 async function loadContent(){
   try{
-    const r=await fetch('/api/content');
+    const r=await fetch('/api/content?t='+Date.now());
     const c=await r.json();
     // Hero
     if(c.hero_title)document.querySelector('.hero-h1').innerHTML=c.hero_title;
