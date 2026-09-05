@@ -399,7 +399,9 @@ footer p{font-size:.72rem;color:var(--muted)}
   }
   section > .section-label::before{display:none}
   /* Animations/Conferences: colonne pour que label soit en premier */
-  #animations,#conferences{flex-direction:column !important;justify-content:flex-start !important;align-items:stretch !important}
+  #animations,#conferences{flex-direction:column !important;justify-content:flex-start !important;align-items:stretch !important;min-height:auto !important;padding:5rem 0 !important}
+  /* Images Animations/Conferences: limiter la hauteur sur mobile */
+  #animations .ph,#conferences .ph{aspect-ratio:unset !important;height:220px !important}
 
   /* Footer */
   footer{flex-direction:column;gap:1.5rem;text-align:center;padding:3rem 1.5rem}
@@ -409,6 +411,8 @@ footer p{font-size:.72rem;color:var(--muted)}
   /* Grilles → 1 colonne */
   .cards-grid,.spec-grid{grid-template-columns:1fr !important}
   .artiste-inner{padding:0 1.5rem}
+  /* Cartes spectacles : image moins haute sur mobile */
+  .card-img,.card-ph{max-height:200px !important;aspect-ratio:unset !important}
 
   /* Typography */
   h2{font-size:clamp(1.8rem,7vw,2.5rem)}
