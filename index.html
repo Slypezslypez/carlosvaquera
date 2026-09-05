@@ -407,6 +407,17 @@ footer p{font-size:.72rem;color:var(--muted)}
   footer{flex-direction:column;gap:1.5rem;text-align:center;padding:3rem 1.5rem}
 }
 
+/* Troncature texte mobile */
+.text-collapse{max-height:120px;overflow:hidden;position:relative}
+.text-collapse::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.text-collapse.expanded{max-height:none}
+.text-collapse.expanded::after{display:none}
+.voir-plus-btn{display:none;background:none;border:none;color:var(--gold);font-size:.78rem;letter-spacing:.1em;cursor:pointer;padding:.3rem 0;text-decoration:underline;text-underline-offset:3px;font-family:'Inter',sans-serif}
+
+@media(max-width:900px){
+  .voir-plus-btn{display:inline-block}
+}
+
 @media(max-width:600px){
   /* Grilles → 1 colonne */
   .cards-grid,.spec-grid{grid-template-columns:1fr !important}
@@ -1142,7 +1153,23 @@ async function loadContent(){
     loadVideos(c);
   }catch(e){console.log('Content unavailable, using defaults');}
 }
-loadContent();
+loadContent().then(()=>{
+  if(window.innerWidth<=900){
+    document.querySelectorAll('p.body,.lead').forEach(el=>{
+      if(el.scrollHeight>140){
+        el.classList.add('text-collapse');
+        const btn=document.createElement('button');
+        btn.className='voir-plus-btn';
+        btn.textContent='Voir plus ↓';
+        btn.onclick=function(){
+          const expanded=el.classList.toggle('expanded');
+          btn.textContent=expanded?'Voir moins ↑':'Voir plus ↓';
+        };
+        el.parentNode.insertBefore(btn,el.nextSibling);
+      }
+    });
+  }
+});
 
 // ── AGENDA ───────────────────────────────
 async function loadAgenda(){
