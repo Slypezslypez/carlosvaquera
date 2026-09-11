@@ -668,11 +668,6 @@ function renderAnimations() {
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Collez une URL YouTube — la vidéo s'affiche sans consommer le transfert Neon. Prioritaire sur la vidéo uploadée.</p>
       ${fieldHtml('URL YouTube', 'anim_youtube', 'https://www.youtube.com/watch?v=...')}
     </div>
-    <div class="form-section">
-      <h3>Vidéo uploadée (éviter — consomme le transfert)</h3>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Utilisez plutôt l'URL YouTube ci-dessus. Max 2 Mo.</p>
-      ${videoHtml('Vidéo', 'anim_video', 'anim_video_loop')}
-    </div>
     ${saveBar('animations')}`;
 }
 
