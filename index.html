@@ -248,6 +248,8 @@ p.body{color:var(--muted);font-size:.9rem;line-height:1.5;font-weight:300;margin
 .badge-av{background:rgba(50,180,100,.1);color:#3c8;border:1px solid rgba(50,180,100,.2)}
 .badge-so{background:rgba(200,60,60,.08);color:#c66;border:1px solid rgba(200,60,60,.15)}
 .agenda-empty{text-align:center;padding:4rem;color:var(--muted);font-size:.85rem}
+.btn-reserve{display:inline-block;margin-top:.5rem;padding:.3rem .8rem;border:1px solid rgba(201,168,76,.6);color:var(--gold);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .2s}
+.btn-reserve:hover{background:rgba(201,168,76,.12)}
 
 /* ── CONTACT ── */
 #contact{padding:10rem 0;background:var(--bg)}
@@ -1200,6 +1202,7 @@ async function loadAgenda(){
           ${s.status==='sold-out'
             ?'<span class="badge badge-so">Complet</span>'
             :'<span class="badge badge-av">Disponible</span>'}
+          ${s.booking_url&&s.status!=='sold-out'?`<a href="${s.booking_url}" target="_blank" rel="noopener" class="btn-reserve">Réserver</a>`:''}
         </div>
       </div>`).join('');
   }catch{
@@ -1407,6 +1410,7 @@ function renderAgendaBadges(rows) {
         ${s.status==='sold-out'
           ?`<span class="badge badge-so">${t.badge_so}</span>`
           :`<span class="badge badge-av">${t.badge_av}</span>`}
+        ${s.booking_url&&s.status!=='sold-out'?`<a href="${s.booking_url}" target="_blank" rel="noopener" class="btn-reserve">Réserver</a>`:''}
       </div>
     </div>`).join('');
 }
