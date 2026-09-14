@@ -795,7 +795,7 @@ function renderAgendaTable() {
         <td style="color:var(--muted)">${s.venue}</td>
         <td><span class="badge badge-${s.status==='sold-out'?'so':'av'}">${s.status==='sold-out'?'Complet':'Disponible'}</span></td>
         <td><div class="actions">
-          <button class="btn btn-outline" onclick='editAgenda(${JSON.stringify(s)})'>Modifier</button>
+          <button class="btn btn-outline" onclick="editAgenda(${agendaRows.indexOf(s)})">Modifier</button>
           <button class="btn btn-danger" onclick="deleteAgenda(${s.id})">Suppr.</button>
         </div></td>
       </tr>`).join('')}
@@ -860,7 +860,7 @@ function clearAgendaImg() {
   prev.src = ''; prev.style.display = 'none';
 }
 
-function editAgenda(item) { openAgendaModal(item); }
+function editAgenda(idx) { openAgendaModal(agendaRows[idx]); }
 function closeAgendaModal() { document.getElementById('agenda-modal').classList.remove('open'); }
 document.getElementById('agenda-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAgendaModal(); });
 
