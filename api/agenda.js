@@ -38,6 +38,7 @@ module.exports = async function handler(req, res) {
 
   try { await sql`ALTER TABLE agenda ADD COLUMN IF NOT EXISTS image TEXT`; } catch(e) {}
   try { await sql`ALTER TABLE agenda ADD COLUMN IF NOT EXISTS booking_url TEXT`; } catch(e) {}
+  try { await sql`ALTER TABLE agenda ADD COLUMN IF NOT EXISTS booking_email TEXT`; } catch(e) {}
 
   if (req.method === 'GET') {
     const rows = await sql`SELECT * FROM agenda`;
@@ -47,11 +48,11 @@ module.exports = async function handler(req, res) {
   if (!verifyToken(req)) return res.status(401).json({ error: 'Non autorisé' });
 
   if (req.method === 'POST') {
-    const { id, day, month, title, venue, status, image, booking_url } = req.body || {};
+    const { id, day, month, title, venue, status, image, booking_url, booking_email } = req.body || {};
     if (id) {
-      await sql`UPDATE agenda SET day=${day}, month=${month}, title=${title}, venue=${venue}, status=${status}, image=${image||null}, booking_url=${booking_url||null} WHERE id=${id}`;
+      await sql`UPDATE agenda SET day=${day}, month=${month}, title=${title}, venue=${venue}, status=${status}, image=${image||null}, booking_url=${booking_url||null}, booking_email=${booking_email||null} WHERE id=${id}`;
     } else {
-      await sql`INSERT INTO agenda (day, month, title, venue, status, image, booking_url) VALUES (${day}, ${month}, ${title}, ${venue}, ${status||'available'}, ${image||null}, ${booking_url||null})`;
+      await sql`INSERT INTO agenda (day, month, title, venue, status, image, booking_url, booking_email) VALUES (${day}, ${month}, ${title}, ${venue}, ${status||'available'}, ${image||null}, ${booking_url||null}, ${booking_email||null})`;
     }
     const rows = await sql`SELECT * FROM agenda`;
     return res.json(sortByDate(rows));
