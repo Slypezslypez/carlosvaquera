@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1203,7 +1202,7 @@ async function loadAgenda(){
           ${s.status==='sold-out'
             ?'<span class="badge badge-so">Complet</span>'
             :'<span class="badge badge-av">Disponible</span>'}
-          ${s.booking_url&&s.status!=='sold-out'?`<a href="${s.booking_url}" target="_blank" rel="noopener" class="btn-reserve">Réserver</a>`:''}
+          ${s.status!=='sold-out'&&(s.booking_url||s.booking_email)?`<a href="${s.booking_url||`mailto:${s.booking_email}`}" ${s.booking_url?'target="_blank" rel="noopener"':''} class="btn-reserve">Réserver</a>`:''}
         </div>
       </div>`).join('');
   }catch{
@@ -1411,7 +1410,7 @@ function renderAgendaBadges(rows) {
         ${s.status==='sold-out'
           ?`<span class="badge badge-so">${t.badge_so}</span>`
           :`<span class="badge badge-av">${t.badge_av}</span>`}
-        ${s.booking_url&&s.status!=='sold-out'?`<a href="${s.booking_url}" target="_blank" rel="noopener" class="btn-reserve">Réserver</a>`:''}
+        ${s.status!=='sold-out'&&(s.booking_url||s.booking_email)?`<a href="${s.booking_url||`mailto:${s.booking_email}`}" ${s.booking_url?'target="_blank" rel="noopener"':''} class="btn-reserve">Réserver</a>`:''}
       </div>
     </div>`).join('');
 }
