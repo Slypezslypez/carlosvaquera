@@ -444,6 +444,7 @@ footer p{font-size:.72rem;color:var(--muted)}
   .featured-book-cover{width:140px}
 }
 </style>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -903,6 +904,7 @@ footer p{font-size:.72rem;color:var(--muted)}
           </select>
         </div>
         <div class="field"><label data-i18n="form_message">Message</label><textarea name="message" required placeholder="Décrivez votre événement, la date souhaitée, le lieu…" data-i18n-placeholder="form_placeholder_message"></textarea></div>
+        <div class="g-recaptcha" data-sitekey="6LfYBtEtAAAAALfIRHyNBzevOUeqgSPsWXadKnkw" style="margin-bottom:.8rem"></div>
         <button type="submit" class="btn-send" data-i18n="form_send">Envoyer le message</button>
         <p class="form-msg" id="form-msg"></p>
       </form>
@@ -1425,15 +1427,17 @@ document.getElementById('contact-form').addEventListener('submit',async function
   const btn=this.querySelector('.btn-send');
   btn.disabled=true;btn.textContent=TRANSLATIONS[currentLang].form_sending;
   try{
-    const data={name:this.name.value,email:this.email.value,prestation:this.prestation.value,message:this.message.value};
+    const recaptchaToken=grecaptcha.getResponse();
+    if(!recaptchaToken){msg.textContent='Veuillez cocher "Je ne suis pas un robot".';msg.className='form-msg err';btn.disabled=false;btn.textContent=TRANSLATIONS[currentLang].form_send;return;}
+    const data={name:this.name.value,email:this.email.value,prestation:this.prestation.value,message:this.message.value,recaptchaToken};
     const r=await fetch(this.action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     if(r.ok){
       msg.textContent=TRANSLATIONS[currentLang].form_ok;
-      msg.className='form-msg ok';this.reset();
+      msg.className='form-msg ok';this.reset();grecaptcha.reset();
     }else throw new Error();
   }catch{
     msg.textContent=TRANSLATIONS[currentLang].form_err;
-    msg.className='form-msg err';
+    msg.className='form-msg err';grecaptcha.reset();
   }
   btn.disabled=false;btn.textContent=TRANSLATIONS[currentLang].form_send;
 });
