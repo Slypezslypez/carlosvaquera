@@ -1,4 +1,20 @@
 const { Resend } = require('resend');
+const https = require('https');
+
+function verifyRecaptcha(token) {
+  return new Promise((resolve) => {
+    const params = `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`;
+    const options = { hostname:'www.google.com', path:'/recaptcha/api/siteverify', method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded','Content-Length':params.length} };
+    const req = https.request(options, r => {
+      let data = '';
+      r.on('data', c => data += c);
+      r.on('end', () => { try { resolve(JSON.parse(data)); } catch { resolve({ success: false }); } });
+    });
+    req.on('error', () => resolve({ success: false }));
+    req.write(params); req.end();
+  });
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -7,9 +23,14 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { name, email, prestation, message } = req.body || {};
+  const { name, email, prestation, message, recaptchaToken } = req.body || {};
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Champs manquants' });
+  }
+
+  const captcha = await verifyRecaptcha(recaptchaToken || '');
+  if (!captcha.success) {
+    return res.status(400).json({ error: 'reCAPTCHA invalide' });
   }
 
   try {
